@@ -13,6 +13,7 @@ public class Player_Move : MonoBehaviour
     public bool OnGround;
     float preScale, preScale_re;
    [SerializeField] GameObject Deth_Effect;
+    bool Active;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,35 +23,37 @@ public class Player_Move : MonoBehaviour
         OnGround = false;
         preScale = transform.localScale.x;
         preScale_re = transform.localScale.x * -1;
-
+        Active = true;
     }
 
     private void Update()
     {
+        if (Active == true)
 
-        Attack();
-        var jumpPower = 15.0f;
-        if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
         {
-            Debug.Log("Space");
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-        }
-        if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
-        {
-            rb.gravityScale = 0.5f;
-        }
-        else
-        {
-            rb.gravityScale = 1.0f;
+            Attack();
+            var jumpPower = 15.0f;
+            if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
+            {
+                Debug.Log("Space");
+                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            }
+            if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
+            {
+                rb.gravityScale = 0.5f;
+            }
+            else
+            {
+                rb.gravityScale = 1.0f;
+            }
         }
     }
-
     // Update is called once per frame
     void  FixedUpdate()
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
         Vertical = Mathf.Clamp(rb.velocity.y,-1,1);
-        Move(Horizontal);
+        if(Active)   Move(Horizontal);
 
     }
     void Move(float X)
@@ -60,12 +63,12 @@ public class Player_Move : MonoBehaviour
         Vector2 pos = transform.position;
 
         pos.x = Mathf.Clamp(pos.x, min.x, max.x);
-        //pos.y = Mathf.Clamp(pos.y, min.y, max.y);
+        pos.y = Mathf.Clamp(pos.y, min.y - 3, max.y);
 
         Vector3 scale = transform.localScale;
 
         
-        rb.velocity = new Vector2(Horizontal * MoveSpeed,rb.velocity.y);
+         rb.velocity = new Vector2(Horizontal * MoveSpeed,rb.velocity.y);
         
         animator.SetFloat("Move",Mathf.Abs( Horizontal));
 
@@ -116,17 +119,22 @@ public class Player_Move : MonoBehaviour
     }
     public void Damage()
     {
-        animator.SetTrigger("Damage");
+       if(Active) animator.SetTrigger("Damage");
         PlayerDown();
     }
 
 
     public void PlayerDown()
     {
-
-        animator.SetBool("Dead", true);
-        
+        if(Active)animator.SetBool("Dead", true);
+        Active = false;
+        rb.velocity = Vector2.zero;
+        rb.isKinematic = true;
 //        gameObject.SetActive(false);
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+    }
 }

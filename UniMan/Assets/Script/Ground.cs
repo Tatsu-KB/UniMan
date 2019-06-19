@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     Player_Move player;
-    [SerializeField] ContactFilter2D filter2D;
+    //[SerializeField] ContactFilter2D filter2D;
     // Start is called before the first frame update
     void Start()
     {
