@@ -12,6 +12,7 @@ public class Player_Move : MonoBehaviour
     private static int gravity = -1;
     public bool OnGround;
     float preScale, preScale_re;
+   [SerializeField] GameObject Deth_Effect;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,8 @@ public class Player_Move : MonoBehaviour
 
     private void Update()
     {
+
+        Attack();
         var jumpPower = 15.0f;
         if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
         {
@@ -48,8 +51,6 @@ public class Player_Move : MonoBehaviour
         Horizontal = Input.GetAxisRaw("Horizontal");
         Vertical = Mathf.Clamp(rb.velocity.y,-1,1);
         Move(Horizontal);
-
-        Attack();
 
     }
     void Move(float X)
@@ -95,14 +96,14 @@ public class Player_Move : MonoBehaviour
     void Attack()
     {
         float nowAnim = animator.GetNextAnimatorStateInfo(0).normalizedTime;
-        Debug.Log(nowAnim);
+        //Debug.Log(nowAnim);
         if(Input.GetButtonDown("Fire1"))
         {
             animator.SetTrigger("Attack1");
             
         }
 
-        if (nowAnim > 1) animator.SetTrigger("Stand");
+        //if (nowAnim > 1) animator.SetTrigger("Stand");
     }
 
     public void IsGround()
@@ -113,4 +114,19 @@ public class Player_Move : MonoBehaviour
     {
         OnGround = false;
     }
+    public void Damage()
+    {
+        animator.SetTrigger("Damage");
+        PlayerDown();
+    }
+
+
+    public void PlayerDown()
+    {
+
+        animator.SetBool("Dead", true);
+        
+//        gameObject.SetActive(false);
+    }
+
 }
