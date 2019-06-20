@@ -65,7 +65,7 @@ public class Player_Move : MonoBehaviour
 
             AnimatorStateInfo nowAnim = animator.GetCurrentAnimatorStateInfo(0);
 
-            if ((nowAnim.IsName("Attack_1") || nowAnim.IsName("Attack_2") || nowAnim.IsName("Attack_3")) && nowAnim.normalizedTime >= 0.5f)
+            if ((nowAnim.IsName("Attack_1") || nowAnim.IsName("Attack_2") || nowAnim.IsName("Attack_3")) && nowAnim.normalizedTime >= 1.0f)
             {
 
                 animator.SetTrigger("Stand");
@@ -73,11 +73,7 @@ public class Player_Move : MonoBehaviour
                 OneAnime = false;
             }
             Debug.Log(nowAnim.normalizedTime);
-
-            if (nowAnim.IsName("Dead") && nowAnim.normalizedTime >= 0.5f)
-            {
-                gameObject.SetActive(false);
-            }
+          
         }
     }
         // Update is called once per frame
@@ -175,7 +171,7 @@ public class Player_Move : MonoBehaviour
         Active = false;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
-//        gameObject.SetActive(false);
+        Invoke("PlayerFalse",1.0f);
     }
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -191,5 +187,10 @@ public class Player_Move : MonoBehaviour
         {
             transform.parent = null;
         }
+    }
+
+    void PlayerFalse()
+    {
+        gameObject.SetActive(false);
     }
 }
