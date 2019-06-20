@@ -13,7 +13,7 @@ public class Player_Move : MonoBehaviour
     public bool OnGround;
     float preScale, preScale_re;
    [SerializeField] GameObject Deth_Effect;
-    bool Active;
+   public bool Active,NowAttack,OneAnime;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +24,7 @@ public class Player_Move : MonoBehaviour
         preScale = transform.localScale.x;
         preScale_re = transform.localScale.x * -1;
         Active = true;
+        NowAttack = false;
     }
 
     private void Update()
@@ -31,7 +32,7 @@ public class Player_Move : MonoBehaviour
         if (Active == true)
 
         {
-            Attack();
+            //Attack();
             var jumpPower = 15.0f;
             if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
             {
@@ -46,16 +47,47 @@ public class Player_Move : MonoBehaviour
             {
                 rb.gravityScale = 1.0f;
             }
+            //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            //Debug.Log(stateInfo.normalizedTime);
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Attack1();
+            }
+            if (Input.GetButtonDown("Fire2"))
+            {
+                Attack2();
+            }
+            if (Input.GetButtonDown("Fire3"))
+            {
+                Attack3();
+            }
+
+            AnimatorStateInfo nowAnim = animator.GetCurrentAnimatorStateInfo(0);
+
+            if ((nowAnim.IsName("Attack_1") || nowAnim.IsName("Attack_2") || nowAnim.IsName("Attack_3")) && nowAnim.normalizedTime >= 0.5f)
+            {
+
+                animator.SetTrigger("Stand");
+                NowAttack = false;
+                OneAnime = false;
+            }
+            Debug.Log(nowAnim.normalizedTime);
+
+            if (nowAnim.IsName("Dead") && nowAnim.normalizedTime >= 0.5f)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
-    // Update is called once per frame
-    void  FixedUpdate()
-    {
-        Horizontal = Input.GetAxisRaw("Horizontal");
-        Vertical = Mathf.Clamp(rb.velocity.y,-1,1);
-        if(Active)   Move(Horizontal);
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            Horizontal = Input.GetAxisRaw("Horizontal");
+            Vertical = Mathf.Clamp(rb.velocity.y, -1, 1);
+            if (Active) Move(Horizontal);
 
-    }
+        }
     void Move(float X)
     {
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
@@ -67,10 +99,10 @@ public class Player_Move : MonoBehaviour
 
         Vector3 scale = transform.localScale;
 
-        
-         rb.velocity = new Vector2(Horizontal * MoveSpeed,rb.velocity.y);
-        
-        animator.SetFloat("Move",Mathf.Abs( Horizontal));
+
+        rb.velocity = new Vector2(Horizontal * MoveSpeed, rb.velocity.y);
+
+        animator.SetFloat("Move", Mathf.Abs(Horizontal));
 
         if (!OnGround)
         {
@@ -91,22 +123,34 @@ public class Player_Move : MonoBehaviour
             scale.x = preScale_re;
         }
 
-        
+
         transform.localScale = scale;
         transform.position = pos;
     }
 
-    void Attack()
+    void Attack1()
     {
-        float nowAnim = animator.GetNextAnimatorStateInfo(0).normalizedTime;
-        //Debug.Log(nowAnim);
-        if(Input.GetButtonDown("Fire1"))
+        if (NowAttack == false)
         {
+            NowAttack = true;
             animator.SetTrigger("Attack1");
-            
         }
-
-        //if (nowAnim > 1) animator.SetTrigger("Stand");
+    }
+    void Attack2()
+    {
+        if (NowAttack == false)
+        {
+            NowAttack = true;
+            animator.SetTrigger("Attack2");
+        }
+    }
+    void Attack3()
+    {
+        if (NowAttack == false)
+        {
+            NowAttack = true;
+            animator.SetTrigger("Attack3");
+        }
     }
 
     public void IsGround()
@@ -116,6 +160,7 @@ public class Player_Move : MonoBehaviour
     public void NotGround()
     {
         OnGround = false;
+
     }
     public void Damage()
     {
@@ -132,9 +177,19 @@ public class Player_Move : MonoBehaviour
         rb.isKinematic = true;
 //        gameObject.SetActive(false);
     }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.gameObject.tag == "MoveGround")
+        {
+            transform.parent = col.gameObject.transform;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "MoveGround")
+        {
+            transform.parent = null;
+        }
     }
 }
