@@ -7,7 +7,8 @@ public class CameraMove : MonoBehaviour
     [SerializeField] GameObject Target;
     [SerializeField] Vector3 vector;
     // Start is called before the first frame update
-    void Start()
+
+    public void Camera_Target()
     {
         Target = GameObject.FindGameObjectWithTag("Player"); 
     }

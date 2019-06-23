@@ -13,7 +13,7 @@ public class Player_Move : MonoBehaviour
     public bool OnGround;
     float preScale, preScale_re;
    [SerializeField] GameObject Deth_Effect;
-   public bool Active,NowAttack,OneAnime;
+   public bool Active,NowAttack;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,12 +67,13 @@ public class Player_Move : MonoBehaviour
 
             if ((nowAnim.IsName("Attack_1") || nowAnim.IsName("Attack_2") || nowAnim.IsName("Attack_3")) && nowAnim.normalizedTime >= 1.0f)
             {
-
-                animator.SetTrigger("Stand");
-                NowAttack = false;
-                OneAnime = false;
+                if (NowAttack)
+                {
+                    animator.SetTrigger("Stand");
+                    NowAttack = false;
+                }
             }
-            Debug.Log(nowAnim.normalizedTime);
+            //Debug.Log(nowAnim.normalizedTime);
           
         }
     }
