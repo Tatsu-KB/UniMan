@@ -8,8 +8,14 @@ TextureImporter:
     21300006: BricksWide_3
     21300008: BricksWide_4
     21300010: BricksWide_5
+    21300012: BricksWide_6
+    21300014: BricksWide_7
+    21300016: BricksWide_8
+    21300018: BricksWide_9
+    21300020: BricksWide_10
+    21300022: BricksWide_11
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -128,16 +134,16 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 32
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 64765c831b1f30e48a80bd87f4987274
+      spriteID: d09b69f79a6502c41a479c0c675c3d59
       vertices: []
       indices: 
       edges: []
@@ -146,18 +152,18 @@ TextureImporter:
       name: BricksWide_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 32
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ba2b1dac0b67ca74e8631065f72fabc8
+      spriteID: 3bc8702bc563a134d94066eaef9cf238
       vertices: []
       indices: 
       edges: []
@@ -166,18 +172,18 @@ TextureImporter:
       name: BricksWide_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 32
-        width: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c7dc9602e16263a45ad3dcd8bdd69e73
+      spriteID: 4703f8507b728e64dac13dcf58e83ed7
       vertices: []
       indices: 
       edges: []
@@ -186,18 +192,18 @@ TextureImporter:
       name: BricksWide_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
+        x: 96
+        y: 32
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 692bdbfef9cfa1e41bfb72f9dadbaaa0
+      spriteID: 7d2a56bbdf7d1b84195005f24249d355
       vertices: []
       indices: 
       edges: []
@@ -206,18 +212,18 @@ TextureImporter:
       name: BricksWide_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
+        x: 128
+        y: 32
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 12501df59ebd4844d99205fed0d41d6d
+      spriteID: 033b952623245bd46988987eba95f793
       vertices: []
       indices: 
       edges: []
@@ -226,18 +232,138 @@ TextureImporter:
       name: BricksWide_5
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
+        x: 160
+        y: 32
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7ec964ffc2afde7418d27a31c2517482
+      spriteID: 9d79af58da58bc04bb5f782a45a98075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BricksWide_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a340928114f0284885ef316e593ed8f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BricksWide_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3354ac32b91be3948864b6a41924be79
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BricksWide_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 053719bd6d1ca0d4eaa60bde6bf5d67b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BricksWide_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9350c8f05365e1246967e6f7ed50a510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BricksWide_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8af82b0457c833947a12deb515e68236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BricksWide_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35b13b4336f604640ad1a5bc8b4c4db8
       vertices: []
       indices: 
       edges: []
@@ -245,7 +371,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c448c780655de5e41aa69f46826dc434
     vertices: []
     indices: 
     edges: []
