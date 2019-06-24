@@ -10,7 +10,8 @@ public class TitleManeger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        st.gameObject.SetActive(false);
+        ex.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,7 +21,9 @@ public class TitleManeger : MonoBehaviour
     }
     public void Title()
     {
-
+        button.gameObject.SetActive(false);
+        st.gameObject.SetActive(true);
+        ex.gameObject.SetActive(true);
     }
 
     public void GameStart()
