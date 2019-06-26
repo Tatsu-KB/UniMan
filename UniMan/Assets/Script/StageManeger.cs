@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class StageManeger : MonoBehaviour
 {
-    [SerializeField] GameObject StartPos;
-    [SerializeField] GameObject Player;
-    [SerializeField] GameObject Prefab;
+    [SerializeField] GameObject StartPos,GoalPos;
+    [SerializeField] GameObject Player,Goal;
+    [SerializeField] GameObject PlayerPrefab,GoalPrefab;
     [SerializeField] CameraMove Camera;
     // Start is called before the first frame update
     void Start()
     {
-        Player = Instantiate(Prefab, StartPos.transform);
+        Player = Instantiate(PlayerPrefab, StartPos.transform);
         Player.transform.parent = null;
+        Goal = Instantiate(GoalPrefab, GoalPos.transform);
+        Goal.tag = GoalPos.tag;
+        Goal.transform.parent = null;
         Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
         Camera.Camera_Target();
     }
@@ -27,5 +30,11 @@ public class StageManeger : MonoBehaviour
     {
         //Debug.Log("即死です");
         Player.GetComponent<Player_Move>().Damage();
+    }
+
+    public void StageGoal()
+    {
+        Debug.Log("おめでとう! ゴールです!!");
+        Player.GetComponent<Player_Move>().StageClear();
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Start
   - MoveGround
+  - Goal
   layers:
   - Default
   - TransparentFX
