@@ -37,4 +37,9 @@ public class StageManeger : MonoBehaviour
         Debug.Log("おめでとう! ゴールです!!");
         Player.GetComponent<Player_Move>().StageClear();
     }
+
+    public void GoalPerformance()
+    {
+        Player.GetComponent<Player_Move>().Performance();
+    }
 }

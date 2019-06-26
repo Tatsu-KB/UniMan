@@ -13,7 +13,7 @@ public class Player_Move : MonoBehaviour
     public bool OnGround;
     float preScale, preScale_re;
    [SerializeField] GameObject Deth_Effect;
-   public bool Active,NowAttack;
+    public bool Active, NowAttack;
     AnimatorStateInfo nowAnim;
     // Start is called before the first frame update
     void Start()
@@ -207,5 +207,19 @@ public class Player_Move : MonoBehaviour
     {
         Active = false;
         rb.velocity = new Vector2(0, transform.position.y);
+    }
+
+    public void Performance()
+    {
+        int value = Random.Range(0, 2);
+        Debug.Log("パフォーマンスです");
+        if(value == 0)
+        {
+            animator.SetTrigger("Clear1");
+        }
+        if(value == 1)
+        {
+            animator.SetTrigger("Clear2");
+        }
     }
 }
