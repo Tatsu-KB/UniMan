@@ -11,6 +11,7 @@ public class Enemy_Bee : MonoBehaviour
     [SerializeField]float Speed;
     [SerializeField] Rigidbody2D rb;
     float preScale, preScale_re;
+    public Vector3 scale;
 
 
     // Start is called before the first frame update
@@ -24,16 +25,16 @@ public class Enemy_Bee : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         preScale = transform.localScale.x;
         preScale_re = transform.localScale.x * -1;
+        scale = transform.localScale;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (EnemyFlag)
         {
-            // transform.position = new Vector3(transform.position.x ,   transform.position.y , transform.position.z);
+            //transform.position = new Vector3(transform.position.x ,   transform.position.y , transform.position.z);
             EnemyMove();
         }
     }
@@ -59,16 +60,20 @@ public class Enemy_Bee : MonoBehaviour
         Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y).normalized;
 
         rb.velocity = direction * Speed;
-        /*
-        if(x - transform.position.x < 0)
-            {
+        Debug.Log(x - transform.position.x);
+
+        
+        if((x - transform.position.x) <= 0)
+        {
 
                 scale.x = preScale;
-            }
-            else if (Horizontal < 0)
-            {
+        }
+        
+        if((x - transform.position.x) >= 0)
+        {
                 scale.x = preScale_re;
-            }
-            */
+        }
+
+        transform.localScale = scale;
     }
 }
