@@ -7,6 +7,7 @@ public class EnemyControll : MonoBehaviour
 {
     Animator animator;
     int value;
+    float action;
     public enum EnemyState
     {
         Idle,
@@ -28,10 +29,18 @@ public class EnemyControll : MonoBehaviour
     void Update()
     {
         AnimatorStateInfo nowAnim = animator.GetCurrentAnimatorStateInfo(0);
+        action += Time.deltaTime;
+        /*
         if (nowAnim.normalizedTime >= 1.0f)
         {
             State();
             
+        }
+        */
+        if(action >= 1.0f)
+        {
+            State();
+            action = 0;
         }
         switch(value)
         {
