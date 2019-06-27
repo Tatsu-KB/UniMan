@@ -9,7 +9,7 @@ public class Player_Move : MonoBehaviour
     BoxCollider2D col;                                                      
     public int MoveSpeed;                                            //移動速度
     float Horizontal,Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
-    bool OnGround,Active, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
+    public bool OnGround,Active, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
 
     public int Life;                                                         //体力値
@@ -56,36 +56,41 @@ public class Player_Move : MonoBehaviour
             //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             //Debug.Log(stateInfo.normalizedTime);
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && !NowAttack)
             {
+                NowAttack = true;
                 Attack1();
             }
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2") && !NowAttack)
             {
+                NowAttack = true;
                 Attack2();
             }
-            if (Input.GetButtonDown("Fire3"))
+            if (Input.GetButtonDown("Fire3") && !NowAttack)
             {
+                NowAttack = true;
                 Attack3();
             }
 
             nowAnim = animator.GetCurrentAnimatorStateInfo(0);
-
+            //Debug.Log(nowAnim.length);
+            if (nowAnim.normalizedTime < 1.0f) animator.Update(0);
             if ((nowAnim.IsName("Attack_1") || nowAnim.IsName("Attack_2") || nowAnim.IsName("Attack_3")) && nowAnim.normalizedTime >= 1.0f)
             {
                 if (NowAttack)
                 {
                     animator.SetTrigger("Stand");
-                    NowAttack = false;
+                    Invoke("FlagReset", 0.4f);
                 }
             }
-               // Debug.Log(nowAnim.normalizedTime);
+           // Debug.Log(nowAnim.normalizedTime);
         }
     }
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (Active)
+
+        if (Active)
             {
                 Horizontal = Input.GetAxisRaw("Horizontal");
                 Vertical = Mathf.Clamp(rb.velocity.y, -1, 1);
@@ -140,27 +145,15 @@ public class Player_Move : MonoBehaviour
 
     void Attack1()
     {
-        if (NowAttack == false)
-        {
-            NowAttack = true;
             animator.SetTrigger("Attack1");
-        }
     }
     void Attack2()
     {
-        if (NowAttack == false)
-        {
-            NowAttack = true;
             animator.SetTrigger("Attack2");
-        }
     }
     void Attack3()
     {
-        if (NowAttack == false)
-        {
-            NowAttack = true;
             animator.SetTrigger("Attack3");
-        }
     }
 
     public void IsGround()
@@ -238,5 +231,10 @@ public class Player_Move : MonoBehaviour
         {
             animator.SetTrigger("Clear2");
         }
+    }
+
+    void FlagReset()
+    {
+        NowAttack = false;
     }
 }

@@ -28,7 +28,7 @@ public class StageManeger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log((int)Bee.Length);
+        //Debug.Log((int)Bee.Length);
     }
 
     public void PlayerDamege(int EnemyAtk)
