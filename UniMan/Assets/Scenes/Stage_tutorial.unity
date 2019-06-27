@@ -5517,7 +5517,7 @@ GameObject:
   - component: {fileID: 644373608}
   m_Layer: 0
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Bee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5965,7 +5965,7 @@ MonoBehaviour:
   GoalPrefab: {fileID: 6666000860620209986, guid: d06865ad16b3dd1438717cde338f6e71,
     type: 3}
   Camera: {fileID: 0}
-  Bee: {fileID: 0}
+  Bee: []
   DamegeEffect: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
   Effect: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
   GoalEffect: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
@@ -7015,7 +7015,7 @@ GameObject:
   - component: {fileID: 2102307311}
   m_Layer: 0
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Bee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

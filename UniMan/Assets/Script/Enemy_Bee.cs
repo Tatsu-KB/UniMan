@@ -95,4 +95,9 @@ public class Enemy_Bee : MonoBehaviour
             maneger.PlayerDamege(Attack);
         }
     }
+
+    public void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -8,6 +8,7 @@ TagManager:
   - MoveGround
   - Goal
   - StageManeger
+  - Bee
   layers:
   - Default
   - TransparentFX

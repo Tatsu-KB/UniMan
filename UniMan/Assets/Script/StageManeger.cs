@@ -8,7 +8,7 @@ public class StageManeger : MonoBehaviour
     [SerializeField] GameObject Player, Goal;
     [SerializeField] GameObject PlayerPrefab, GoalPrefab;
     [SerializeField] CameraMove Camera;
-    [SerializeField] Enemy_Bee Bee;
+    [SerializeField] GameObject[] Bee;
     [SerializeField] GameObject DamegeEffect;
     [SerializeField] GameObject Effect;
     [SerializeField] GameObject GoalEffect;
@@ -22,12 +22,13 @@ public class StageManeger : MonoBehaviour
         Goal.transform.parent = null;
         Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
         Camera.Camera_Target();
+        Bee = GameObject.FindGameObjectsWithTag("Bee");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log((int)Bee.Length);
     }
 
     public void PlayerDamege(int EnemyAtk)
@@ -43,7 +44,7 @@ public class StageManeger : MonoBehaviour
     public void StageGoal(Transform transform)
     {
         Debug.Log("おめでとう! ゴールです!!");
-        Instantiate(GoalEffect,transform).transform.parent = null;
+        Instantiate(GoalEffect, transform).transform.parent = null;
         Player.GetComponent<Player_Move>().StageClear();
     }
 
