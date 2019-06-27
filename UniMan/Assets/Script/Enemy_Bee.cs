@@ -45,30 +45,38 @@ public class Enemy_Bee : MonoBehaviour
 
     void EnemyMove()
     {
-        Vector2 targetPos = player.transform.position;
-
-        float x = targetPos.x;
-        float y = targetPos.y;
-
-        //プレイヤーとの距離算出
-        Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y).normalized;
-        //プレイヤーに向け前進
-        rb.velocity = direction * Speed;
-        //Debug.Log(x - transform.position.x);
-
-        //反転処理
-        if((x - transform.position.x) <= 0)
+        if (player.activeSelf)
         {
+            Vector2 targetPos = player.transform.position;
+
+            float x = targetPos.x;
+            float y = targetPos.y;
+
+            //プレイヤーとの距離算出
+            Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y).normalized;
+            //プレイヤーに向け前進
+            rb.velocity = direction * Speed;
+            //Debug.Log(x - transform.position.x);
+
+            //反転処理
+            if ((x - transform.position.x) < 0 && player.activeSelf)
+            {
 
                 scale.x = preScale;
-        }
-        
-        if((x - transform.position.x) >= 0)
-        {
+            }
+
+            if ((x - transform.position.x) > 0 && player.activeSelf)
+            {
                 scale.x = preScale_re;
+            }
+
+            transform.localScale = scale;
         }
 
-        transform.localScale = scale;
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
 

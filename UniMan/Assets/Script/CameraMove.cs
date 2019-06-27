@@ -11,6 +11,7 @@ public class CameraMove : MonoBehaviour
 
     public void Camera_Target()
     {
+        Debug.Log(Target);
         Target = GameObject.FindGameObjectWithTag("Player"); 
     }
 

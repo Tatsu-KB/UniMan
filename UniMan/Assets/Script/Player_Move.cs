@@ -33,7 +33,7 @@ public class Player_Move : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.A))
         {
             Life = 0;
-            Damage();
+            Damage(5);
         }
         if (Active == true)
 
@@ -172,13 +172,14 @@ public class Player_Move : MonoBehaviour
         OnGround = false;
 
     }
-    public void Damage()
+    public void Damage( int EnemyATK)
     {
         rb.velocity = Vector2.zero;
         if (Active)
         {
             animator.SetTrigger("Damage");
             maneger.Damege(transform);
+            Life -= EnemyATK;
         }
 
         if (Life == 0) PlayerDown(); //ライフ0でダウン

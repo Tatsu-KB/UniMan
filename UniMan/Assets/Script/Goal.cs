@@ -25,15 +25,15 @@ public class Goal : MonoBehaviour
     {
         if(collision.tag == "Player" && Active)
         {
-            stageManeger.StageGoal();
-            animator.SetTrigger("Get");
+
+            stageManeger.StageGoal(transform);
             Invoke("Lost", 0.4f);
             Active = false;
+            gameObject.SetActive(false);
         }
     }
     void Lost()
     {
-        gameObject.SetActive(false);
         stageManeger.GoalPerformance();
     }
 }

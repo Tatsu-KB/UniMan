@@ -9,8 +9,9 @@ public class StageManeger : MonoBehaviour
     [SerializeField] GameObject PlayerPrefab, GoalPrefab;
     [SerializeField] CameraMove Camera;
     [SerializeField] Enemy_Bee Bee;
-    [SerializeField] GameObject DamegeEffect, DamegeEffectPrefab;
-    [SerializeField] GameObject Effect,EffectPrefab;
+    [SerializeField] GameObject DamegeEffect;
+    [SerializeField] GameObject Effect;
+    [SerializeField] GameObject GoalEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,20 +30,20 @@ public class StageManeger : MonoBehaviour
         
     }
 
-    public void PlayerDamege(int Damege)
+    public void PlayerDamege(int EnemyAtk)
     {
-        Player.GetComponent<Player_Move>().Damage();
+        Player.GetComponent<Player_Move>().Damage(EnemyAtk);
     }
 
     public void NeedleDamage()
     {
-        //Debug.Log("即死です");
         Player.GetComponent<Player_Move>().PlayerDown();
     }
 
-    public void StageGoal()
+    public void StageGoal(Transform transform)
     {
         Debug.Log("おめでとう! ゴールです!!");
+        Instantiate(GoalEffect,transform).transform.parent = null;
         Player.GetComponent<Player_Move>().StageClear();
     }
 
@@ -53,13 +54,11 @@ public class StageManeger : MonoBehaviour
 
     public void Damege(Transform P_pos)
     {
-        DamegeEffectPrefab = Instantiate(DamegeEffect, P_pos);
-        DamegeEffectPrefab.transform.parent = null;
+        Instantiate(DamegeEffect, P_pos).transform.parent = null;
     }
 
     public void DownEffect(Transform P_pos)
     {
-        EffectPrefab =  Instantiate(Effect, P_pos);
-        EffectPrefab.transform.parent = null;
+        Instantiate(Effect, P_pos).transform.parent = null;
     }
 }
