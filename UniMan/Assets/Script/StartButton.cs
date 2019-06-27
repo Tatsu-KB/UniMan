@@ -17,7 +17,7 @@ public class StartButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Alpha = Mathf.Sin(Time.time) / 2 + 0.5f;
+        Alpha = Mathf.Sin(Time.time) / 1 + 0.5f;
         StartCoroutine("ColorCoroutine");
     }
 
