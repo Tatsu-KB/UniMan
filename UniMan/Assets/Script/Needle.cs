@@ -8,7 +8,7 @@ public class Needle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StageManeger = GameObject.Find("StageManeger").GetComponent<StageManeger>();
+        StageManeger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
     }
 
     // Update is called once per frame

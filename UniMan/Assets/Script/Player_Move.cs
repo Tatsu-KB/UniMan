@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Player_Move : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    Animator animator;
     Rigidbody2D rb;
-    BoxCollider2D col;
-    public int MoveSpeed;
-    float Horizontal,Vertical;
-    private static int gravity = -1;
-    public bool OnGround;
-    float preScale, preScale_re;
-   [SerializeField] GameObject Deth_Effect;
-    public bool Active, NowAttack;
-    AnimatorStateInfo nowAnim;
+    BoxCollider2D col;                                                      
+    public int MoveSpeed;                                            //移動速度
+    float Horizontal,Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
+    bool OnGround,Active, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
+    AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
+
+    public int Life;                                                         //体力値
+    StageManeger maneger;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +25,16 @@ public class Player_Move : MonoBehaviour
         preScale_re = transform.localScale.x * -1;
         Active = true;
         NowAttack = false;
+        maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
     }
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            Life = 0;
+            Damage();
+        }
         if (Active == true)
 
         {
@@ -169,19 +174,32 @@ public class Player_Move : MonoBehaviour
     }
     public void Damage()
     {
-       if(Active) animator.SetTrigger("Damage");
-        PlayerDown();
+        rb.velocity = Vector2.zero;
+        if (Active)
+        {
+            animator.SetTrigger("Damage");
+            maneger.Damege(transform);
+        }
+
+        if (Life == 0) PlayerDown(); //ライフ0でダウン
+        else Invoke("Alive",0.5f);
     }
 
-
+    
     public void PlayerDown()
     {
-        if(Active)animator.SetBool("Dead", true);
+        if (Active) animator.SetTrigger("Damage");
         Active = false;
-        rb.velocity = Vector2.zero;
-        rb.isKinematic = true;
-        Invoke("PlayerFalse",1.0f);
+        rb.velocity = Vector2.zero;                     // やられた後不自然に滑らないように  
+        rb.isKinematic = true;                            //  天井のトゲなどでダウンした場合にその場で爆発させるため
+        Invoke("PlayerFalse",0.2f);                   //やられモーションを見せるため一瞬待っています
     }
+
+    void Alive()
+    {
+        animator.SetTrigger("Stand");
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "MoveGround")
@@ -197,12 +215,11 @@ public class Player_Move : MonoBehaviour
             transform.parent = null;
         }
     }
-
     void PlayerFalse()
     {
-        gameObject.SetActive(false);
+        maneger.DownEffect(transform);          //自分の居場所にエフェクトを出す
+        gameObject.SetActive(false);               //ダウンと同時だとエフェクトが不自然だったため
     }
-
     public void StageClear()
     {
         Active = false;
@@ -212,8 +229,7 @@ public class Player_Move : MonoBehaviour
     public void Performance()
     {
         int value = Random.Range(0, 2);
-        Debug.Log("パフォーマンスです");
-        if(value == 0)
+        if (value == 0)
         {
             animator.SetTrigger("Clear1");
         }

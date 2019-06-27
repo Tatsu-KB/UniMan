@@ -5,47 +5,40 @@ using UnityEngine;
 public class Enemy_Bee : MonoBehaviour
 {
     GameObject player;
-    public bool EnemyFlag;
-    public Renderer Renderer;
-    float Min, Max;
+    bool EnemyFlag;
     [SerializeField]float Speed;
-    [SerializeField] Rigidbody2D rb;
+    Rigidbody2D rb;
     float preScale, preScale_re;
-    public Vector3 scale;
-
-
+    Vector3 scale;
+    StageManeger maneger;
+    int Attack;
     // Start is called before the first frame update
     void Start()
     {
-        Min = transform.position.y;
-        Max = transform.position.y + 3;
         EnemyFlag = false;
-        Renderer = GetComponent<Renderer>();
-        player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         preScale = transform.localScale.x;
         preScale_re = transform.localScale.x * -1;
         scale = transform.localScale;
-
+        maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
+        Attack = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!player) player = GameObject.FindGameObjectWithTag("Player");
+
+
         if (EnemyFlag)
         {
-            //transform.position = new Vector3(transform.position.x ,   transform.position.y , transform.position.z);
             EnemyMove();
         }
     }
 
     void OnWillRenderObject()
     {
-        if (Camera.current.name == "SceneCamera")
-        {
-
-        }
-
+        //画面内に出るまでは動かさない
         if (Camera.current.name == "Main Camera")
                 EnemyFlag = true;
     }
@@ -57,12 +50,13 @@ public class Enemy_Bee : MonoBehaviour
         float x = targetPos.x;
         float y = targetPos.y;
 
+        //プレイヤーとの距離算出
         Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y).normalized;
-
+        //プレイヤーに向け前進
         rb.velocity = direction * Speed;
-        Debug.Log(x - transform.position.x);
+        //Debug.Log(x - transform.position.x);
 
-        
+        //反転処理
         if((x - transform.position.x) <= 0)
         {
 
@@ -75,5 +69,22 @@ public class Enemy_Bee : MonoBehaviour
         }
 
         transform.localScale = scale;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            maneger.PlayerDamege(Attack);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            maneger.PlayerDamege(Attack);
+        }
     }
 }
