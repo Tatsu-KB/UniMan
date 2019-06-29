@@ -71,7 +71,7 @@ public class Player_Move : MonoBehaviour
                 NowAttack = true;
                 Attack3();
             }
-
+            /*
             nowAnim = animator.GetCurrentAnimatorStateInfo(0);
             //Debug.Log(nowAnim.length);
             if (nowAnim.normalizedTime < 1.0f) animator.Update(0);
@@ -79,10 +79,11 @@ public class Player_Move : MonoBehaviour
             {
                 if (NowAttack)
                 {
-                    animator.SetTrigger("Stand");
+                    
                     Invoke("FlagReset", 0.4f);
                 }
             }
+            */
            // Debug.Log(nowAnim.normalizedTime);
         }
     }
@@ -232,9 +233,9 @@ public class Player_Move : MonoBehaviour
             animator.SetTrigger("Clear2");
         }
     }
-
-    void FlagReset()
+    void AnimationEnd()
     {
+        animator.SetTrigger("Stand");
         NowAttack = false;
     }
 }
