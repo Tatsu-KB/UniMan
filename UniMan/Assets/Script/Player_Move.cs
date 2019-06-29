@@ -38,6 +38,11 @@ public class Player_Move : MonoBehaviour
         if (Active == true)
 
         {
+
+            Horizontal = Input.GetAxisRaw("Horizontal");
+            Vertical = Mathf.Clamp(rb.velocity.y, -1, 1);
+
+
             //Attack();
             var jumpPower = 15.0f;
             if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
@@ -93,8 +98,8 @@ public class Player_Move : MonoBehaviour
 
         if (Active)
             {
-                Horizontal = Input.GetAxisRaw("Horizontal");
-                Vertical = Mathf.Clamp(rb.velocity.y, -1, 1);
+
+            Debug.Log(Horizontal);
 
                 Move(Horizontal);
              }
