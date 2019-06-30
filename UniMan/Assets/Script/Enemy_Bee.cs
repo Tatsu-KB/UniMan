@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Bee : MonoBehaviour
 {
     GameObject player;
-    bool EnemyFlag;
+    bool EnemyFlag,HitFlag;
     [SerializeField]float Speed;
     Rigidbody2D rb;
     float preScale, preScale_re;
@@ -79,7 +79,7 @@ public class Enemy_Bee : MonoBehaviour
         }
     }
 
-
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
@@ -87,13 +87,19 @@ public class Enemy_Bee : MonoBehaviour
             maneger.PlayerDamege(Attack);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    */
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             maneger.PlayerDamege(Attack);
+            HitFlag = false;
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        HitFlag = true;
     }
 
     public void Destroy()

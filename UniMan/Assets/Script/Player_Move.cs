@@ -11,7 +11,7 @@ public class Player_Move : MonoBehaviour
     float Horizontal,Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
     public bool OnGround,Active, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
-
+    public Renderer ren;
     public int Life;                                                         //体力値
     StageManeger maneger;
     // Start is called before the first frame update
@@ -26,6 +26,7 @@ public class Player_Move : MonoBehaviour
         Active = true;
         NowAttack = false;
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
+        ren = GetComponent<Renderer>();
     }
 
     private void Update()
@@ -58,8 +59,6 @@ public class Player_Move : MonoBehaviour
             {
                 rb.gravityScale = 1.0f;
             }
-            //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            //Debug.Log(stateInfo.normalizedTime);
 
             if (Input.GetButtonDown("Fire1") && !NowAttack)
             {
@@ -99,7 +98,7 @@ public class Player_Move : MonoBehaviour
         if (Active)
             {
 
-            Debug.Log(Horizontal);
+           
 
                 Move(Horizontal);
              }
@@ -173,12 +172,17 @@ public class Player_Move : MonoBehaviour
     }
     public void Damage( int EnemyATK)
     {
+        gameObject.layer = 8;
+        ren.material.color = new Color(1,1,1,0.5f);
+
         rb.velocity = Vector2.zero;
         if (Active)
         {
             animator.SetTrigger("Damage");
             maneger.Damege(transform);
+            rb.isKinematic = true;
             Life -= EnemyATK;
+            Active = false;
         }
 
         if (Life == 0) PlayerDown(); //ライフ0でダウン
@@ -198,6 +202,9 @@ public class Player_Move : MonoBehaviour
     void Alive()
     {
         animator.SetTrigger("Stand");
+        Invoke("Find",2.0f);
+        Active = true;
+        rb.isKinematic = false;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -242,5 +249,12 @@ public class Player_Move : MonoBehaviour
     {
         animator.SetTrigger("Stand");
         NowAttack = false;
+    }
+
+    void Find()
+    {
+        gameObject.layer = 1;
+        ren.material.color = new Color(1, 1, 1, 1);
+
     }
 }

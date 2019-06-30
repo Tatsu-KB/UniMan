@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8886695495664267065}
   - component: {fileID: 8886695495664267068}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_Gun
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,6 +273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 5
+  OnGround: 0
+  Active: 0
+  NowAttack: 0
   Life: 5
 --- !u!1 &8886695496153460858
 GameObject:
@@ -285,7 +288,7 @@ GameObject:
   - component: {fileID: 8886695496153460857}
   - component: {fileID: 8886695496153460856}
   - component: {fileID: 8886695496153460863}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IsGround
   m_TagString: Player
   m_Icon: {fileID: 0}

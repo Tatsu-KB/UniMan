@@ -46,6 +46,14 @@ public class StageManeger : MonoBehaviour
         Debug.Log("おめでとう! ゴールです!!");
         Instantiate(GoalEffect, transform).transform.parent = null;
         Player.GetComponent<Player_Move>().StageClear();
+        for (int i = 0; i < Bee.Length; i++)
+        {
+            Transform effect = Bee[i].transform;
+            Instantiate(GoalEffect, effect.transform).transform.parent = null;
+            Bee[i].GetComponent<Enemy_Bee>().Destroy();
+            Debug.Log(effect.transform.position);
+        }
+
     }
 
     public void GoalPerformance()
@@ -61,5 +69,10 @@ public class StageManeger : MonoBehaviour
     public void DownEffect(Transform P_pos)
     {
         Instantiate(Effect, P_pos).transform.parent = null;
+    }
+
+    private void Destroy()
+    {
+       
     }
 }

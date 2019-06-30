@@ -9,6 +9,7 @@ TagManager:
   - Goal
   - StageManeger
   - Bee
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Invisible
+  - Ground
   - 
   - 
   - 
