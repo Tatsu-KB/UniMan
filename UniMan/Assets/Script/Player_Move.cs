@@ -185,7 +185,7 @@ public class Player_Move : MonoBehaviour
         }
 
         if (Life <= 0) PlayerDown(); //ライフ0でダウン
-        else Invoke("Alive",0.5f);
+        else Invoke("Alive",0.3f);
     }
 
     
