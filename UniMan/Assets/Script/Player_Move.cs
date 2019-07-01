@@ -192,6 +192,7 @@ public class Player_Move : MonoBehaviour
     public void PlayerDown()
     {
         if (Active) animator.SetTrigger("Damage");
+        Life = 0;
         Active = false;
         rb.velocity = Vector2.zero;                     // やられた後不自然に滑らないように  
         rb.isKinematic = true;                            //  天井のトゲなどでダウンした場合にその場で爆発させるため
@@ -201,7 +202,7 @@ public class Player_Move : MonoBehaviour
     void Alive()
     {
         animator.SetTrigger("Stand");
-        Invoke("Find",2.0f);
+        Invoke("Find",1.5f);
         Active = true;
         rb.isKinematic = false;
     }

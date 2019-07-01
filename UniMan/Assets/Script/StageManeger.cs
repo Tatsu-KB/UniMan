@@ -9,7 +9,7 @@ public class StageManeger : MonoBehaviour
     [SerializeField] GameObject Player, Goal;
     [SerializeField] GameObject PlayerPrefab, GoalPrefab,EnemyPrefab1,EnemyPrefab2;
     [SerializeField] CameraMove Camera;
-    [SerializeField] GameObject[] Bee;
+    [SerializeField] GameObject[] Bee,Piranha;
     [SerializeField] GameObject DamegeEffect;
     [SerializeField] GameObject Effect;
     [SerializeField] GameObject GoalEffect;
@@ -32,7 +32,7 @@ public class StageManeger : MonoBehaviour
            // Debug.Log(EnemyPos.Rank);
             Bee[No] = Instantiate(EnemyPrefab1, EnemyPos[No].transform);
             Bee[No].transform.parent = null;
-            Bee[No].GetComponent<Enemy_Bee>().Speed = Random.Range(1, 3);
+            //Bee[No].GetComponent<Enemy_Bee>().Speed = Random.Range(1, 3);
         }
     }
 
@@ -80,10 +80,9 @@ public class StageManeger : MonoBehaviour
     public void DownEffect(Transform P_pos)
     {
         Instantiate(Effect, P_pos).transform.parent = null;
+        
+        for(int i = 0; i < Bee.Length;i++)  Bee[i].GetComponent<Enemy_Piranha>().ActiveFalse();
     }
 
-    private void Destroy()
-    {
-       
-    }
+    
 }

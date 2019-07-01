@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy_Piranha : MonoBehaviour
 {
-    GameObject player,Bullet;
+    GameObject player;
+    public GameObject Bullet;
     bool EnemyFlag, HitFlag;
 //    public float Speed;
     Rigidbody2D rb;
@@ -13,7 +14,7 @@ public class Enemy_Piranha : MonoBehaviour
     StageManeger maneger;
     Animator animator;
     int Attack;
-    bool StateFlag;
+    public bool StateFlag,Active;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class Enemy_Piranha : MonoBehaviour
         Attack = 2;
         animator = GetComponent<Animator>();
         StateFlag = false;
+        Active = true;
     }
 
     // Update is called once per frame
@@ -125,7 +127,16 @@ public class Enemy_Piranha : MonoBehaviour
 
     void Action()
     {
-        animator.SetTrigger("Attack");
+        if (Active)
+        {
+            animator.SetTrigger("Attack");
+            Instantiate(Bullet, transform).transform.parent = null;
+        }
+    }
 
+    public void ActiveFalse()
+    {
+        Debug.Log("test");
+        Active = false;  
     }
 }

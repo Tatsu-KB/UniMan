@@ -8,8 +8,9 @@ TagManager:
   - MoveGround
   - Goal
   - StageManeger
-  - Bee
   - EnemyPos
+  - FxTemporaire
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - 
   - Invisible
   - Ground
-  - 
+  - EnemyBullet
   - 
   - 
   - 
