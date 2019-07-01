@@ -9,7 +9,7 @@ TagManager:
   - Goal
   - StageManeger
   - Bee
-  - FxTemporaire
+  - EnemyPos
   layers:
   - Default
   - TransparentFX

@@ -5,8 +5,9 @@ using UnityEngine;
 public class StageManeger : MonoBehaviour
 {
     [SerializeField] GameObject StartPos, GoalPos;
+    [SerializeField]GameObject[] EnemyPos;
     [SerializeField] GameObject Player, Goal;
-    [SerializeField] GameObject PlayerPrefab, GoalPrefab;
+    [SerializeField] GameObject PlayerPrefab, GoalPrefab,EnemyPrefab1,EnemyPrefab2;
     [SerializeField] CameraMove Camera;
     [SerializeField] GameObject[] Bee;
     [SerializeField] GameObject DamegeEffect;
@@ -22,7 +23,17 @@ public class StageManeger : MonoBehaviour
         Goal.transform.parent = null;
         Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
         Camera.Camera_Target();
-        Bee = GameObject.FindGameObjectsWithTag("Bee");
+
+        EnemyPos = GameObject.FindGameObjectsWithTag("EnemyPos");
+        Debug.Log(EnemyPos.Length);
+        System.Array.Resize(ref Bee, EnemyPos.Length);
+        for (int No = 0; No < EnemyPos.Length; No++)
+        {
+           // Debug.Log(EnemyPos.Rank);
+            Bee[No] = Instantiate(EnemyPrefab1, EnemyPos[No].transform);
+            Bee[No].transform.parent = null;
+            Bee[No].GetComponent<Enemy_Bee>().Speed = Random.Range(1, 3);
+        }
     }
 
     // Update is called once per frame

@@ -33,7 +33,6 @@ public class Player_Move : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.A))
         {
-            Life = 0;
             Damage(5);
         }
         if (Active == true)
@@ -185,7 +184,7 @@ public class Player_Move : MonoBehaviour
             Active = false;
         }
 
-        if (Life == 0) PlayerDown(); //ライフ0でダウン
+        if (Life <= 0) PlayerDown(); //ライフ0でダウン
         else Invoke("Alive",0.5f);
     }
 

@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Bee : MonoBehaviour
+public class Enemy_Piranha : MonoBehaviour
 {
-    GameObject player;
-    bool EnemyFlag,HitFlag;
-    public float Speed;
+    GameObject player,Bullet;
+    bool EnemyFlag, HitFlag;
+//    public float Speed;
     Rigidbody2D rb;
     float preScale, preScale_re;
     Vector3 scale;
     StageManeger maneger;
+    Animator animator;
     int Attack;
+    bool StateFlag;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,29 +23,35 @@ public class Enemy_Bee : MonoBehaviour
         preScale_re = transform.localScale.x * -1;
         scale = transform.localScale;
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
-        Attack = 1;
+        Attack = 2;
+        animator = GetComponent<Animator>();
+        StateFlag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!player) player = GameObject.FindGameObjectWithTag("Player");
+        if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
 
         if (EnemyFlag)
         {
-            EnemyMove();
+            EnemyAction();
+            if(StateFlag == false)
+            {
+                StartCoroutine(AttackStart(5.5f));
+                StateFlag = true;
+            }
         }
-    }
 
+    }
     void OnWillRenderObject()
     {
         //画面内に出るまでは動かさない
         if (Camera.current.name == "Main Camera")
-                EnemyFlag = true;
+            EnemyFlag = true;
     }
-
-    void EnemyMove()
+    void EnemyAction()
     {
         if (player.activeSelf)
         {
@@ -55,7 +63,7 @@ public class Enemy_Bee : MonoBehaviour
             //プレイヤーとの距離算出
             Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y).normalized;
             //プレイヤーに向け前進
-            rb.velocity = direction * Speed;
+            //rb.velocity = direction * Speed;
             //Debug.Log(x - transform.position.x);
 
             //反転処理
@@ -72,17 +80,11 @@ public class Enemy_Bee : MonoBehaviour
 
             transform.localScale = scale;
         }
-
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
     }
 
-    
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             maneger.PlayerDamege(Attack);
             HitFlag = false;
@@ -94,7 +96,7 @@ public class Enemy_Bee : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             maneger.PlayerDamege(Attack);
             HitFlag = false;
@@ -109,5 +111,21 @@ public class Enemy_Bee : MonoBehaviour
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    private IEnumerator AttackStart(float delayCount)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delayCount);
+            Action();
+        }
+    }
+
+
+    void Action()
+    {
+        animator.SetTrigger("Attack");
+
     }
 }
