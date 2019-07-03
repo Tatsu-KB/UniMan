@@ -14,8 +14,9 @@ public class SceneLoad : MonoBehaviour
 
     public string SceneName;
 
-    static public SceneLoad instance;
+    //static public SceneLoad instance;
     // Start is called before the first frame update
+    /*
     void Awake()
     {
         if (instance == null)
@@ -30,7 +31,7 @@ public class SceneLoad : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    */
     void LoadScene(string Name)
     {
         loadUI.SetActive(true);
