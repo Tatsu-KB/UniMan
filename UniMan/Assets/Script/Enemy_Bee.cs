@@ -55,7 +55,7 @@ public class Enemy_Bee : MonoBehaviour
             float y = targetPos.y;
 
             //プレイヤーとの距離算出
-            Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y).normalized;
+            Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y -0.3f).normalized;
             //プレイヤーに向け前進
             rb.velocity = direction * Speed;
             //Debug.Log(x - transform.position.x);
