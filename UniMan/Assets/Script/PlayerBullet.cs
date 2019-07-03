@@ -7,7 +7,7 @@ public class PlayerBullet : MonoBehaviour
     Rigidbody2D rb;
     GameObject player;
     Vector2 direction;
-    [SerializeField] int SpeedX, SpeedY,Speed,Speed2;
+    [SerializeField] float SpeedX, SpeedY,Speed,Speed2;
     [SerializeField] int Attack;
     StageManeger maneger;
 
@@ -21,13 +21,13 @@ public class PlayerBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SpeedX > 0 && SpeedY > 0) Speed = Speed2;
-        if (SpeedX > 0 && SpeedY < 0) Speed = Speed2;
+        if (SpeedY > 0) Speed = Speed2;
+        if (SpeedY < 0) Speed = Speed2;
 
         rb.velocity = new Vector2(SpeedX * Speed, SpeedY * Speed);
     }
     
-    public void Inst(int x,int y)
+    public void Inst(float x,float y)
     {
         SpeedX = x;
         SpeedY = y;

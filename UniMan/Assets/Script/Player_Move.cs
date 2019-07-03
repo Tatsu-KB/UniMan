@@ -54,21 +54,23 @@ public class Player_Move : MonoBehaviour
             if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
                 rb.gravityScale = 0.5f;
             else             rb.gravityScale = 1.0f;
-
-            if (Input.GetButtonDown("Fire1") && !NowAttack)
+            if (Active)
             {
-                NowAttack = true;
-                Attack1();
-            }
-            if (Input.GetButtonDown("Fire2") && !NowAttack)
-            {
-                NowAttack = true;
-                Attack2();
-            }
-            if (Input.GetButtonDown("Fire3") && !NowAttack)
-            {
-                NowAttack = true;
-                Attack3();
+                if (Input.GetButtonDown("Fire1") && !NowAttack)
+                {
+                    NowAttack = true;
+                    Attack1();
+                }
+                if (Input.GetButtonDown("Fire2") && !NowAttack)
+                {
+                    NowAttack = true;
+                    Attack2();
+                }
+                if (Input.GetButtonDown("Fire3") && !NowAttack)
+                {
+                    NowAttack = true;
+                    Attack3();
+                }
             }
         }
     }
@@ -248,7 +250,8 @@ public class Player_Move : MonoBehaviour
         Instantiate
         (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.4f)
         , Bullet.transform.rotation)
-        .GetComponent<PlayerBullet>().Inst(1 * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 1);
+        .GetComponent<PlayerBullet>().Inst(1.5f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 1);
+        Debug.Log(1.5f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)));
 
     }
     public void Attack_Down()
@@ -256,7 +259,7 @@ public class Player_Move : MonoBehaviour
         Instantiate
      (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y - 0.2f)
     , Bullet.transform.rotation)
-     .GetComponent<PlayerBullet>().Inst(1 * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), -1);
+     .GetComponent<PlayerBullet>().Inst(1.5f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), -1);
 
     }
 }
