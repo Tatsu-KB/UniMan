@@ -54,6 +54,7 @@ public class StageManeger : MonoBehaviour
 
     public void EnemyDamage(GameObject Enemy, int ATK,Transform Pos)
     {
+        Debug.Log(Enemy.name);
         if(Enemy.tag == "Bee")Enemy.GetComponent<Enemy_Bee>().Damage(ATK);
         if (Enemy.tag == "Piranha") Enemy.GetComponent<Enemy_Piranha>().Damage(ATK);
 
@@ -81,15 +82,21 @@ public class StageManeger : MonoBehaviour
         Player.GetComponent<Player_Move>().StageClear();
         for (int i = 0; i < Bee.Length; i++)
         {
-            Transform effect_Bee = Bee[i].transform;
-            Instantiate(EnemyEffect, effect_Bee).transform.parent = null;
-            Bee[i].GetComponent<Enemy_Bee>().Destroy();
+            if (Bee[i] != null)
+            {
+                Transform effect_Bee = Bee[i].transform;
+                Instantiate(EnemyEffect, effect_Bee).transform.parent = null;
+                Bee[i].GetComponent<Enemy_Bee>().Destroy();
+            }
         }
         for (int i = 0; i < Piranha.Length; i++)
         {
-            Transform effect_Piranha = Piranha[i].transform;
-            Instantiate(EnemyEffect, effect_Piranha).transform.parent = null;
-            Piranha[i].GetComponent<Enemy_Piranha>().Destroy();
+            if (Piranha[i] != null)
+            {
+                Transform effect_Piranha = Piranha[i].transform;
+                Instantiate(EnemyEffect, effect_Piranha).transform.parent = null;
+                Piranha[i].GetComponent<Enemy_Piranha>().Destroy();
+            }
         }
 
     }

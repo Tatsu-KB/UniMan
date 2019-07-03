@@ -246,7 +246,7 @@ public class Player_Move : MonoBehaviour
     public void Attack_Up()
     {
         Instantiate
-        (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.2f)
+        (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.4f)
         , Bullet.transform.rotation)
         .GetComponent<PlayerBullet>().Inst(1 * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 1);
 

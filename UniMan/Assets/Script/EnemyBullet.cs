@@ -41,7 +41,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Enemy")
+        if (collision.tag != gameObject.tag)
         {
             Destroy(gameObject);
         }
@@ -50,7 +50,7 @@ public class EnemyBullet : MonoBehaviour
             maneger.PlayerDamege(Attack);
         }
         
-        if(collision.tag != "Enemy" && collision.tag != "Player")
+        if(collision.tag != gameObject.tag && collision.tag != "Player")
         {
             maneger.BreakEffect(transform);
         }

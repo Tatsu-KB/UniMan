@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2023232883682115341}
   - component: {fileID: 2023232883682115337}
   - component: {fileID: 2023232883682115338}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: piranha
   m_TagString: Piranha
   m_Icon: {fileID: 0}

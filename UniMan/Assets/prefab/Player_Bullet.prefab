@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5489226010302989690}
   - component: {fileID: 7152249431478609775}
   - component: {fileID: 2591574290527104326}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Player_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,4 +134,5 @@ MonoBehaviour:
   SpeedX: 0
   SpeedY: 0
   Speed: 10
+  Speed2: 0
   Attack: 1

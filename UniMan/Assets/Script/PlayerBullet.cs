@@ -33,9 +33,9 @@ public class PlayerBullet : MonoBehaviour
         SpeedY = y;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Bee" || collision.tag == "Piranha")
         {
             maneger.GetComponent<StageManeger>().EnemyDamage(collision.gameObject,Attack,transform);
         }

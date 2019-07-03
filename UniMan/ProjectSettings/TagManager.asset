@@ -30,8 +30,8 @@ TagManager:
   - Ground
   - EnemyBullet
   - PlayerBullet
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 
