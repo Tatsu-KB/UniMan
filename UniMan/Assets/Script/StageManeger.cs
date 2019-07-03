@@ -52,6 +52,18 @@ public class StageManeger : MonoBehaviour
         //Debug.Log((int)Bee.Length);
     }
 
+    public void EnemyDamage(GameObject Enemy, int ATK,Transform Pos)
+    {
+        if(Enemy.tag == "Bee")Enemy.GetComponent<Enemy_Bee>().Damage(ATK);
+        if (Enemy.tag == "Piranha") Enemy.GetComponent<Enemy_Piranha>().Damage(ATK);
+
+        Instantiate(DamegeEffect, Pos).transform.parent = null;
+    }
+    public void EnemyDown(Transform Enemy_pos)
+    {
+        Instantiate(EnemyEffect, Enemy_pos).transform.parent = null;
+    }
+
     public void PlayerDamege(int EnemyAtk)
     {
         Player.GetComponent<Player_Move>().Damage(EnemyAtk);

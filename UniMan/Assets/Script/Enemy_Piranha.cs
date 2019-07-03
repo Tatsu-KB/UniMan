@@ -140,4 +140,13 @@ public class Enemy_Piranha : MonoBehaviour
     {
         Active = false;  
     }
+    public void Damage(int EnemyATK)
+    {
+        Life -= EnemyATK;
+        if (Life <= 0)
+        {
+            maneger.EnemyDown(transform);
+            Destroy(gameObject);
+        }
+    }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Bee : MonoBehaviour
 {
+    int Life;
     GameObject player;
     bool EnemyFlag,HitFlag;
     public float Speed;
@@ -15,6 +16,7 @@ public class Enemy_Bee : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Life = 3;
         EnemyFlag = false;
         rb = GetComponent<Rigidbody2D>();
         preScale = transform.localScale.x;
@@ -110,4 +112,15 @@ public class Enemy_Bee : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void Damage(int EnemyATK)
+    {
+        Life -= EnemyATK;
+        if (Life <= 0)
+        {
+            maneger.EnemyDown(transform);
+            Destroy(gameObject);
+        }
+    }
+
 }

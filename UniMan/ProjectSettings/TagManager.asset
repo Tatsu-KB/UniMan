@@ -9,12 +9,14 @@ TagManager:
   - Goal
   - StageManeger
   - FxTemporaire
-  - Enemy
   - EnemyPos1
   - EnemyPos2
   - EnemyPos3
   - EnemyPos4
   - EnemyPos5
+  - Bee
+  - Piranha
+  - Enemy
   layers:
   - Default
   - TransparentFX

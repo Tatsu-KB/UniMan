@@ -11,9 +11,10 @@ public class Player_Move : MonoBehaviour
     float Horizontal,Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
     public bool OnGround,Active, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
-    public Renderer ren;
+    Renderer ren;
     public int Life;                                                         //体力値
     StageManeger maneger;
+    [SerializeField] GameObject Bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,15 +123,17 @@ public class Player_Move : MonoBehaviour
 
     void Attack1()
     {
-            animator.SetTrigger("Attack1");
+        animator.SetTrigger("Attack1");
     }
     void Attack2()
     {
-            animator.SetTrigger("Attack2");
+     
+        animator.SetTrigger("Attack2");
     }
     void Attack3()
     {
-            animator.SetTrigger("Attack3");
+        animator.SetTrigger("Attack3");
+
     }
 
     public void IsGround()
@@ -174,10 +177,10 @@ public class Player_Move : MonoBehaviour
 
     void Alive()
     {
-        animator.SetTrigger("Stand");
-        Invoke("Find",1.5f);
-        Active = true;
-        rb.isKinematic = false;
+        animator.SetTrigger("Stand");   
+        Invoke("Find",1.5f);                //無敵時間を解除するまでの時間
+        Active = true;                        //操作不能を解除
+        rb.isKinematic = false;          //ダメージを受けた際物理計算を止めるので元に戻す
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -229,6 +232,31 @@ public class Player_Move : MonoBehaviour
     {
         gameObject.layer = 1;
         ren.material.color = new Color(1, 1, 1, 1);
+
+    }
+
+    public void Attack_Front()
+    {
+        Instantiate
+        (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.1f)
+        , Bullet.transform.rotation)
+        .GetComponent<PlayerBullet>().Inst(1 * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 0);
+
+    }
+    public void Attack_Up()
+    {
+        Instantiate
+        (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.2f)
+        , Bullet.transform.rotation)
+        .GetComponent<PlayerBullet>().Inst(1 * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 1);
+
+    }
+    public void Attack_Down()
+    {
+        Instantiate
+     (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y - 0.2f)
+    , Bullet.transform.rotation)
+     .GetComponent<PlayerBullet>().Inst(1 * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), -1);
 
     }
 }
