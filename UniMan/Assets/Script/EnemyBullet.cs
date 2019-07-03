@@ -28,6 +28,8 @@ public class EnemyBullet : MonoBehaviour
             maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
 
             direction = new Vector2(x - transform.position.x, y - transform.position.y).normalized;
+
+        
         }
     }
 
@@ -35,7 +37,6 @@ public class EnemyBullet : MonoBehaviour
     void Update()
     {
         rb.velocity = direction * Speed;
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,5 +54,9 @@ public class EnemyBullet : MonoBehaviour
         {
             maneger.BreakEffect(transform);
         }
+    }
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Piranha : MonoBehaviour
 {
+    int Life;
     GameObject player;
     public GameObject Bullet;
     bool EnemyFlag, HitFlag;
@@ -28,6 +29,7 @@ public class Enemy_Piranha : MonoBehaviour
         animator = GetComponent<Animator>();
         StateFlag = false;
         Active = true;
+        Life = 7;
     }
 
     // Update is called once per frame
@@ -41,17 +43,16 @@ public class Enemy_Piranha : MonoBehaviour
             EnemyAction();
             if(StateFlag == false)
             {
-                StartCoroutine(AttackStart(5.5f));
+                StartCoroutine(AttackStart(3.5f));
                 StateFlag = true;
             }
         }
-
+        if (Life <= 0) ;
     }
     void OnWillRenderObject()
     {
         //画面内に出るまでは動かさない
-        if (Camera.current.name == "Main Camera")
-            EnemyFlag = true;
+        if (Camera.current.name == "Main Camera") EnemyFlag = true;
     }
     void EnemyAction()
     {
@@ -137,7 +138,6 @@ public class Enemy_Piranha : MonoBehaviour
 
     public void ActiveFalse()
     {
-        Debug.Log("test");
         Active = false;  
     }
 }

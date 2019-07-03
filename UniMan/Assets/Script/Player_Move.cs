@@ -51,13 +51,8 @@ public class Player_Move : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             }
             if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
-            {
                 rb.gravityScale = 0.5f;
-            }
-            else
-            {
-                rb.gravityScale = 1.0f;
-            }
+            else             rb.gravityScale = 1.0f;
 
             if (Input.GetButtonDown("Fire1") && !NowAttack)
             {
@@ -74,34 +69,15 @@ public class Player_Move : MonoBehaviour
                 NowAttack = true;
                 Attack3();
             }
-            /*
-            nowAnim = animator.GetCurrentAnimatorStateInfo(0);
-            //Debug.Log(nowAnim.length);
-            if (nowAnim.normalizedTime < 1.0f) animator.Update(0);
-            if ((nowAnim.IsName("Attack_1") || nowAnim.IsName("Attack_2") || nowAnim.IsName("Attack_3")) && nowAnim.normalizedTime >= 1.0f)
-            {
-                if (NowAttack)
-                {
-                    
-                    Invoke("FlagReset", 0.4f);
-                }
-            }
-            */
-           // Debug.Log(nowAnim.normalizedTime);
         }
     }
         // Update is called once per frame
         void FixedUpdate()
         {
 
-        if (Active)
-            {
+        if (Active)Move(Horizontal);
 
-           
-
-                Move(Horizontal);
-             }
-            else
+        else
         {
             Horizontal = 0;
             Vertical = 0;
@@ -110,20 +86,17 @@ public class Player_Move : MonoBehaviour
     }
     void Move(float X)
     {
-        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-        Vector2 pos = transform.position;
-
-        pos.x = Mathf.Clamp(pos.x, min.x, max.x);
-        pos.y = Mathf.Clamp(pos.y, min.y - 3, max.y);
-
+        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));  //カメラの左下座標の取得
+        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)); //カメラの右上     〃
+        Vector2 pos = transform.position;   //自分の座標の更新
+        pos.x = Mathf.Clamp(pos.x, min.x, max.x);       //移動制限(カメラの表示範囲の横から出ないように)
+        pos.y = Mathf.Clamp(pos.y, min.y - 3, max.y); //移動制限(カメラの表示範囲の縦から出ないように)
         Vector3 scale = transform.localScale;
 
+        rb.velocity = new Vector2(Horizontal * MoveSpeed, rb.velocity.y); //移動
 
-        rb.velocity = new Vector2(Horizontal * MoveSpeed, rb.velocity.y);
 
-
-        if (!OnGround)
+        if (!OnGround)  //地面に触れているか否か
         {
             animator.SetFloat("Jump", Mathf.Clamp(Vertical, -1.0f, 1.0f));
         }
@@ -235,6 +208,7 @@ public class Player_Move : MonoBehaviour
 
     public void Performance()
     {
+        gameObject.layer = 8;
         int value = Random.Range(0, 2);
         if (value == 0)
         {

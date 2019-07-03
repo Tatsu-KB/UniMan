@@ -10,9 +10,7 @@ public class StageManeger : MonoBehaviour
     [SerializeField] GameObject PlayerPrefab, GoalPrefab,EnemyPrefab1,EnemyPrefab2;
     [SerializeField] CameraMove Camera;
     [SerializeField] GameObject[] Bee,Piranha;
-    [SerializeField] GameObject DamegeEffect;
-    [SerializeField] GameObject Effect;
-    [SerializeField] GameObject GoalEffect;
+    [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,13 +25,24 @@ public class StageManeger : MonoBehaviour
         EnemyPos_Bee = GameObject.FindGameObjectsWithTag("EnemyPos1");
         EnemyPos_Piranha = GameObject.FindGameObjectsWithTag("EnemyPos2");
         Debug.Log(EnemyPos_Bee.Length);
+        Debug.Log(EnemyPos_Piranha.Length);
+
         System.Array.Resize(ref Bee, EnemyPos_Bee.Length);
-        for (int No = 0; No < EnemyPos_Bee.Length; No++)
+        System.Array.Resize(ref Piranha, EnemyPos_Piranha.Length);
+
+        for (int No1 = 0; No1 < EnemyPos_Bee.Length; No1++)
         {
-           // Debug.Log(EnemyPos.Rank);
-            Bee[No] = Instantiate(EnemyPrefab1, EnemyPos_Bee[No].transform);
-            Bee[No].transform.parent = null;
-            //Bee[No].GetComponent<Enemy_Bee>().Speed = Random.Range(1, 3);
+            Bee[No1] = Instantiate(EnemyPrefab1, EnemyPos_Bee[No1].transform);
+            Bee[No1].transform.parent = null;
+            Bee[No1].GetComponent<Enemy_Bee>().Speed = 1;
+        }
+
+        for (int No2 = 0; No2 < EnemyPos_Piranha.Length; No2++)
+        {
+            Piranha[No2] = Instantiate(EnemyPrefab2, EnemyPos_Piranha[No2].transform);
+            Piranha[No2].transform.parent = null;
+            //Piranha[No2] = Instantiate(EnemyPrefab2, EnemyPos_Piranha[No2].transform);
+            //Piranha[No2].transform.parent = null;
         }
     }
 
@@ -60,10 +69,15 @@ public class StageManeger : MonoBehaviour
         Player.GetComponent<Player_Move>().StageClear();
         for (int i = 0; i < Bee.Length; i++)
         {
-            Transform effect = Bee[i].transform;
-            Instantiate(GoalEffect, effect.transform).transform.parent = null;
+            Transform effect_Bee = Bee[i].transform;
+            Instantiate(EnemyEffect, effect_Bee).transform.parent = null;
             Bee[i].GetComponent<Enemy_Bee>().Destroy();
-            Debug.Log(effect.transform.position);
+        }
+        for (int i = 0; i < Piranha.Length; i++)
+        {
+            Transform effect_Piranha = Piranha[i].transform;
+            Instantiate(EnemyEffect, effect_Piranha).transform.parent = null;
+            Piranha[i].GetComponent<Enemy_Piranha>().Destroy();
         }
 
     }
@@ -82,7 +96,7 @@ public class StageManeger : MonoBehaviour
     {
         Instantiate(Effect, P_pos).transform.parent = null;
         
-        //for(int i = 0; i < Piranha.Length;i++)  Bee[i].GetComponent<Enemy_Piranha>().ActiveFalse();
+        for(int i = 0; i < Piranha.Length;i++)  Piranha[i].GetComponent<Enemy_Piranha>().ActiveFalse();
     }
 
     public void BreakEffect(Transform Pos)
