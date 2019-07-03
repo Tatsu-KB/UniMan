@@ -8,9 +8,13 @@ TagManager:
   - MoveGround
   - Goal
   - StageManeger
-  - EnemyPos
   - FxTemporaire
   - Enemy
+  - EnemyPos1
+  - EnemyPos2
+  - EnemyPos3
+  - EnemyPos4
+  - EnemyPos5
   layers:
   - Default
   - TransparentFX

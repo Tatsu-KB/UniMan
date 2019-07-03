@@ -14,6 +14,7 @@ public class EnemyBullet : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        transform.localScale = transform.localScale;
         if (!player) player = GameObject.FindGameObjectWithTag("Player");
 
         if (player)
@@ -39,11 +40,18 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag != "Enemy") Destroy(gameObject);
-
+        if (collision.tag != "Enemy")
+        {
+            Destroy(gameObject);
+        }
         if(collision.tag == "Player")
         {
             maneger.PlayerDamege(Attack);
+        }
+        
+        if(collision.tag != "Enemy" && collision.tag != "Player")
+        {
+            maneger.BreakEffect(transform);
         }
     }
 }

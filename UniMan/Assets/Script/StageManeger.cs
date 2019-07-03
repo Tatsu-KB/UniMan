@@ -5,7 +5,7 @@ using UnityEngine;
 public class StageManeger : MonoBehaviour
 {
     [SerializeField] GameObject StartPos, GoalPos;
-    [SerializeField]GameObject[] EnemyPos;
+    [SerializeField]GameObject[] EnemyPos_Bee,EnemyPos_Piranha;
     [SerializeField] GameObject Player, Goal;
     [SerializeField] GameObject PlayerPrefab, GoalPrefab,EnemyPrefab1,EnemyPrefab2;
     [SerializeField] CameraMove Camera;
@@ -24,13 +24,14 @@ public class StageManeger : MonoBehaviour
         Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
         Camera.Camera_Target();
 
-        EnemyPos = GameObject.FindGameObjectsWithTag("EnemyPos");
-        Debug.Log(EnemyPos.Length);
-        System.Array.Resize(ref Bee, EnemyPos.Length);
-        for (int No = 0; No < EnemyPos.Length; No++)
+        EnemyPos_Bee = GameObject.FindGameObjectsWithTag("EnemyPos1");
+        EnemyPos_Piranha = GameObject.FindGameObjectsWithTag("EnemyPos2");
+        Debug.Log(EnemyPos_Bee.Length);
+        System.Array.Resize(ref Bee, EnemyPos_Bee.Length);
+        for (int No = 0; No < EnemyPos_Bee.Length; No++)
         {
            // Debug.Log(EnemyPos.Rank);
-            Bee[No] = Instantiate(EnemyPrefab1, EnemyPos[No].transform);
+            Bee[No] = Instantiate(EnemyPrefab1, EnemyPos_Bee[No].transform);
             Bee[No].transform.parent = null;
             //Bee[No].GetComponent<Enemy_Bee>().Speed = Random.Range(1, 3);
         }
@@ -81,8 +82,13 @@ public class StageManeger : MonoBehaviour
     {
         Instantiate(Effect, P_pos).transform.parent = null;
         
-        for(int i = 0; i < Bee.Length;i++)  Bee[i].GetComponent<Enemy_Piranha>().ActiveFalse();
+        //for(int i = 0; i < Piranha.Length;i++)  Bee[i].GetComponent<Enemy_Piranha>().ActiveFalse();
     }
 
-    
+    public void BreakEffect(Transform Pos)
+    {
+        Instantiate(DamegeEffect, Pos).transform.parent = null;
+    }
+
+
 }

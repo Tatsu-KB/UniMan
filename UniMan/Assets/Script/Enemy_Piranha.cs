@@ -71,7 +71,6 @@ public class Enemy_Piranha : MonoBehaviour
             //反転処理
             if ((x - transform.position.x) < 0 && player.activeSelf)
             {
-
                 scale.x = preScale;
             }
 
@@ -127,10 +126,12 @@ public class Enemy_Piranha : MonoBehaviour
 
     void Action()
     {
+
+        Vector2 Position = new Vector2(transform.position.x + -1 * transform.localScale.x / 2 / Mathf.Abs(transform.localScale.x),transform.position.y);
         if (Active)
         {
             animator.SetTrigger("Attack");
-            Instantiate(Bullet, transform).transform.parent = null;
+            Instantiate(Bullet,Position,transform.rotation).transform.parent = null;
         }
     }
 
