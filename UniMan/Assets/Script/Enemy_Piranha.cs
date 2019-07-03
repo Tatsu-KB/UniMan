@@ -15,7 +15,7 @@ public class Enemy_Piranha : MonoBehaviour
     StageManeger maneger;
     Animator animator;
     int Attack;
-    public bool StateFlag,Active;
+    public bool StateFlag;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,6 @@ public class Enemy_Piranha : MonoBehaviour
         Attack = 2;
         animator = GetComponent<Animator>();
         StateFlag = false;
-        Active = true;
         Life = 7;
     }
 
@@ -129,16 +128,13 @@ public class Enemy_Piranha : MonoBehaviour
     {
 
         Vector2 Position = new Vector2(transform.position.x + -1 * transform.localScale.x / 2 / Mathf.Abs(transform.localScale.x),transform.position.y);
-        if (Active)
-        {
-            animator.SetTrigger("Attack");
-            Instantiate(Bullet,Position,transform.rotation).transform.parent = null;
-        }
+        animator.SetTrigger("Attack");
+        Instantiate(Bullet,Position,transform.rotation).transform.parent = null;
     }
 
     public void ActiveFalse()
     {
-        Active = false;  
+        StopAllCoroutines();
     }
     public void Damage(int EnemyATK)
     {
