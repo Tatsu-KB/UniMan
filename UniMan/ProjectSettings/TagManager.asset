@@ -17,6 +17,7 @@ TagManager:
   - Bee
   - Piranha
   - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX
