@@ -16,7 +16,7 @@ public class Enemy_Bee : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Life = 3;
+        Life = 1;
         EnemyFlag = false;
         rb = GetComponent<Rigidbody2D>();
         preScale = transform.localScale.x;
