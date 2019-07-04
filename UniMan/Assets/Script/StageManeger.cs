@@ -115,7 +115,8 @@ public class StageManeger : MonoBehaviour
     {
         Instantiate(Effect, P_pos).transform.parent = null;
         
-        for(int i = 0; i < Piranha.Length;i++)  Piranha[i].GetComponent<Enemy_Piranha>().ActiveFalse();
+        for(int i = 0; i < Piranha.Length;i++)
+            if(Piranha[i] != null) Piranha[i].GetComponent<Enemy_Piranha>().ActiveFalse();
     }
 
     public void BreakEffect(Transform Pos)
