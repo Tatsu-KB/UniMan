@@ -7,7 +7,15 @@ public class TitleManeger : MonoBehaviour
 {
     public Button button, st, ex;
 
+    private int ButtonNum;
+
+    [SerializeField] string SceneName;
     // Start is called before the first frame update
+    void Awake()
+    {
+        Cursor.visible = false;   
+    }
+
     void Start()
     {
         st.gameObject.SetActive(false);
@@ -17,7 +25,10 @@ public class TitleManeger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.anyKeyDown)
+        {
+            Debug.Log("AAA");
+        }
     }
     public void Title()
     {
