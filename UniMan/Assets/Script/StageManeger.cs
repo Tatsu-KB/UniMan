@@ -34,7 +34,7 @@ public class StageManeger : MonoBehaviour
         {
             Bee[No1] = Instantiate(EnemyPrefab1, EnemyPos_Bee[No1].transform);
             Bee[No1].transform.parent = null;
-            Bee[No1].GetComponent<Enemy_Bee>().Speed = 1;
+            Bee[No1].GetComponent<Enemy_Bee>().Speed = 2;
         }
 
         for (int No2 = 0; No2 < EnemyPos_Piranha.Length; No2++)
@@ -114,8 +114,9 @@ public class StageManeger : MonoBehaviour
     public void DownEffect(Transform P_pos)
     {
         Instantiate(Effect, P_pos).transform.parent = null;
-        
-        for(int i = 0; i < Piranha.Length;i++)  Piranha[i].GetComponent<Enemy_Piranha>().ActiveFalse();
+
+        for (int i = 0; i < Piranha.Length;i++)
+            if(Piranha[i] != null) Piranha[i].GetComponent<Enemy_Piranha>().ActiveFalse();
     }
 
     public void BreakEffect(Transform Pos)
