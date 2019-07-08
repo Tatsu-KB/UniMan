@@ -6,7 +6,7 @@ using System;
 public class TitleManager : MonoBehaviour
 {
     public Button button, st, ex;
-    bool AxisReset = false,StartFlag = false;
+    public bool AxisReset = false,StartFlag = false;
     public int ButtonNum;
     string ButtonName;
     [SerializeField] string SceneName;
@@ -44,15 +44,25 @@ public class TitleManager : MonoBehaviour
         if (StartFlag)
         {
 
-            if (Input.GetAxisRaw("Vertical") != 0 && !AxisReset)
+            if (Input.GetAxis("Vertical") != 0.0f && !AxisReset)
             {
-                ButtonNum += (int)Input.GetAxisRaw("Vertical") * 2;
+                if(Input.GetAxis("Vertical") <= 0.0f)
+                    ButtonNum--;
+                if (Input.GetAxis("Vertical") >= 0.0f)
+                    ButtonNum++;
                 AxisReset = true;
                 StartCoroutine(ModeSelect());
+                Debug.Log(ButtonNum);
             }
-            if (Input.GetAxisRaw("Vertical") != 0) AxisReset = false;
-            if (StartFlag && Input.anyKeyDown && Input.GetAxisRaw("Vertical") == 0) StartCoroutine(Select());
+            if (Input.GetAxis("Vertical") == 0.0f && AxisReset)
+            {
+                AxisReset = false;
+            }
+
+            if (StartFlag && Input.anyKeyDown && Input.GetAxisRaw("Vertical") == 0.0f) StartCoroutine(Select());
+
             ButtonNum = Mathf.Clamp(ButtonNum, -1, 0);
+            
 
         }
     }
@@ -66,8 +76,13 @@ public class TitleManager : MonoBehaviour
     
     private IEnumerator ModeSelect()
     {
-        yield return new WaitForSeconds(0.8f);
-        if(!StartFlag)StartFlag = true;
+
+        if (!StartFlag)
+        {
+            yield return new WaitForSeconds(0.8f);
+            StartFlag = true;
+        }
+        else yield return new WaitForSeconds(0.3f);
         switch (ButtonNum)
         {
             case 0:
