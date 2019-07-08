@@ -8094,6 +8094,7 @@ MonoBehaviour:
   Effect: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
   GoalEffect: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
   EnemyEffect: {fileID: 100004, guid: 757df604761b8ef42831192c70ee1099, type: 3}
+  LifeUp: 5
 --- !u!4 &802083917
 Transform:
   m_ObjectHideFlags: 0
@@ -8877,10 +8878,10 @@ RectTransform:
   m_Father: {fileID: 744537329}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -360, y: 120}
-  m_SizeDelta: {x: 40, y: 160}
+  m_SizeDelta: {x: -760, y: -290}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802174814
 MonoBehaviour:
@@ -8894,7 +8895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781074e2a382347469f14d9e40e8ca4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 9581577}
+  image: {fileID: 0}
 --- !u!114 &1802174815
 MonoBehaviour:
   m_ObjectHideFlags: 0

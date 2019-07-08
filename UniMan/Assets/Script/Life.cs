@@ -13,6 +13,7 @@ public class Life : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
+        image = GameObject.Find("Canvas/Slider/Fill Area/Fill").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -23,10 +24,10 @@ public class Life : MonoBehaviour
             Player = GameObject.FindGameObjectWithTag("Player");
             PlayerLife = Player.GetComponent<Player_Move>();
             slider.maxValue = PlayerLife.Life;
-
         }
 
         slider.value = PlayerLife.Life;
+        
         if (slider.value <= slider.maxValue / 2)
         {
             image.color = Color.yellow;
@@ -36,6 +37,6 @@ public class Life : MonoBehaviour
             }
         }
         else
-            image.color = Color.cyan;
+        image.color = Color.cyan;
     }
 }

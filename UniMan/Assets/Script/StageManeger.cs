@@ -11,6 +11,7 @@ public class StageManeger : MonoBehaviour
     [SerializeField] CameraMove Camera;
     [SerializeField] GameObject[] Bee,Piranha;
     [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect;
+    public int LifeUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class StageManeger : MonoBehaviour
         EnemyPos_Bee = GameObject.FindGameObjectsWithTag("EnemyPos1");
         EnemyPos_Piranha = GameObject.FindGameObjectsWithTag("EnemyPos2");
         Debug.Log(EnemyPos_Bee.Length);
-        Debug.Log(EnemyPos_Piranha.Length);
+        //Debug.Log(EnemyPos_Piranha.Length);
 
         System.Array.Resize(ref Bee, EnemyPos_Bee.Length);
         System.Array.Resize(ref Piranha, EnemyPos_Piranha.Length);

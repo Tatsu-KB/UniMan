@@ -28,6 +28,7 @@ public class Player_Move : MonoBehaviour
         NowAttack = false;
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
         ren = GetComponent<Renderer>();
+        Life += maneger.LifeUp;
     }
 
     private void Update()

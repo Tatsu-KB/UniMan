@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class TitleManager : MonoBehaviour
 {
     public Button button, st, ex;
 
     private int ButtonNum;
-
+    string ButtonName;
     [SerializeField] string SceneName;
     // Start is called before the first frame update
     void Awake()
@@ -18,6 +18,7 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
+
         st.gameObject.SetActive(false);
         ex.gameObject.SetActive(false);
     }
@@ -27,7 +28,14 @@ public class TitleManager : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            Debug.Log("AAA");
+            foreach(KeyCode code in Enum.GetValues(typeof(KeyCode)))
+            {
+               if (Input.GetKeyDown(code))
+                    {
+                    Debug.Log(code);
+                    break;
+                }
+            }
         }
     }
     public void Title()
