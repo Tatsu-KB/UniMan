@@ -28,7 +28,7 @@ public class StageManeger : MonoBehaviour
 
         EnemyPos_Bee = GameObject.FindGameObjectsWithTag("EnemyPos1");
         EnemyPos_Piranha = GameObject.FindGameObjectsWithTag("EnemyPos2");
-        Debug.Log(EnemyPos_Bee.Length);
+        //Debug.Log(EnemyPos_Bee.Length);
         //Debug.Log(EnemyPos_Piranha.Length);
 
         System.Array.Resize(ref Bee, EnemyPos_Bee.Length);
@@ -58,7 +58,7 @@ public class StageManeger : MonoBehaviour
 
     public void EnemyDamage(GameObject Enemy, int ATK,Transform Pos)
     {
-        Debug.Log(Enemy.name);
+        //Debug.Log(Enemy.name);
         if(Enemy.tag == "Bee")Enemy.GetComponent<Enemy_Bee>().Damage(ATK);
         if (Enemy.tag == "Piranha") Enemy.GetComponent<Enemy_Piranha>().Damage(ATK);
 

@@ -7,11 +7,11 @@ public class SceneLoad : MonoBehaviour
 {
 
     private AsyncOperation async;
-    public string SceneName;
+    public string SceneName,BackName;
 
     static public SceneLoad instance;
 
-    public Texture2D blackTexture;
+    private Texture2D blackTexture;
     private float fadeAlpha = 0;
     private bool Fading = false;
     // Start is called before the first frame update
@@ -43,8 +43,9 @@ public class SceneLoad : MonoBehaviour
     }
     public void LoadScene(string Name)
     {
+        BackName = SceneName;
         SceneName = Name;
-        StartCoroutine(LoadDeta(Name,2.0f));
+        StartCoroutine(LoadDeta(Name,1.0f));
     }
 
     public void OnGUI()

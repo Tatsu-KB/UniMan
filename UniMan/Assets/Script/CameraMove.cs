@@ -13,7 +13,6 @@ public class CameraMove : MonoBehaviour
     {
 
         Target = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(Target);
     }
 
     // Update is called once per frame

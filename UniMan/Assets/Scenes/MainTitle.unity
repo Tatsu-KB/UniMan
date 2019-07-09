@@ -489,10 +489,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.049619913
-    width: 1
-    height: 0.9007602
+    x: 0.00028201938
+    y: 0
+    width: 0.99943596
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1343,6 +1343,9 @@ MonoBehaviour:
   button: {fileID: 1600568194}
   st: {fileID: 1286762826}
   ex: {fileID: 918918603}
+  AxisReset: 0
+  StartFlag: 0
+  AxisFlag: 0
   ButtonNum: 0
   SceneName: 
   Anime1: {fileID: 1286762827}
@@ -1786,7 +1789,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: UniMan
+  m_text: UniTyan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ddbdcffc9c9db44b9375f4383b3bca8, type: 2}
   m_sharedMaterial: {fileID: 21535286572613042, guid: 8ddbdcffc9c9db44b9375f4383b3bca8,
@@ -1856,7 +1859,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1429217333}
-    characterCount: 6
+    characterCount: 7
     spriteCount: 0
     spaceCount: 0
     wordCount: 1

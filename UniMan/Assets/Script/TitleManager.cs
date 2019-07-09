@@ -6,7 +6,7 @@ using System;
 public class TitleManager : MonoBehaviour
 {
     public Button button, st, ex;
-    public bool AxisReset = false,StartFlag = false;
+    public bool AxisReset = false,StartFlag = false,AxisFlag = false;
     public int ButtonNum;
     string ButtonName;
     [SerializeField] string SceneName;
@@ -41,7 +41,7 @@ public class TitleManager : MonoBehaviour
                }
             }
         }
-        if (StartFlag)
+        if (StartFlag && AxisFlag)
         {
 
             if (Input.GetAxis("Vertical") != 0.0f && !AxisReset)
@@ -52,15 +52,18 @@ public class TitleManager : MonoBehaviour
                     ButtonNum++;
                 AxisReset = true;
                 StartCoroutine(ModeSelect());
-                Debug.Log(ButtonNum);
+                //Debug.Log(ButtonNum);
             }
             if (Input.GetAxis("Vertical") == 0.0f && AxisReset)
             {
                 AxisReset = false;
             }
 
-            if (StartFlag && Input.anyKeyDown && Input.GetAxisRaw("Vertical") == 0.0f) StartCoroutine(Select());
-
+            if (StartFlag && Input.anyKeyDown&&Input.GetAxis("Vertical") == 0 && AxisFlag)
+            {
+                StartCoroutine(Select());
+                AxisFlag = false;
+            }
             ButtonNum = Mathf.Clamp(ButtonNum, -1, 0);
             
 
@@ -72,6 +75,7 @@ public class TitleManager : MonoBehaviour
         st.gameObject.SetActive(true);
         ex.gameObject.SetActive(true);
         StartCoroutine(ModeSelect());
+        AxisFlag = true;
     }
     
     private IEnumerator ModeSelect()

@@ -28,7 +28,7 @@ public class Enemy_Piranha : MonoBehaviour
         Attack = 2;
         animator = GetComponent<Animator>();
         StateFlag = false;
-        Life = 7;
+        Life = 5;
     }
 
     // Update is called once per frame
@@ -46,7 +46,6 @@ public class Enemy_Piranha : MonoBehaviour
                 StateFlag = true;
             }
         }
-        if (Life <= 0) ;
     }
     void OnWillRenderObject()
     {

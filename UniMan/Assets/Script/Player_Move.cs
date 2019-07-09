@@ -49,7 +49,6 @@ public class Player_Move : MonoBehaviour
             var jumpPower = 15.0f;
             if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
             {
-                Debug.Log("Space");
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             }
             if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
@@ -252,8 +251,6 @@ public class Player_Move : MonoBehaviour
         (Bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.4f)
         , Bullet.transform.rotation)
         .GetComponent<PlayerBullet>().Inst(1.5f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 1);
-        Debug.Log(1.5f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)));
-
     }
     public void Attack_Down()
     {
