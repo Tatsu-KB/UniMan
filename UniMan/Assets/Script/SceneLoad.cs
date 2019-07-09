@@ -81,7 +81,7 @@ public class SceneLoad : MonoBehaviour
         async = SceneManager.LoadSceneAsync(Name);
         async.allowSceneActivation = false;
         while (async.progress < 0.9f) yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         fadeAlpha = 1f;
         async.allowSceneActivation = true;

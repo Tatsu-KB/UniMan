@@ -11,7 +11,10 @@ public class StageManeger : MonoBehaviour
     [SerializeField] CameraMove Camera;
     [SerializeField] GameObject[] Bee,Piranha;
     [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect;
+    public float BeeSpeed;
+    bool Loading = false;
     public int LifeUp;
+    public string SceneName;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +38,7 @@ public class StageManeger : MonoBehaviour
         {
             Bee[No1] = Instantiate(EnemyPrefab1, EnemyPos_Bee[No1].transform);
             Bee[No1].transform.parent = null;
-            Bee[No1].GetComponent<Enemy_Bee>().Speed = 2;
+            Bee[No1].GetComponent<Enemy_Bee>().Speed = BeeSpeed;
         }
 
         for (int No2 = 0; No2 < EnemyPos_Piranha.Length; No2++)
@@ -99,7 +102,12 @@ public class StageManeger : MonoBehaviour
                 Piranha[i].GetComponent<Enemy_Piranha>().Destroy();
             }
         }
-
+        if (!Loading)
+        {
+            SceneName = "GameClear";
+            Loading = true;
+            Invoke("SceneLoading", 1.5f);
+        }
     }
 
     public void GoalPerformance()
@@ -116,8 +124,14 @@ public class StageManeger : MonoBehaviour
     {
         Instantiate(Effect, P_pos).transform.parent = null;
 
-        for (int i = 0; i < Piranha.Length;i++)
-            if(Piranha[i] != null) Piranha[i].GetComponent<Enemy_Piranha>().ActiveFalse();
+        for (int i = 0; i < Piranha.Length; i++)
+            if (Piranha[i] != null) Piranha[i].GetComponent<Enemy_Piranha>().ActiveFalse();
+        if (!Loading)
+        {
+            SceneName = "GameOver";           
+            Loading = true;
+            Invoke("SceneLoading", 1.5f);
+        }
     }
 
     public void BreakEffect(Transform Pos)
@@ -125,5 +139,8 @@ public class StageManeger : MonoBehaviour
         Instantiate(DamegeEffect, Pos).transform.parent = null;
     }
 
-
+    void SceneLoading()
+    {
+        SceneLoad.instance.LoadScene(SceneName);
+    }
 }

@@ -185,7 +185,7 @@ public class Player_Move : MonoBehaviour
         Active = true;                        //操作不能を解除
         rb.isKinematic = false;          //ダメージを受けた際物理計算を止めるので元に戻す
     }
-
+    //動く床に対応させるために子オブジェクトにする
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "MoveGround")
@@ -193,7 +193,7 @@ public class Player_Move : MonoBehaviour
             transform.parent = col.gameObject.transform;
         }
     }
-
+    //動く床から離れたら子オブジェクトを解除
     void OnCollisionExit2D(Collision2D col)
     {
         if (col.gameObject.tag == "MoveGround")
