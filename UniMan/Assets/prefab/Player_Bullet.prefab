@@ -133,6 +133,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedX: 0
   SpeedY: 0
-  Speed: 10
+  Speed: 15
   Speed2: 0
   Attack: 1

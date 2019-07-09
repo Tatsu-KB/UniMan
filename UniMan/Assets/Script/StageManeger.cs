@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class StageManeger : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI text;
     [SerializeField] GameObject StartPos, GoalPos;
-    [SerializeField]GameObject[] EnemyPos_Bee,EnemyPos_Piranha;
+    [SerializeField] GameObject[] EnemyPos_Bee,EnemyPos_Piranha;
     [SerializeField] GameObject Player, Goal;
     [SerializeField] GameObject PlayerPrefab, GoalPrefab,EnemyPrefab1,EnemyPrefab2;
     [SerializeField] CameraMove Camera;
     [SerializeField] GameObject[] Bee,Piranha;
-    [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect;
+    [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect,ActiveEffect;
+    new SpriteRenderer renderer;
     public float BeeSpeed;
     bool Loading = false;
     public int LifeUp;
@@ -20,11 +22,11 @@ public class StageManeger : MonoBehaviour
     {
         Player = Instantiate(PlayerPrefab, StartPos.transform);
         Player.transform.parent = null;
+        renderer = Player.GetComponent<SpriteRenderer>();
+        renderer.color = new Color(1, 1, 1, 0);
         Goal = Instantiate(GoalPrefab, GoalPos.transform);
         Goal.tag = GoalPos.tag;
         Goal.transform.parent = null;
-        Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
-        Camera.Camera_Target();
 
         EnemyPos_Bee = GameObject.FindGameObjectsWithTag("EnemyPos1");
         EnemyPos_Piranha = GameObject.FindGameObjectsWithTag("EnemyPos2");
@@ -45,9 +47,9 @@ public class StageManeger : MonoBehaviour
         {
             Piranha[No2] = Instantiate(EnemyPrefab2, EnemyPos_Piranha[No2].transform);
             Piranha[No2].transform.parent = null;
-            //Piranha[No2] = Instantiate(EnemyPrefab2, EnemyPos_Piranha[No2].transform);
-            //Piranha[No2].transform.parent = null;
         }
+        Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
+        Camera.Camera_Target();
     }
 
     // Update is called once per frame
@@ -81,7 +83,6 @@ public class StageManeger : MonoBehaviour
 
     public void StageGoal(Transform transform)
     {
-        Debug.Log("おめでとう! ゴールです!!");
         Instantiate(GoalEffect, transform).transform.parent = null;
         Player.GetComponent<Player_Move>().StageClear();
         for (int i = 0; i < Bee.Length; i++)
@@ -142,5 +143,12 @@ public class StageManeger : MonoBehaviour
     void SceneLoading()
     {
         SceneLoad.instance.LoadScene(SceneName);
+    }
+
+    public void Ready()
+    {
+        renderer.color = new Color(1, 1, 1, 1);
+        Instantiate(ActiveEffect, Player.transform).transform.parent = null;
+        Player.GetComponent<Animator>().SetTrigger("Start");
     }
 }

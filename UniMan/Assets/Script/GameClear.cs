@@ -13,9 +13,15 @@ public class GameClear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKeyDown && Input.GetAxis("Vertical") == 0)
+        if(Input.anyKeyDown)
         {
-            SceneLoad.instance.LoadScene("MainTitle");
+            StartCoroutine(TitleBack());
         }
+    }
+
+    IEnumerator  TitleBack()
+    {
+        yield return new WaitForSeconds(0.3f);
+        SceneLoad.instance.LoadScene("MainTitle");
     }
 }

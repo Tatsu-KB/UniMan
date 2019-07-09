@@ -7,9 +7,9 @@ public class Player_Move : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
     BoxCollider2D col;                                                      
-    public int MoveSpeed;                                            //移動速度
+    public int MoveSpeed,Speed;                                            //移動速度
     float Horizontal,Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
-    public bool OnGround,Active, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
+    public bool OnGround,Active = false, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
     Renderer ren;
     public int Life;                                                         //体力値
@@ -24,7 +24,6 @@ public class Player_Move : MonoBehaviour
         OnGround = false;
         preScale = transform.localScale.x;
         preScale_re = transform.localScale.x * -1;
-        Active = true;
         NowAttack = false;
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
         ren = GetComponent<Renderer>();
@@ -33,11 +32,8 @@ public class Player_Move : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            Damage(5);
-        }
-        if (Active == true)
+        
+        if (Active)
 
         {
 
@@ -259,5 +255,9 @@ public class Player_Move : MonoBehaviour
     , Bullet.transform.rotation)
      .GetComponent<PlayerBullet>().Inst(1.5f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), -1);
 
+    }
+    void ActiveStart()
+    {
+        Active = true;
     }
 }
