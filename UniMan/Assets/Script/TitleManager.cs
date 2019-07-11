@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 public class TitleManager : MonoBehaviour
 {
-    public Button button, st, ex;
+    public TextMeshProUGUI button, st, ex;
     public bool AxisReset = false,StartFlag = false,AxisFlag = false;
     public int ButtonNum;
     string ButtonName;
@@ -86,14 +87,16 @@ public class TitleManager : MonoBehaviour
             yield return new WaitForSeconds(0.8f);
             StartFlag = true;
         }
-        else yield return new WaitForSeconds(0.3f);
+        else yield return new WaitForSeconds(0.05f);
         switch (ButtonNum)
         {
             case 0:
-                st.Select();
+                st.color = new Color(0, 1, 1, 1);
+                ex.color = new Color(1, 1, 1, 1);
                 break;
             case -1:
-                ex.Select();
+                ex.color = new Color(0, 1, 1, 1);
+                st.color = new Color(1, 1, 1, 1);
                 break;
         }
     }
