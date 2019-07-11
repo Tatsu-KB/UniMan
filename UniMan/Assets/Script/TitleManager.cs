@@ -108,11 +108,13 @@ public class TitleManager : MonoBehaviour
         {
             case 0:
                 GameStart();
+                SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
             case -1:
                 GameExit();
+                SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
@@ -141,5 +143,9 @@ public class TitleManager : MonoBehaviour
         SoundManeger.instance.Music(BackMusic,0.8f);
         Flag = true;
         return;
+    }
+    void SE(AudioClip clip)
+    {
+        SoundManeger.instance.Sound(clip);
     }
 }

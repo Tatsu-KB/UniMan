@@ -547,6 +547,9 @@ MonoBehaviour:
   Return: {fileID: 900351343}
   ButtonNum: 0
   AxisReset: 0
+  BGM: {fileID: 8300000, guid: 22c616ddd47feeb4ca9cac06eca6060c, type: 3}
+  SelectSE: {fileID: 8300000, guid: 954e4ae283c325b4f9903bbfb4d4b9a6, type: 3}
+  CursolSE: {fileID: 0}
 --- !u!1 &1266779304
 GameObject:
   m_ObjectHideFlags: 0

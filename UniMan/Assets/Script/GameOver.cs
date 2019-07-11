@@ -10,11 +10,14 @@ public class GameOver : MonoBehaviour
     public TextMeshProUGUI Continue, Return;
     public int ButtonNum = 0;
     public bool AxisReset = false;
+    public AudioClip BGM,SelectSE,CursolSE;
+
     // Start is called before the first frame update
     void Start()
     {
         SceneNeme = GameObject.Find("LoadManeger").GetComponent<SceneLoad>().BackName;
         StartCoroutine(ButtonSelect());
+        SoundManeger.instance.Music(BGM,1);
     }
 
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class GameOver : MonoBehaviour
         }
         if (Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
         {
+            SoundManeger.instance.Sound(SelectSE);
             StartCoroutine(Select());
         }
 
@@ -64,10 +68,12 @@ public class GameOver : MonoBehaviour
         {
             case 0:
                 SceneLoad.instance.LoadScene(SceneNeme);
+                SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
             case -1:
                 SceneLoad.instance.LoadScene("MainTitle");
+                SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
         }

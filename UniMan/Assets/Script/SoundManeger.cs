@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoundManeger : MonoBehaviour
 {
-    public AudioClip BackMusic,SE;
     public AudioSource[] audioSource;
     static public SoundManeger instance;
     // Start is called before the first frame update
@@ -44,7 +43,6 @@ public class SoundManeger : MonoBehaviour
 
     public void Sound(AudioClip Sound)
     {
-        SE = Sound;
-        audioSource[1].PlayOneShot(SE);
+        audioSource[1].PlayOneShot(Sound);
     }
 }
