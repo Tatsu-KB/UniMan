@@ -17,6 +17,7 @@ public class StageManeger : MonoBehaviour
     bool Loading = false;
     public int LifeUp;
     public string SceneName;
+    public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +51,7 @@ public class StageManeger : MonoBehaviour
         }
         Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
         Camera.Camera_Target();
+        Music();
     }
 
     // Update is called once per frame
@@ -142,6 +144,7 @@ public class StageManeger : MonoBehaviour
 
     void SceneLoading()
     {
+        SoundManeger.instance.Stop();
         SceneLoad.instance.LoadScene(SceneName);
     }
 
@@ -150,5 +153,10 @@ public class StageManeger : MonoBehaviour
         renderer.color = new Color(1, 1, 1, 1);
         Instantiate(ActiveEffect, Player.transform).transform.parent = null;
         Player.GetComponent<Animator>().SetTrigger("Start");
+    }
+
+    void Music()
+    {
+        SoundManeger.instance.Music(clip,1);
     }
 }

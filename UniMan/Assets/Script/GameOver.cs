@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class GameOverController : MonoBehaviour
+public class GameOver : MonoBehaviour
 {
     string SceneNeme;
-    public Button Continue, Return;
+    public TextMeshProUGUI Continue, Return;
     public int ButtonNum = 0;
-    Selectable select;
     public bool AxisReset = false;
     // Start is called before the first frame update
     void Start()
     {
-        select = GetComponent<Selectable>();
         SceneNeme = GameObject.Find("LoadManeger").GetComponent<SceneLoad>().BackName;
         StartCoroutine(ButtonSelect());
     }
@@ -35,7 +34,7 @@ public class GameOverController : MonoBehaviour
         {
             AxisReset = false;
         }
-        if (Input.anyKeyDown && Input.GetAxis("Vertical") == 0)
+        if (Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
         {
             StartCoroutine(Select());
         }
@@ -45,14 +44,16 @@ public class GameOverController : MonoBehaviour
 
     IEnumerator ButtonSelect()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.05f);
         switch(ButtonNum)
         {
             case 0:
-                Continue.Select();
+                Continue.color = new Color(0, 1, 1, 1);
+                Return.color = new Color(1, 1, 1, 1);
                 break;
             case -1:
-                Return.Select();
+                Return.color = new Color(0, 1, 1, 1);
+                Continue.color = new Color(1, 1, 1, 1);
                 break;
         }
     }

@@ -12,8 +12,8 @@ public class TitleManager : MonoBehaviour
     string ButtonName;
     [SerializeField] string SceneName;
     public Animation Anime1, Anime2;
-    Selectable select;
-
+    public AudioClip BackMusic,SelectSE,CursolSE;
+    bool Flag = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,19 +23,20 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
-        select = GetComponent<Selectable>();
         st.gameObject.SetActive(false);
         ex.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKeyDown && !StartFlag)
+        if (!Flag) Music();
+        if (Input.anyKeyDown && !StartFlag)
         {
             foreach(KeyCode code in Enum.GetValues(typeof(KeyCode)))
             {
-               if (Input.GetKeyDown(code))
+               if (Input.GetKeyDown(code) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
                {
                     Title();
                     break;
@@ -53,14 +54,13 @@ public class TitleManager : MonoBehaviour
                     ButtonNum++;
                 AxisReset = true;
                 StartCoroutine(ModeSelect());
-                //Debug.Log(ButtonNum);
             }
             if (Input.GetAxis("Vertical") == 0.0f && AxisReset)
             {
                 AxisReset = false;
             }
 
-            if (StartFlag && Input.anyKeyDown&&Input.GetAxis("Vertical") == 0 && AxisFlag)
+            if (StartFlag && Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && AxisFlag)
             {
                 StartCoroutine(Select());
                 AxisFlag = false;
@@ -108,10 +108,12 @@ public class TitleManager : MonoBehaviour
         {
             case 0:
                 GameStart();
+                SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
             case -1:
                 GameExit();
+                SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
         }
@@ -132,5 +134,12 @@ public class TitleManager : MonoBehaviour
 #if UNITY_STANDALONE
         Application.Quit();
 #endif
+    }
+
+    void Music()
+    {
+        SoundManeger.instance.Music(BackMusic,0.8f);
+        Flag = true;
+        return;
     }
 }

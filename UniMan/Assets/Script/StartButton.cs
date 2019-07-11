@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StartButton : MonoBehaviour
+public class StartButton : MonoBehaviour //スタートボタンの点滅
 {
     float Alpha;
     TextMeshProUGUI text_Pro;
