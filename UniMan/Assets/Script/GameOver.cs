@@ -25,6 +25,7 @@ public class GameOver : MonoBehaviour
     {
         if (Input.GetAxis("Vertical") != 0.0f && !AxisReset)
         {
+            SoundManeger.instance.Sound(CursolSE);
             if (Input.GetAxis("Vertical") <= 0.0f)
                 ButtonNum--;
             if (Input.GetAxis("Vertical") >= 0.0f)

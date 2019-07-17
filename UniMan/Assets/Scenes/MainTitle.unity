@@ -643,7 +643,7 @@ MonoBehaviour:
   Anime2: {fileID: 918918604}
   BackMusic: {fileID: 8300000, guid: aec76c19983689346842faeb5ef5b386, type: 3}
   SelectSE: {fileID: 8300000, guid: 954e4ae283c325b4f9903bbfb4d4b9a6, type: 3}
-  CursolSE: {fileID: 0}
+  CursolSE: {fileID: 8300000, guid: 9ea6583c034703f47b250a9907a63503, type: 3}
 --- !u!1 &1225297257
 GameObject:
   m_ObjectHideFlags: 0
