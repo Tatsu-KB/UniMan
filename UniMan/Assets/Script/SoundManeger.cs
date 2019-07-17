@@ -44,5 +44,5 @@ public class SoundManeger : MonoBehaviour
     public void Sound(AudioClip Sound)
     {
         audioSource[1].PlayOneShot(Sound);
-    }
+    } 
 }

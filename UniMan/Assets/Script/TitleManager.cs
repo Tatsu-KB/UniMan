@@ -50,8 +50,10 @@ public class TitleManager : MonoBehaviour
             {
                 if(Input.GetAxis("Vertical") <= 0.0f)
                     ButtonNum--;
+                    SoundManeger.instance.Sound(CursolSE);
                 if (Input.GetAxis("Vertical") >= 0.0f)
                     ButtonNum++;
+                    SoundManeger.instance.Sound(CursolSE);
                 AxisReset = true;
                 StartCoroutine(ModeSelect());
             }
