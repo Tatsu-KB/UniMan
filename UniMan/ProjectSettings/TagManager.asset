@@ -18,6 +18,7 @@ TagManager:
   - Piranha
   - Enemy
   - Ground
+  - Menu
   layers:
   - Default
   - TransparentFX

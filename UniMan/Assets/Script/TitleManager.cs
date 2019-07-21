@@ -6,9 +6,10 @@ using System;
 using TMPro;
 public class TitleManager : MonoBehaviour
 {
-    public TextMeshProUGUI button, st, ex;
+    public TextMeshProUGUI button, st, ex, op;
     public bool AxisReset = false,StartFlag = false,AxisFlag = false;
-    public int ButtonNum;
+    public int ButtonNum;    //ボタン選択の番号、最大値、最小値
+    static int Min, Max;
     string ButtonName;
     [SerializeField] string SceneName;
     public Animation Anime1, Anime2;
@@ -18,13 +19,16 @@ public class TitleManager : MonoBehaviour
     void Awake()
     {
         Cursor.visible = false;
-        ButtonNum = 0;
+        Max = GameObject.FindGameObjectsWithTag("Menu").Length - 1;
+        Min = 0;
+        ButtonNum = Max;
     }
 
     void Start()
     {
         st.gameObject.SetActive(false);
         ex.gameObject.SetActive(false);
+        op.gameObject.SetActive(false);
 
     }
 
@@ -48,11 +52,17 @@ public class TitleManager : MonoBehaviour
 
             if (Input.GetAxis("Vertical") != 0.0f && !AxisReset)
             {
-                SoundManeger.instance.Sound(CursolSE);
-                if (Input.GetAxis("Vertical") <= 0.0f)
-                    ButtonNum--;         
-                if (Input.GetAxis("Vertical") >= 0.0f)
+
+                if (Input.GetAxis("Vertical") <= 0.0f && ButtonNum > Min)
+                {
+                    ButtonNum--;
+                    SoundManeger.instance.Sound(CursolSE);
+                }
+                if (Input.GetAxis("Vertical") >= 0.0f && ButtonNum < Max)
+                {
                     ButtonNum++;
+                    SoundManeger.instance.Sound(CursolSE);
+                }
                 AxisReset = true;
                 StartCoroutine(ModeSelect());
             }
@@ -66,7 +76,7 @@ public class TitleManager : MonoBehaviour
                 StartCoroutine(Select());
                 AxisFlag = false;
             }
-            ButtonNum = Mathf.Clamp(ButtonNum, -1, 0);
+            ButtonNum = Mathf.Clamp(ButtonNum, Min, Max);
             
 
         }
@@ -76,6 +86,7 @@ public class TitleManager : MonoBehaviour
         button.gameObject.SetActive(false);
         st.gameObject.SetActive(true);
         ex.gameObject.SetActive(true);
+        op.gameObject.SetActive(true);
         StartCoroutine(ModeSelect());
         AxisFlag = true;
     }
@@ -85,35 +96,47 @@ public class TitleManager : MonoBehaviour
 
         if (!StartFlag)
         {
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(1.0f);
             StartFlag = true;
         }
         else yield return new WaitForSeconds(0.05f);
         switch (ButtonNum)
         {
-            case 0:
+            case 2:
                 st.color = new Color(0, 1, 1, 1);
                 ex.color = new Color(1, 1, 1, 1);
+                op.color = new Color(1, 1, 1, 1);
                 break;
-            case -1:
-                ex.color = new Color(0, 1, 1, 1);
+            case 1:
                 st.color = new Color(1, 1, 1, 1);
+                ex.color = new Color(1, 1, 1, 1);
+                op.color = new Color(0, 1, 1, 1);
+                break;
+            case 0:
+                st.color = new Color(1, 1, 1, 1);
+                ex.color = new Color(0, 1, 1, 1);
+                op.color = new Color(1, 1, 1, 1);
                 break;
         }
     }
 
     private IEnumerator Select()
     {
-
         switch (ButtonNum)
         {
-            case 0:
-                GameStart();
+            case 2:
+                GameLoad("Stage_Tutorial");
                 SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
-            case -1:
+            case 1:
+                GameLoad("Option");
+                SE(SelectSE);
+                SoundManeger.instance.Stop();
+                yield return new WaitForSeconds(0.5f);
+                break;
+            case 0:
                 GameExit();
                 SE(SelectSE);
                 SoundManeger.instance.Stop();
@@ -123,9 +146,9 @@ public class TitleManager : MonoBehaviour
     }
 
 
-    public void GameStart()
+    public void GameLoad(string Name)
     {
-        SceneName = "Stage_Tutorial";
+        SceneName = Name;
         SceneLoad.instance.LoadScene(SceneName);
     }
 
