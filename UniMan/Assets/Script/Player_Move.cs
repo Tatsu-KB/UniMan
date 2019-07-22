@@ -6,10 +6,11 @@ public class Player_Move : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D rb;
-    BoxCollider2D col;                                                      
-    public int MoveSpeed,Speed;                                            //移動速度
-    float Horizontal,Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
-    public bool OnGround,Active = false, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
+    BoxCollider2D col;
+    CircleCollider2D circle;
+    public int MoveSpeed, Speed;                                            //移動速度
+    float Horizontal, Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
+    public bool OnGround, Active = false, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
     Renderer ren;
     public int Life;                                                         //体力値
@@ -21,6 +22,7 @@ public class Player_Move : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        circle = GetComponent<CircleCollider2D>();
         OnGround = false;
         preScale = transform.localScale.x;
         preScale_re = transform.localScale.x * -1;
@@ -32,7 +34,7 @@ public class Player_Move : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (Active)
 
         {
@@ -49,7 +51,7 @@ public class Player_Move : MonoBehaviour
             }
             if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
                 rb.gravityScale = 0.5f;
-            else             rb.gravityScale = 1.0f;
+            else rb.gravityScale = 1.0f;
             if (Active)
             {
                 if (Input.GetButtonDown("Fire1") && !NowAttack)
@@ -70,11 +72,11 @@ public class Player_Move : MonoBehaviour
             }
         }
     }
-        // Update is called once per frame
-        void FixedUpdate()
-        {
+    // Update is called once per frame
+    void FixedUpdate()
+    {
 
-        if (Active)Move(Horizontal);
+        if (Active) Move(Horizontal);
 
         else
         {
@@ -126,28 +128,19 @@ public class Player_Move : MonoBehaviour
     }
     void Attack2()
     {
-     
         animator.SetTrigger("Attack2");
+        maneger.Attack();
     }
     void Attack3()
     {
         animator.SetTrigger("Attack3");
-
+        maneger.Attack();
     }
 
-    public void IsGround()
-    {
-        if(rb.velocity.y <= 0) OnGround = true;
-    }
-    public void NotGround()
-    {
-        OnGround = false;
-
-    }
-    public void Damage( int EnemyATK)
+    public void Damage(int EnemyATK)
     {
         gameObject.layer = 8;
-        ren.material.color = new Color(1,1,1,0.5f);
+        ren.material.color = new Color(1, 1, 1, 0.5f);
 
         rb.velocity = Vector2.zero;
         if (Active)
@@ -160,10 +153,10 @@ public class Player_Move : MonoBehaviour
         }
 
         if (Life <= 0) PlayerDown(); //ライフ0でダウン
-        else Invoke("Alive",0.3f);
+        else Invoke("Alive", 0.3f);
     }
 
-    
+
     public void PlayerDown()
     {
         if (Active) animator.SetTrigger("Damage");
@@ -171,31 +164,15 @@ public class Player_Move : MonoBehaviour
         Active = false;
         rb.velocity = Vector2.zero;                     // やられた後不自然に滑らないように  
         rb.isKinematic = true;                            //  天井のトゲなどでダウンした場合にその場で爆発させるため
-        Invoke("PlayerFalse",0.2f);                   //やられモーションを見せるため一瞬待っています
+        Invoke("PlayerFalse", 0.2f);                   //やられモーションを見せるため一瞬待っています
     }
 
     void Alive()
     {
-        animator.SetTrigger("Stand");   
-        Invoke("Find",1.5f);                //無敵時間を解除するまでの時間
+        animator.SetTrigger("Stand");
+        Invoke("Find", 1.5f);                //無敵時間を解除するまでの時間
         Active = true;                        //操作不能を解除
         rb.isKinematic = false;          //ダメージを受けた際物理計算を止めるので元に戻す
-    }
-    //動く床に対応させるために子オブジェクトにする
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "MoveGround")
-        {
-            transform.parent = col.gameObject.transform;
-        }
-    }
-    //動く床から離れたら子オブジェクトを解除
-    void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "MoveGround")
-        {
-            transform.parent = null;
-        }
     }
     void PlayerFalse()
     {
@@ -216,7 +193,7 @@ public class Player_Move : MonoBehaviour
         {
             animator.SetTrigger("Clear1");
         }
-        if(value == 1)
+        if (value == 1)
         {
             animator.SetTrigger("Clear2");
         }
@@ -260,5 +237,54 @@ public class Player_Move : MonoBehaviour
     void ActiveStart()
     {
         Active = true;
+    }
+
+    public void IsGround()
+    {
+        if (rb.velocity.y <= 0)
+        {
+            OnGround = true;
+            Collider();
+        }
+    }
+    public void NotGround()
+    {
+        OnGround = false;
+
+    }
+    //動く床に対応させるために子オブジェクトにする
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MoveGround")
+        {
+            transform.parent = collision.gameObject.transform;
+        }
+        
+        if (!OnGround && collision.gameObject.tag == "OneWayGround" && rb.velocity.y == 0)
+        {
+            col.isTrigger = true;
+            circle.isTrigger = true;
+        }
+        
+    }
+    //動く床から離れたら子オブジェクトを解除
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MoveGround")
+        {
+            transform.parent = null;
+        }
+        
+        if(collision.gameObject.tag == "OneWayGround")
+        {
+            Collider();
+        }
+        
+    }
+
+    private void Collider()
+    {
+        col.isTrigger = false;
+        circle.isTrigger = false;
     }
 }

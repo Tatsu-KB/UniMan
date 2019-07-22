@@ -19,6 +19,7 @@ TagManager:
   - Enemy
   - Ground
   - Menu
+  - OneWayGround
   layers:
   - Default
   - TransparentFX
