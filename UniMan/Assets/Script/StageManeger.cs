@@ -17,7 +17,7 @@ public class StageManeger : MonoBehaviour
     bool Loading = false;
     public int LifeUp;
     public string SceneName;
-    public AudioClip clip;
+    public AudioClip clip,AttackSE;
     // Start is called before the first frame update
     void Start()
     {
@@ -158,5 +158,9 @@ public class StageManeger : MonoBehaviour
     void Music()
     {
         SoundManeger.instance.Music(clip,1);
+    }
+    public void Attack()
+    {
+        SoundManeger.instance.Sound(AttackSE);
     }
 }

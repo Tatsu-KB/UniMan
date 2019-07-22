@@ -8,7 +8,7 @@ public class GameOver : MonoBehaviour
 {
     string SceneNeme;
     public TextMeshProUGUI Continue, Return;
-    public int ButtonNum = 0;
+    public int ButtonNum = 0, Max;
     public bool AxisReset = false;
     public AudioClip BGM,SelectSE,CursolSE;
 
@@ -18,6 +18,8 @@ public class GameOver : MonoBehaviour
         SceneNeme = GameObject.Find("LoadManeger").GetComponent<SceneLoad>().BackName;
         StartCoroutine(ButtonSelect());
         SoundManeger.instance.Music(BGM,1);
+        Max = GameObject.FindGameObjectsWithTag("Menu").Length - 1;
+        ButtonNum = Max;
     }
 
     // Update is called once per frame
@@ -25,14 +27,20 @@ public class GameOver : MonoBehaviour
     {
         if (Input.GetAxis("Vertical") != 0.0f && !AxisReset)
         {
-            SoundManeger.instance.Sound(CursolSE);
-            if (Input.GetAxis("Vertical") <= 0.0f)
+            if (Input.GetAxis("Vertical") <= 0.0f && ButtonNum > 0)
+            {
                 ButtonNum--;
-            if (Input.GetAxis("Vertical") >= 0.0f)
+                SoundManeger.instance.Sound(CursolSE);
+
+            }
+            if (Input.GetAxis("Vertical") >= 0.0f && ButtonNum < Max)
+            {
                 ButtonNum++;
-            AxisReset = true;
+                SoundManeger.instance.Sound(CursolSE);
+
+            }
             StartCoroutine(ButtonSelect());
-            Debug.Log(ButtonNum);
+            AxisReset = true;
         }
         if (Input.GetAxis("Vertical") == 0.0f && AxisReset)
         {
@@ -44,7 +52,7 @@ public class GameOver : MonoBehaviour
             StartCoroutine(Select());
         }
 
-        ButtonNum = Mathf.Clamp(ButtonNum, -1, 0);
+        ButtonNum = Mathf.Clamp(ButtonNum, 0, Max);
     }
 
     IEnumerator ButtonSelect()
@@ -52,11 +60,11 @@ public class GameOver : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         switch(ButtonNum)
         {
-            case 0:
+            case 1:
                 Continue.color = new Color(0, 1, 1, 1);
                 Return.color = new Color(1, 1, 1, 1);
                 break;
-            case -1:
+            case 0:
                 Return.color = new Color(0, 1, 1, 1);
                 Continue.color = new Color(1, 1, 1, 1);
                 break;
@@ -67,12 +75,12 @@ public class GameOver : MonoBehaviour
     {
         switch (ButtonNum)
         {
-            case 0:
+            case 1:
                 SceneLoad.instance.LoadScene(SceneNeme);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
-            case -1:
+            case 0:
                 SceneLoad.instance.LoadScene("MainTitle");
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);

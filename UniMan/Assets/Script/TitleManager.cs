@@ -9,7 +9,7 @@ public class TitleManager : MonoBehaviour
     public TextMeshProUGUI button, st, ex, op;
     public bool AxisReset = false,StartFlag = false,AxisFlag = false;
     public int ButtonNum;    //ボタン選択の番号、最大値、最小値
-    static int Min, Max;
+    static int Max;
     string ButtonName;
     [SerializeField] string SceneName;
     public Animation Anime1, Anime2;
@@ -20,7 +20,6 @@ public class TitleManager : MonoBehaviour
     {
         Cursor.visible = false;
         Max = GameObject.FindGameObjectsWithTag("Menu").Length - 1;
-        Min = 0;
         ButtonNum = Max;
     }
 
@@ -53,7 +52,7 @@ public class TitleManager : MonoBehaviour
             if (Input.GetAxis("Vertical") != 0.0f && !AxisReset)
             {
 
-                if (Input.GetAxis("Vertical") <= 0.0f && ButtonNum > Min)
+                if (Input.GetAxis("Vertical") <= 0.0f && ButtonNum > 0)
                 {
                     ButtonNum--;
                     SoundManeger.instance.Sound(CursolSE);
@@ -76,7 +75,7 @@ public class TitleManager : MonoBehaviour
                 StartCoroutine(Select());
                 AxisFlag = false;
             }
-            ButtonNum = Mathf.Clamp(ButtonNum, Min, Max);
+            ButtonNum = Mathf.Clamp(ButtonNum, 0, Max);
             
 
         }

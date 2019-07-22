@@ -14741,6 +14741,7 @@ MonoBehaviour:
   LifeUp: 0
   SceneName: 
   clip: {fileID: 8300000, guid: 5842d8401675bf543bfa9cd25c0c9cdc, type: 3}
+  AttackSE: {fileID: 8300000, guid: 153b07bc3aa8e454f990fd040ae6567d, type: 3}
 --- !u!4 &802083917
 Transform:
   m_ObjectHideFlags: 0

@@ -122,6 +122,7 @@ public class Player_Move : MonoBehaviour
     void Attack1()
     {
         animator.SetTrigger("Attack1");
+        maneger.Attack();
     }
     void Attack2()
     {
