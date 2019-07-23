@@ -13,7 +13,7 @@ public class TitleManager : MonoBehaviour
     string ButtonName;
     [SerializeField] string SceneName;
     public Animation Anime1, Anime2;
-    public AudioClip BackMusic,SelectSE,CursolSE;
+    public AudioClip StartSE,BackMusic,SelectSE,CursolSE;
     bool Flag = false;
     // Start is called before the first frame update
     void Awake()
@@ -42,6 +42,7 @@ public class TitleManager : MonoBehaviour
                if (Input.GetKeyDown(code) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
                {
                     Title();
+                    SoundManeger.instance.Sound(StartSE);
                     break;
                }
             }

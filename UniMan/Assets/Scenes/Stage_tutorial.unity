@@ -14741,7 +14741,11 @@ MonoBehaviour:
   LifeUp: 0
   SceneName: 
   clip: {fileID: 8300000, guid: 5842d8401675bf543bfa9cd25c0c9cdc, type: 3}
-  AttackSE: {fileID: 8300000, guid: 153b07bc3aa8e454f990fd040ae6567d, type: 3}
+  PlayerAttackSE: {fileID: 8300000, guid: 153b07bc3aa8e454f990fd040ae6567d, type: 3}
+  EnemyAttackSE: {fileID: 8300000, guid: e93bfc16cfcc07f45b005ee007cead03, type: 3}
+  BulletSE: {fileID: 8300000, guid: 429b7f4ed5757d64d980e56389992645, type: 3}
+  DamageSE: {fileID: 8300000, guid: b02106f3a5451274c9e9faa9fe11d79b, type: 3}
+  DownSE: {fileID: 8300000, guid: c342db2a3d98b8046884050ed2bbffdb, type: 3}
 --- !u!4 &802083917
 Transform:
   m_ObjectHideFlags: 0

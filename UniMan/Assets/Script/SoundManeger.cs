@@ -23,6 +23,8 @@ public class SoundManeger : MonoBehaviour
     void Start()
     {
         audioSource = GetComponents<AudioSource>();
+        audioSource[0].volume = 0.8f;
+        audioSource[1].volume = 0.5f;
     }
 
     // Update is called once per frame

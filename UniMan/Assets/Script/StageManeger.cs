@@ -17,7 +17,12 @@ public class StageManeger : MonoBehaviour
     bool Loading = false;
     public int LifeUp;
     public string SceneName;
-    public AudioClip clip,AttackSE;
+    public AudioClip clip,
+                     PlayerAttackSE,
+                     EnemyAttackSE,
+                     BulletSE,
+                     DamageSE,
+                     DownSE;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +72,8 @@ public class StageManeger : MonoBehaviour
         if (Enemy.tag == "Piranha") Enemy.GetComponent<Enemy_Piranha>().Damage(ATK);
 
         Instantiate(DamegeEffect, Pos).transform.parent = null;
+        SoundManeger.instance.Sound(BulletSE);
+
     }
     public void EnemyDown(Transform Enemy_pos)
     {
@@ -76,11 +83,16 @@ public class StageManeger : MonoBehaviour
     public void PlayerDamege(int EnemyAtk)
     {
         Player.GetComponent<Player_Move>().Damage(EnemyAtk);
+        if(Player.GetComponent<Player_Move>().Life > 0)
+        SoundManeger.instance.Sound(DamageSE);
+        else
+        SoundManeger.instance.Sound(DownSE);
     }
 
     public void NeedleDamage()
     {
         Player.GetComponent<Player_Move>().PlayerDown();
+        SoundManeger.instance.Sound(DownSE);
     }
 
     public void StageGoal(Transform transform)
@@ -161,6 +173,6 @@ public class StageManeger : MonoBehaviour
     }
     public void Attack()
     {
-        SoundManeger.instance.Sound(AttackSE);
+        SoundManeger.instance.Sound(PlayerAttackSE);
     }
 }

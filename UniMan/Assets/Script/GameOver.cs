@@ -9,7 +9,7 @@ public class GameOver : MonoBehaviour
     string SceneNeme;
     public TextMeshProUGUI Continue, Return;
     public int ButtonNum = 0, Max;
-    public bool AxisReset = false;
+    public bool AxisReset = false,InputFlag = true;
     public AudioClip BGM,SelectSE,CursolSE;
 
     // Start is called before the first frame update
@@ -46,10 +46,11 @@ public class GameOver : MonoBehaviour
         {
             AxisReset = false;
         }
-        if (Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+        if (Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && InputFlag)
         {
             SoundManeger.instance.Sound(SelectSE);
             StartCoroutine(Select());
+            InputFlag = false;
         }
 
         ButtonNum = Mathf.Clamp(ButtonNum, 0, Max);
