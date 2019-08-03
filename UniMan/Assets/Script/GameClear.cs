@@ -5,22 +5,17 @@ using UnityEngine.UI;
 
 public class GameClear : MonoBehaviour
 {
-    public AudioClip BackMusic;
-    bool ExitFlag = true;
     // Start is called before the first frame update
     void Start()
     {
-        SoundManeger.instance.Music(BackMusic,1.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && ExitFlag)
+        if(Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
         {
             StartCoroutine(TitleBack());
-            SoundManeger.instance.Stop();
-            ExitFlag = false;
         }
     }
 

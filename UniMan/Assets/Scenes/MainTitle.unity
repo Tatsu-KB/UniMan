@@ -365,7 +365,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2056652488}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -545,7 +545,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2056652488}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -815,6 +815,10 @@ MonoBehaviour:
   st: {fileID: 1286762824}
   ex: {fileID: 918918601}
   op: {fileID: 977560759}
+  AxisReset: 0
+  StartFlag: 0
+  AxisFlag: 0
+  ButtonNum: 0
   SceneName: 
   Anime1: {fileID: 1286762827}
   Anime2: {fileID: 918918604}
@@ -1794,8 +1798,8 @@ RectTransform:
   - {fileID: 1101248190}
   - {fileID: 1600568191}
   - {fileID: 1286762823}
-  - {fileID: 918918600}
   - {fileID: 977560758}
+  - {fileID: 918918600}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
