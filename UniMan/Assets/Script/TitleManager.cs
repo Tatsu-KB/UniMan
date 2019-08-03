@@ -7,8 +7,8 @@ using TMPro;
 public class TitleManager : MonoBehaviour
 {
     public TextMeshProUGUI button, st, ex, op;
-    public bool AxisReset = false,StartFlag = false,AxisFlag = false;
-    public int ButtonNum;    //ボタン選択の番号、最大値、最小値
+    bool AxisReset = false,StartFlag = false,AxisFlag = false;
+    int ButtonNum;    //ボタン選択の番号、最大値、最小値
     static int Max;
     string ButtonName;
     [SerializeField] string SceneName;
