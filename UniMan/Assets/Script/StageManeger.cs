@@ -169,7 +169,7 @@ public class StageManeger : MonoBehaviour
 
     void Music()
     {
-        SoundManeger.instance.Music(clip,1);
+        SoundManeger.instance.Music(clip,1.0f);
     }
     public void Attack()
     {
