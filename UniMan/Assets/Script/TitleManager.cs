@@ -125,7 +125,7 @@ public class TitleManager : MonoBehaviour
         switch (ButtonNum)
         {
             case 2:
-                GameLoad("Stage_Tutorial");
+                GameLoad("Stage1");
                 SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
