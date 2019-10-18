@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class Life : MonoBehaviour
 {
     GameObject Player;
-    Player_Move PlayerLife;
+    public Player_Move PlayerLife;
     Slider slider;
     public Image image;
+    float LifeNow;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +25,14 @@ public class Life : MonoBehaviour
             Player = GameObject.FindGameObjectWithTag("Player");
             PlayerLife = Player.GetComponent<Player_Move>();
             slider.maxValue = PlayerLife.Life;
+            LifeNow = slider.maxValue;
+        }
+        if(LifeNow != PlayerLife.Life)
+        {
+            Mathf.Lerp(LifeNow,PlayerLife.Life,Time.deltaTime / 60.0f);
         }
 
         slider.value = PlayerLife.Life;
-        
         if (slider.value <= slider.maxValue / 2)
         {
             image.color = Color.yellow;

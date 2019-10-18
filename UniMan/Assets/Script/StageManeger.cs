@@ -11,7 +11,7 @@ public class StageManeger : MonoBehaviour
     [SerializeField] GameObject PlayerPrefab, GoalPrefab,EnemyPrefab1,EnemyPrefab2;
     [SerializeField] CameraMove Camera;
     [SerializeField] GameObject[] Bee,Piranha;
-    [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect,ActiveEffect;
+    [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect,ActiveEffect,EnemyDamageEffect;
     new SpriteRenderer renderer;
     public float BeeSpeed;
     bool Loading = false;
@@ -73,7 +73,7 @@ public class StageManeger : MonoBehaviour
         if(Enemy.tag == "Bee")Enemy.GetComponent<Enemy_Bee>().Damage(ATK);
         if (Enemy.tag == "Piranha") Enemy.GetComponent<Enemy_Piranha>().Damage(ATK);
 
-        Instantiate(DamegeEffect, Pos).transform.parent = null;
+        Instantiate(EnemyDamageEffect, Pos).transform.parent = null;
         SoundManeger.instance.Sound(BulletSE);
 
     }

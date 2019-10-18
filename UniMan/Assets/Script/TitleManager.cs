@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+
 public class TitleManager : MonoBehaviour
 {
     public TextMeshProUGUI button, st, ex, op;
@@ -14,7 +15,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] string SceneName;
     public Animation Anime1, Anime2;
     public AudioClip StartSE,BackMusic,SelectSE,CursolSE;
-    bool Flag = false;
+    bool MusicFlag = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,7 +34,7 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Flag) Music();
+        if (!MusicFlag) Music();
         if (Input.anyKeyDown && !StartFlag)
         {
             foreach(KeyCode code in Enum.GetValues(typeof(KeyCode)))
@@ -124,7 +125,7 @@ public class TitleManager : MonoBehaviour
         switch (ButtonNum)
         {
             case 2:
-                GameLoad("Stage1");
+                GameLoad("StageSelect");
                 SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
@@ -164,7 +165,7 @@ public class TitleManager : MonoBehaviour
     void Music()
     {
         SoundManeger.instance.Music(BackMusic,0.8f);
-        Flag = true;
+        MusicFlag = true;
         return;
     }
     void SE(AudioClip clip)

@@ -61,11 +61,6 @@ public class OptionMameger : MonoBehaviour
         Slider_Sound.value = Mathf.FloorToInt(Slider_Sound.value);
         MusicText.text = Slider_Music.value.ToString();
         SoundText.text = Slider_Sound.value.ToString();
-
-        if(ButtonNum != 0 && Input.GetAxisRaw("Horizontal") != 0)
-        {
-            
-        }
     }
 
     IEnumerator ButtonSelect()
@@ -95,17 +90,17 @@ public class OptionMameger : MonoBehaviour
 
     IEnumerator SliderValue()
     {
-        yield return new WaitForSeconds(0.5f);
-
         switch (ButtonNum)
         {
             case 2:
                 Slider_Music.value += Input.GetAxisRaw("Horizontal");
                 audios[0].volume = Slider_Music.value / 100;
+                yield return new WaitForSeconds(0.5f);
                 break;
             case 1:
                 Slider_Sound.value += Input.GetAxisRaw("Horizontal");
                 audios[1].volume = Slider_Sound.value / 100;
+                yield return new WaitForSeconds(0.5f);
                 break;
         }
     }

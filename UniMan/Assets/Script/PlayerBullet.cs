@@ -37,10 +37,11 @@ public class PlayerBullet : MonoBehaviour
     {
         if(collision.tag == "Bee" || collision.tag == "Piranha")
         {
+            Destroy(gameObject);
             maneger.GetComponent<StageManeger>().EnemyDamage(collision.gameObject,Attack,transform);
         }
 
-        if(collision.tag != "Player")
+        if(collision.tag != "Player" && collision.tag != "Bee" && collision.tag != "Piranha")
         {
             Destroy(gameObject);
             maneger.BreakEffect(transform); 
