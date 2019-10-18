@@ -9,7 +9,7 @@ public class Life : MonoBehaviour
     public Player_Move PlayerLife;
     Slider slider;
     public Image image;
-    float LifeNow;
+    public float LifeNow,LifeBefor;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,14 +25,12 @@ public class Life : MonoBehaviour
             Player = GameObject.FindGameObjectWithTag("Player");
             PlayerLife = Player.GetComponent<Player_Move>();
             slider.maxValue = PlayerLife.Life;
-            LifeNow = slider.maxValue;
+            LifeBefor = PlayerLife.Life;
         }
-        if(LifeNow != PlayerLife.Life)
-        {
-            Mathf.Lerp(LifeNow,PlayerLife.Life,Time.deltaTime / 60.0f);
-        }
+        LifeBefor = PlayerLife.Life;
+        LifeNow =  Mathf.MoveTowards(LifeNow, LifeBefor, Time.deltaTime * 5f);
 
-        slider.value = PlayerLife.Life;
+        slider.value = LifeNow;
         if (slider.value <= slider.maxValue / 2)
         {
             image.color = Color.yellow;

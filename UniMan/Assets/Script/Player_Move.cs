@@ -10,12 +10,14 @@ public class Player_Move : MonoBehaviour
     CircleCollider2D circle;
     public int MoveSpeed, Speed;                                            //移動速度
     float Horizontal, Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
-    public bool OnGround, Active = false, NowAttack;                        //接地、行動可能か、攻撃中かどうか                                
+    public bool OnGround, Active = false, NowAttack , IsCrouch;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
     Renderer ren;
     public int Life;                                                         //体力値
     StageManeger maneger;
     [SerializeField] GameObject Bullet;
+    Vector2 Resize ,Size;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,43 +32,61 @@ public class Player_Move : MonoBehaviour
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
         ren = GetComponent<Renderer>();
         Life += maneger.LifeUp;
+        Size = new Vector2(col.size.x, col.size.y);
+        Resize = new Vector2(col.size.x, col.size.y - 0.2f);
     }
 
     private void Update()
     {
 
         if (Active)
-
         {
-
-            Horizontal = Input.GetAxisRaw("Horizontal");
-            Vertical = Mathf.Clamp(rb.velocity.y, -1f, 1f);
-
-            var jumpPower = 12.0f;
-            if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
+            if (!IsCrouch)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                Horizontal = Input.GetAxisRaw("Horizontal");
+                Vertical = Mathf.Clamp(rb.velocity.y, -1f, 1f);
+
+                var jumpPower = 12.0f;
+                if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                }
+                if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
+                    rb.gravityScale = 0.6f;
+                else rb.gravityScale = 1.0f;
+                if (Active)
+                {
+                    if (Input.GetButtonDown("Fire1") && !NowAttack)
+                    {
+                        NowAttack = true;
+                        Attack1();
+                    }
+                    if (Input.GetButtonDown("Fire2") && !NowAttack)
+                    {
+                        NowAttack = true;
+                        Attack2();
+                    }
+                    if (Input.GetButtonDown("Fire3") && !NowAttack)
+                    {
+                        NowAttack = true;
+                        Attack3();
+                    }
+
+                }
             }
-            if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
-                rb.gravityScale = 0.6f;
-            else rb.gravityScale = 1.0f;
-            if (Active)
+            float var = Input.GetAxisRaw("Vertical");
+
+            if (var == -1)
             {
-                if (Input.GetButtonDown("Fire1") && !NowAttack)
-                {
-                    NowAttack = true;
-                    Attack1();
-                }
-                if (Input.GetButtonDown("Fire2") && !NowAttack)
-                {
-                    NowAttack = true;
-                    Attack2();
-                }
-                if (Input.GetButtonDown("Fire3") && !NowAttack)
-                {
-                    NowAttack = true;
-                    Attack3();
-                }
+                animator.SetBool("Crouch", true);
+                IsCrouch = true;
+                col.size = Resize;
+            }
+            else
+            {
+                animator.SetBool("Crouch", false);
+                IsCrouch = false;
+                col.size = Size;
             }
         }
     }
