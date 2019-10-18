@@ -28,7 +28,6 @@ public class TitleManager : MonoBehaviour
         st.gameObject.SetActive(false);
         ex.gameObject.SetActive(false);
         op.gameObject.SetActive(false);
-
     }
 
     // Update is called once per frame

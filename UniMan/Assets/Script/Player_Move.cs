@@ -40,17 +40,15 @@ public class Player_Move : MonoBehaviour
         {
 
             Horizontal = Input.GetAxisRaw("Horizontal");
-            Vertical = Mathf.Clamp(rb.velocity.y, -1, 1);
+            Vertical = Mathf.Clamp(rb.velocity.y, -1f, 1f);
 
-
-            //Attack();
-            var jumpPower = 15.0f;
+            var jumpPower = 12.0f;
             if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             }
             if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
-                rb.gravityScale = 0.5f;
+                rb.gravityScale = 0.6f;
             else rb.gravityScale = 1.0f;
             if (Active)
             {
@@ -108,7 +106,6 @@ public class Player_Move : MonoBehaviour
 
         if (Horizontal > 0)
         {
-
             scale.x = preScale;
         }
         else if (Horizontal < 0)

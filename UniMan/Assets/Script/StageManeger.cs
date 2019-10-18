@@ -30,10 +30,12 @@ public class StageManeger : MonoBehaviour
         Player.transform.parent = null;
         renderer = Player.GetComponent<SpriteRenderer>();
         renderer.color = new Color(1, 1, 1, 0);
-        Goal = Instantiate(GoalPrefab, GoalPos.transform);
-        Goal.tag = GoalPos.tag;
-        Goal.transform.parent = null;
-
+        if(GoalPos)
+        {
+            Goal = Instantiate(GoalPrefab, GoalPos.transform);
+            Goal.tag = GoalPos.tag;
+            Goal.transform.parent = null;
+        }
         EnemyPos_Bee = GameObject.FindGameObjectsWithTag("EnemyPos1");
         EnemyPos_Piranha = GameObject.FindGameObjectsWithTag("EnemyPos2");
         //Debug.Log(EnemyPos_Bee.Length);
