@@ -7,7 +7,7 @@ public class Enemy_Piranha : MonoBehaviour
     int Life;
     GameObject player;
     public GameObject Bullet;
-    bool EnemyFlag, HitFlag;
+    public bool EnemyFlag, HitFlag;
 //    public float Speed;
     Rigidbody2D rb;
     float preScale, preScale_re;
@@ -28,30 +28,36 @@ public class Enemy_Piranha : MonoBehaviour
         Attack = 2;
         animator = GetComponent<Animator>();
         StateFlag = false;
-        Life = 5;
+        Life = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!player) player = GameObject.FindGameObjectWithTag("Player");
-
+        if (!player)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
 
         if (EnemyFlag)
         {
             EnemyAction();
-            if(StateFlag == false)
+            if (StateFlag == false)
             {
                 StartCoroutine(AttackStart(2.5f));
                 StateFlag = true;
             }
         }
+
+        else
+        {
+            StateFlag = false;
+            StopAllCoroutines();
+        }
+
+        EnemyFlag = false;
     }
-    void OnWillRenderObject()
-    {
-        //画面内に出るまでは動かさない
-        if (Camera.current.name == "Main Camera") EnemyFlag = true;
-    }
+
     void EnemyAction()
     {
         if (player.activeSelf)
@@ -142,6 +148,15 @@ public class Enemy_Piranha : MonoBehaviour
         {
             maneger.EnemyDown(transform);
             Destroy(gameObject);
+        }
+    }
+
+    void OnWillRenderObject()
+    {
+        //画面内に出るまでは動かさない
+        if (Camera.current.name == "Main Camera")
+        {
+            EnemyFlag = true;
         }
     }
 }

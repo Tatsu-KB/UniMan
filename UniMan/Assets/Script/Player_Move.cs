@@ -16,7 +16,7 @@ public class Player_Move : MonoBehaviour
     public int Life;                                                         //体力値
     StageManeger maneger;
     [SerializeField] GameObject Bullet;
-    Vector2 Resize ,Size;
+    Vector2 Resize,Resizeofs ,Size,Sizeofs;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,9 @@ public class Player_Move : MonoBehaviour
         ren = GetComponent<Renderer>();
         Life += maneger.LifeUp;
         Size = new Vector2(col.size.x, col.size.y);
+        Sizeofs = new Vector2(col.offset.x, col.offset.y);
         Resize = new Vector2(col.size.x, col.size.y - 0.2f);
+        Resizeofs = new Vector2(col.offset.x, col.offset.y - 0.15f);
     }
 
     private void Update()
@@ -46,7 +48,7 @@ public class Player_Move : MonoBehaviour
                 Horizontal = Input.GetAxisRaw("Horizontal");
                 Vertical = Mathf.Clamp(rb.velocity.y, -1f, 1f);
 
-                var jumpPower = 12.0f;
+                var jumpPower = 13.0f;
                 if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpPower);
@@ -76,17 +78,19 @@ public class Player_Move : MonoBehaviour
             }
             float var = Input.GetAxisRaw("Vertical");
 
-            if (var == -1)
+            if (var == -1 && OnGround)
             {
                 animator.SetBool("Crouch", true);
                 IsCrouch = true;
                 col.size = Resize;
+                col.offset = Resizeofs;
             }
             else
             {
                 animator.SetBool("Crouch", false);
                 IsCrouch = false;
                 col.size = Size;
+                col.offset = Sizeofs;
             }
         }
     }

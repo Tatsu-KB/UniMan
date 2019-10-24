@@ -179,11 +179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7bac44247ad744e916da6c591b314e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
+  MoveSpeed: 6
   Speed: 0
   OnGround: 0
   Active: 0
   NowAttack: 0
+  IsCrouch: 0
   Life: 10
   Bullet: {fileID: 6797927083237987883, guid: 778e3da5ae773294ca5714ad76f305d2, type: 3}
 --- !u!1 &8886695496153460858

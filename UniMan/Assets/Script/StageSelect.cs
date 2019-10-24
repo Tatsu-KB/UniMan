@@ -8,7 +8,7 @@ using TMPro;
 public class StageSelect : MonoBehaviour
 {
     public Image Stage1, Stage2;
-    bool AxisReset = false, AxisFlag = false;
+    bool AxisReset = false, AxisFlag = true;
     public int ButtonNum , Max;
     [SerializeField] string SceneName;
     public AudioClip BackMusic, CursolSE, SelectSE;
@@ -26,29 +26,33 @@ public class StageSelect : MonoBehaviour
     {
         if (!MusicFlag) Music();
         StartCoroutine(ButtonSelect());
-        if (Input.GetAxis("Horizontal") != 0.0f && !AxisReset)
+        if (AxisFlag)
         {
-
-            if (Input.GetAxis("Horizontal") <= 0.0f && ButtonNum > 0)
+            if (Input.GetAxis("Horizontal") != 0.0f && !AxisReset)
             {
-                ButtonNum--;
-                SoundManeger.instance.Sound(CursolSE);
+
+                if (Input.GetAxis("Horizontal") <= 0.0f && ButtonNum > 0)
+                {
+                    ButtonNum--;
+                    SoundManeger.instance.Sound(CursolSE);
+                }
+                if (Input.GetAxis("Horizontal") >= 0.0f && ButtonNum < Max)
+                {
+                    ButtonNum++;
+                    SoundManeger.instance.Sound(CursolSE);
+                }
+                AxisReset = true;
             }
-            if (Input.GetAxis("Horizontal") >= 0.0f && ButtonNum < Max)
+            if (Input.GetAxis("Horizontal") == 0.0f && AxisReset)
             {
-                ButtonNum++;
-                SoundManeger.instance.Sound(CursolSE);
+                AxisReset = false;
             }
-            AxisReset = true;
-        }
-        if (Input.GetAxis("Horizontal") == 0.0f && AxisReset)
-        {
-            AxisReset = false;
+            ButtonNum = Mathf.Clamp(ButtonNum, 0, Max);
+
         }
 
-        ButtonNum = Mathf.Clamp(ButtonNum, 0, Max);
 
-        if (Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+        if (Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)&&AxisFlag)
         {
             StartCoroutine(Select());
             AxisFlag = false;
@@ -81,7 +85,7 @@ public class StageSelect : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 break;
             case 1:
-                GameLoad("Stage2");
+                GameLoad("StageExtra");
                 SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
