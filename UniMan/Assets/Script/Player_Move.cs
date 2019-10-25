@@ -13,7 +13,7 @@ public class Player_Move : MonoBehaviour
     public bool OnGround, Active = false, NowAttack , IsCrouch;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
     Renderer ren;
-    public int Life;                                                         //体力値
+    public float Life;                                                         //体力値
     StageManeger maneger;
     [SerializeField] GameObject Bullet;
     Vector2 Resize,Resizeofs ,Size,Sizeofs;
@@ -113,7 +113,7 @@ public class Player_Move : MonoBehaviour
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)); //カメラの右上     〃
         Vector2 pos = transform.position;   //自分の座標の更新
         pos.x = Mathf.Clamp(pos.x, min.x, max.x);       //移動制限(カメラの表示範囲の横から出ないように)
-        pos.y = Mathf.Clamp(pos.y, min.y - 3, max.y); //移動制限(カメラの表示範囲の縦から出ないように)
+        pos.y = Mathf.Clamp(pos.y, -100, max.y); //移動制限(カメラの表示範囲の縦から出ないように)
         Vector3 scale = transform.localScale;
 
         rb.velocity = new Vector2(Horizontal * MoveSpeed, rb.velocity.y); //移動
@@ -173,8 +173,14 @@ public class Player_Move : MonoBehaviour
             Active = false;
         }
 
-        if (Life <= 0) PlayerDown(); //ライフ0でダウン
-        else Invoke("Alive", 0.3f);
+        if (Life <= 0)
+        {
+            PlayerDown(); //ライフ0でダウン
+        }
+        else
+        {
+            Invoke("Alive", 0.3f);
+        }
     }
 
 
@@ -307,5 +313,16 @@ public class Player_Move : MonoBehaviour
     {
         col.isTrigger = false;
         circle.isTrigger = false;
+    }
+
+    public void SlDamage()
+    {
+        Life -= Time.deltaTime;
+
+        if (Life <= 0 && Active)
+        {
+            PlayerDown(); //ライフ0でダウン
+            Active = false;
+        }
     }
 }

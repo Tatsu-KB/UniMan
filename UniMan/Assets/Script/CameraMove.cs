@@ -26,10 +26,11 @@ public class CameraMove : MonoBehaviour
 
         if (Target && VerticalMode)
         {
-            transform.position = new Vector3(transform.position.x, Mathf.Clamp(Target.transform.position.y, Min, Max), transform.position.z);
-            if(Min < transform.position.y)
+
+            if(Min < Max)
             {
-                Min = transform.position.y;
+                transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, Min, Max), transform.position.z);
+                Min +=   Time.deltaTime;
             }
         }
     }

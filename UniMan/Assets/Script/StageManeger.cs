@@ -177,4 +177,9 @@ public class StageManeger : MonoBehaviour
     {
         SoundManeger.instance.Sound(PlayerAttackSE);
     }
+
+    public void SlipDamage()
+    {
+        Player.GetComponent<Player_Move>().SlDamage();
+    }
 }
