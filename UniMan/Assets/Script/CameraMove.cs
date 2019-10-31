@@ -8,6 +8,7 @@ public class CameraMove : MonoBehaviour
     [SerializeField] Vector3 vector;
     [SerializeField] float Min, Max;
     public bool VerticalMode, HorizontalMode;
+    public int speed;
     // Start is called before the first frame update
 
     public void Camera_Target()
@@ -30,7 +31,7 @@ public class CameraMove : MonoBehaviour
             if(Min < Max)
             {
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, Min, Max), transform.position.z);
-                Min +=   Time.deltaTime;
+                Min +=   Time.deltaTime * speed;
             }
         }
     }

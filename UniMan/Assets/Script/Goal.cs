@@ -11,7 +11,8 @@ public class Goal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stageManeger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>(); animator = GetComponent<Animator>();
+        stageManeger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
+        animator = GetComponent<Animator>();
         Active = true;
     }
 

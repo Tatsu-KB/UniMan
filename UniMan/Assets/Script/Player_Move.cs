@@ -40,7 +40,6 @@ public class Player_Move : MonoBehaviour
 
     private void Update()
     {
-
         if (Active)
         {
             if (!IsCrouch)
@@ -76,6 +75,10 @@ public class Player_Move : MonoBehaviour
 
                 }
             }
+            else
+            {
+                Move(0);
+            }
             float var = Input.GetAxisRaw("Vertical");
 
             if (var == -1 && OnGround)
@@ -98,13 +101,13 @@ public class Player_Move : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (Active) Move(Horizontal);
-
-        else
+        if (!Active)
         {
             Horizontal = 0;
             Vertical = 0;
+
         }
+        Move(Horizontal);
         animator.SetFloat("Move", Mathf.Abs(Horizontal));
     }
     void Move(float X)
@@ -116,7 +119,7 @@ public class Player_Move : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, -100, max.y); //移動制限(カメラの表示範囲の縦から出ないように)
         Vector3 scale = transform.localScale;
 
-        rb.velocity = new Vector2(Horizontal * MoveSpeed, rb.velocity.y); //移動
+        rb.velocity = new Vector2(X * MoveSpeed, rb.velocity.y); //移動
 
 
         if (!OnGround)  //地面に触れているか否か
@@ -209,7 +212,8 @@ public class Player_Move : MonoBehaviour
     public void StageClear()
     {
         Active = false;
-        rb.velocity = new Vector2(0, transform.position.y);
+        
+        rb.velocity = new Vector2(0, 0);
     }
 
     public void Performance()
