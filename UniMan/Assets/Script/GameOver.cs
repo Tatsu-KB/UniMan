@@ -7,11 +7,11 @@ using TMPro;
 public class GameOver : MonoBehaviour
 {
     string SceneNeme;
-    public TextMeshProUGUI Continue,StageSelect, Return;
+    public TextMeshProUGUI Continue,StageSelect, Return,CT;
     public int ButtonNum = 0, Max;
     public bool AxisReset = false,InputFlag = true;
     public AudioClip BGM,SelectSE,CursolSE;
-
+    int DeathCT;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,8 @@ public class GameOver : MonoBehaviour
         SoundManeger.instance.Music(BGM,1);
         Max = GameObject.FindGameObjectsWithTag("Menu").Length - 1;
         ButtonNum = Max;
+        DeathCT = GameObject.Find("LoadManeger").GetComponent<SceneLoad>().DeathCount;
+        CT.text = DeathCT + " GameOver...";
     }
 
     // Update is called once per frame

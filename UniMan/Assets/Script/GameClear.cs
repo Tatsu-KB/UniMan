@@ -11,6 +11,7 @@ public class GameClear : MonoBehaviour
     void Start()
     {
         SoundManeger.instance.Music(BackMusic,1.0f);
+        GameObject.Find("LoadManeger").GetComponent<SceneLoad>().DeathCount = 0;
     }
 
     // Update is called once per frame

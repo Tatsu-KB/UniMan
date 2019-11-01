@@ -14,6 +14,7 @@ public class SceneLoad : MonoBehaviour
     private Texture2D blackTexture;
     private float fadeAlpha = 0;
     private bool Fading = false;
+    public int DeathCount;
     // Start is called before the first frame update
 
     void Awake()
@@ -43,6 +44,11 @@ public class SceneLoad : MonoBehaviour
     }
     public void LoadScene(string Name)
     {
+        if (Name == "GameOver")
+        {
+            DeathCount++;
+        }
+
         BackName = SceneName;
         SceneName = Name;
         StartCoroutine(LoadDeta(Name,1.0f));
@@ -51,8 +57,7 @@ public class SceneLoad : MonoBehaviour
     public void OnGUI()
     {
         if (Fading)
-        {
-            
+        {  
             //透明度を更新して黒テクスチャを描画
             GUI.color = new Color(0, 0, 0, this.fadeAlpha);
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), this.blackTexture);
