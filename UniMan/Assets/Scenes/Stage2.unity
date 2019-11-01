@@ -323,7 +323,7 @@ MonoBehaviour:
   GoalPos: {fileID: 0}
   EnemyPos_Bee: []
   EnemyPos_Piranha: []
-  Player: {fileID: 0}
+  Player: {fileID: 6596896976810656363, guid: 0dceec071e1e6ec46906ddbd22e98825, type: 3}
   Goal: {fileID: 0}
   PlayerPrefab: {fileID: 8886695495664267066, guid: 2b53c8b3fdad6264ba5c912eb4553430,
     type: 3}
@@ -791,6 +791,10 @@ MonoBehaviour:
   vector: {x: 0, y: 0, z: 0}
   Min: 0
   Max: 40
+  VerticalMode: 0
+  HorizontalMode: 0
+  Start: 1
+  speed: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

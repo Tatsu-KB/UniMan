@@ -17,7 +17,7 @@ public class Player_Move : MonoBehaviour
     StageManeger maneger;
     [SerializeField] GameObject Bullet;
     Vector2 Resize,Resizeofs ,Size,Sizeofs;
-
+    string PlayerTag;
     // Start is called before the first frame update
     void Start()
     {

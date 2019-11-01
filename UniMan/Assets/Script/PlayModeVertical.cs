@@ -11,6 +11,7 @@ public class PlayModeVertical: MonoBehaviour
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
+        camera.Start = false;
     }
 
     // Update is called once per frame

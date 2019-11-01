@@ -7,7 +7,7 @@ public class CameraMove : MonoBehaviour
     [SerializeField] GameObject Target;
     [SerializeField] Vector3 vector;
     [SerializeField] float Min, Max;
-    public bool VerticalMode, HorizontalMode;
+    public bool VerticalMode, HorizontalMode ,Start = true;
     public int speed;
     // Start is called before the first frame update
 
@@ -20,7 +20,7 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Target && !VerticalMode)
+        if (Target && !VerticalMode && Start)
         {
             transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, Min, Max), transform.position.y, transform.position.z);
         }

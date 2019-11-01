@@ -7,7 +7,7 @@ using TMPro;
 public class GameOver : MonoBehaviour
 {
     string SceneNeme;
-    public TextMeshProUGUI Continue, Return;
+    public TextMeshProUGUI Continue,StageSelect, Return;
     public int ButtonNum = 0, Max;
     public bool AxisReset = false,InputFlag = true;
     public AudioClip BGM,SelectSE,CursolSE;
@@ -61,12 +61,19 @@ public class GameOver : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         switch(ButtonNum)
         {
-            case 1:
+            case 2:
                 Continue.color = new Color(0, 1, 1, 1);
+                StageSelect.color = new Color(1, 1, 1, 1);
+                Return.color = new Color(1, 1, 1, 1);
+                break;
+            case 1:
+                Continue.color = new Color(1, 1, 1, 1);
+                StageSelect.color = new Color(0, 1, 1, 1);
                 Return.color = new Color(1, 1, 1, 1);
                 break;
             case 0:
                 Return.color = new Color(0, 1, 1, 1);
+                StageSelect.color = new Color(1, 1, 1, 1);
                 Continue.color = new Color(1, 1, 1, 1);
                 break;
         }
@@ -76,8 +83,13 @@ public class GameOver : MonoBehaviour
     {
         switch (ButtonNum)
         {
-            case 1:
+            case 2:
                 SceneLoad.instance.LoadScene(SceneNeme);
+                SoundManeger.instance.Stop();
+                yield return new WaitForSeconds(0.5f);
+                break;
+            case 1:
+                SceneLoad.instance.LoadScene("StageSelect");
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
