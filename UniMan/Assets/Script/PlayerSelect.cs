@@ -67,13 +67,18 @@ public class PlayerSelect : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         switch (ButtonNum)
         {
-            case 1:
-                GunImage.color = new Color(1, 1, 1, 1);
-                SwordImage.color = new Color(1, 1, 1, 0.5f);
-                break;
             case 0:
+
+                GunAnim.SetBool("Select", true);
+                SwordAnim.SetBool("Select", false);
                 SwordImage.color = new Color(1, 1, 1, 1);
                 GunImage.color = new Color(1, 1, 1, 0.5f);
+                break;
+            case 1:
+                GunAnim.SetBool("Select", false);
+                SwordAnim.SetBool("Select", true);
+                GunImage.color = new Color(1, 1, 1, 1);
+                SwordImage.color = new Color(1, 1, 1, 0.5f);
                 break;
         }
     }
@@ -82,12 +87,12 @@ public class PlayerSelect : MonoBehaviour
         switch (ButtonNum)
         {
             case 0:
-
+                GunAnim.SetTrigger("Decision");
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
             case 1:
-
+                SwordAnim.SetTrigger("Decision");
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
