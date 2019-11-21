@@ -34,7 +34,7 @@ public class Player_Move : MonoBehaviour
         Life += maneger.LifeUp;
         Size = new Vector2(col.size.x, col.size.y);
         Sizeofs = new Vector2(col.offset.x, col.offset.y);
-        Resize = new Vector2(col.size.x, col.size.y - 0.2f);
+        Resize = new Vector2(col.size.x, col.size.y - 0.3f);
         Resizeofs = new Vector2(col.offset.x, col.offset.y - 0.15f);
     }
 
@@ -62,16 +62,20 @@ public class Player_Move : MonoBehaviour
                         NowAttack = true;
                         Attack1();
                     }
+                    /*
                     if (Input.GetButtonDown("Fire2") && !NowAttack)
                     {
                         NowAttack = true;
                         Attack2();
                     }
+                    */
+                    /*
                     if (Input.GetButtonDown("Fire3") && !NowAttack)
                     {
                         NowAttack = true;
                         Attack3();
                     }
+                    */
 
                 }
             }
@@ -155,12 +159,12 @@ public class Player_Move : MonoBehaviour
         animator.SetTrigger("Attack2");
         maneger.Attack();
     }
+
     void Attack3()
     {
         animator.SetTrigger("Attack3");
         maneger.Attack();
     }
-
     public void Damage(int EnemyATK)
     {
         gameObject.layer = 8;
