@@ -7,7 +7,7 @@ using TMPro;
 
 public class TitleManager : MonoBehaviour
 {
-    public TextMeshProUGUI button, st, ex, op;
+    public TextMeshProUGUI button, st, ma, ex, op;
     bool AxisReset = false,StartFlag = false,AxisFlag = false;
     int ButtonNum;    //ボタン選択の番号、最大値、最小値
     static int Max;
@@ -27,6 +27,7 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         st.gameObject.SetActive(false);
+        ma.gameObject.SetActive(false);
         ex.gameObject.SetActive(false);
         op.gameObject.SetActive(false);
     }
@@ -85,6 +86,7 @@ public class TitleManager : MonoBehaviour
     {
         button.gameObject.SetActive(false);
         st.gameObject.SetActive(true);
+        ma.gameObject.SetActive(true);
         ex.gameObject.SetActive(true);
         op.gameObject.SetActive(true);
         StartCoroutine(ModeSelect());
@@ -102,18 +104,27 @@ public class TitleManager : MonoBehaviour
         else yield return new WaitForSeconds(0.05f);
         switch (ButtonNum)
         {
-            case 2:
+            case 3:
                 st.color = new Color(0, 1, 1, 1);
+                ma.color = new Color(1, 1, 1, 1);
+                ex.color = new Color(1, 1, 1, 1);
+                op.color = new Color(1, 1, 1, 1);
+                break;
+            case 2:
+                st.color = new Color(1, 1, 1, 1);
+                ma.color = new Color(0, 1, 1, 1);
                 ex.color = new Color(1, 1, 1, 1);
                 op.color = new Color(1, 1, 1, 1);
                 break;
             case 1:
                 st.color = new Color(1, 1, 1, 1);
+                ma.color = new Color(1, 1, 1, 1);
                 ex.color = new Color(1, 1, 1, 1);
                 op.color = new Color(0, 1, 1, 1);
                 break;
             case 0:
                 st.color = new Color(1, 1, 1, 1);
+                ma.color = new Color(1, 1, 1, 1);
                 ex.color = new Color(0, 1, 1, 1);
                 op.color = new Color(1, 1, 1, 1);
                 break;
@@ -124,8 +135,14 @@ public class TitleManager : MonoBehaviour
     {
         switch (ButtonNum)
         {
-            case 2:
+            case 3:
                 GameLoad("StageSelect");
+                SE(SelectSE);
+                SoundManeger.instance.Stop();
+                yield return new WaitForSeconds(0.5f);
+                break;
+            case 2:
+                GameLoad("Manual");
                 SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
