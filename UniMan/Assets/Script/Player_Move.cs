@@ -8,7 +8,8 @@ public class Player_Move : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D col;
     CircleCollider2D circle;
-    public int MoveSpeed, Speed;                                            //移動速度
+    public float MoveSpeed , Speed;                                            //移動速度
+    //public float moveForceMultiplier;    // 移動速度の入力に対する追従度
     float Horizontal, Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
     public bool OnGround, Active = false, NowAttack , IsCrouch;                        //接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
@@ -17,7 +18,7 @@ public class Player_Move : MonoBehaviour
     StageManeger maneger;
     [SerializeField] GameObject Bullet;
     Vector2 Resize,Resizeofs ,Size,Sizeofs;
-    string PlayerTag;
+    string PlayerTag,GroundTag;
     // Start is called before the first frame update
     void Start()
     {
@@ -114,6 +115,8 @@ public class Player_Move : MonoBehaviour
         Move(Horizontal);
         animator.SetFloat("Move", Mathf.Abs(Horizontal));
     }
+
+
     void Move(float X)
     {
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));  //カメラの左下座標の取得
@@ -123,8 +126,26 @@ public class Player_Move : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, -100, max.y); //移動制限(カメラの表示範囲の縦から出ないように)
         Vector3 scale = transform.localScale;
 
-        rb.velocity = new Vector2(X * MoveSpeed, rb.velocity.y); //移動
+        Speed = rb.velocity.x;
 
+        if(OnGround&&GroundTag == "FreazeGround" && Input.GetAxisRaw("Horizontal") == 0)
+        {
+            Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime * 2);
+            rb.velocity = new Vector2(Speed, rb.velocity.y); //移動
+            
+        }
+        else
+        {
+            rb.velocity = new Vector2(X * MoveSpeed, rb.velocity.y); //移動
+        }
+        /*
+        Vector2 moveVector = Vector2.zero;    // 移動速度の入力
+
+        moveVector.x = MoveSpeed * X;
+        //moveVector.z = MoveSpeed * Vertical;
+
+        rb.AddForce(moveForceMultiplier * (moveVector - rb.velocity));
+        */
 
         if (!OnGround)  //地面に触れているか否か
         {
@@ -274,8 +295,9 @@ public class Player_Move : MonoBehaviour
         Active = true;
     }
 
-    public void IsGround()
+    public void IsGround(string collision)
     {
+        GroundTag = collision;
         if (rb.velocity.y <= 0)
         {
             OnGround = true;

@@ -19,8 +19,8 @@ public class Ground : MonoBehaviour
     }
 
     public void OnTriggerStay2D(Collider2D collision)
-    {
-        player.IsGround();
+    { 
+            player.IsGround(collision.tag);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
