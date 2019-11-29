@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     [SerializeField] GameObject Target;
-    [SerializeField] Vector3 vector;
-    [SerializeField] float Min, Max;
+    //[SerializeField] Vector3 vector;
+    [SerializeField] float MinX, MaxX,MinY,MaxY;
     public bool VerticalMode, HorizontalMode ,Start = true;
     public int speed;
     // Start is called before the first frame update
@@ -22,17 +22,21 @@ public class CameraMove : MonoBehaviour
     {
         if (Target && !VerticalMode && Start)
         {
-            transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, Min, Max), transform.position.y, transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), transform.position.y, transform.position.z);
+        }
+        else
+        if (Target && VerticalMode && !HorizontalMode)
+        {
+            if (MinY < MaxX)
+            {
+                transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, MinY, MaxY), transform.position.z);
+                MinY +=   Time.deltaTime * speed;
+            }
         }
 
-        if (Target && VerticalMode)
+        if (VerticalMode && HorizontalMode)
         {
-
-            if(Min < Max)
-            {
-                transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, Min, Max), transform.position.z);
-                Min +=   Time.deltaTime * speed;
-            }
+             transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), Mathf.Clamp(transform.position.y, MinY, MaxY), transform.position.z);
         }
     }
 
@@ -41,7 +45,7 @@ public class CameraMove : MonoBehaviour
     {
         if (Target)
         {
-            transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, Min, Max), transform.position.y, transform.position.z);
+            //transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), transform.position.y, transform.position.z);
         }
     }
 }

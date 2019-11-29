@@ -138,26 +138,35 @@ public class Player_Move : MonoBehaviour
         {
             if (X == 0)
             {
-                Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime * 0.8f);
+                Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime * 1.2f);
                 rb.velocity = new Vector2(Speed, rb.velocity.y); //移動
             }
-            if (Speed <= 6.0f)
-            {
 
-                    Speed = Mathf.LerpAngle(Speed, X * MoveSpeed, Time.deltaTime);
-                    Debug.Log("逆滑り" + X);
-                
-            }
 
-            if (Speed >= -6.0f )
+            if (Speed >= -6.0)
             {
-                if (X >= 0.1f)
+                if (X <= -0.0001f)
                 {
-                    Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime);
-                    Debug.Log("逆滑り" + X);
+                    Speed = Mathf.LerpAngle(Speed, X * MoveSpeed, Time.deltaTime );
+                }
+                if (X == 1)
+                {
+                    rb.velocity = new Vector2(X * MoveSpeed, rb.velocity.y); //移動
                 }
             }
+             if (Speed <= 6.0f)
+            { 
+                if (X >= 0.0001f)
+                {
+                    Speed = Mathf.LerpAngle(Speed, X * MoveSpeed, Time.deltaTime);
+                }
 
+                if(X == -1)
+                {
+                    rb.velocity = new Vector2(X * MoveSpeed, rb.velocity.y); //移動
+                }
+            }
+            rb.velocity = new Vector2(Speed, rb.velocity.y); //移動
         }
         else
         {
@@ -330,6 +339,12 @@ public class Player_Move : MonoBehaviour
         {
             OnGround = true;
             Collider();
+        }
+        if(GroundTag != "OneWayGround")
+        {
+            OnGround = true;
+            Collider();
+
         }
     }
     public void NotGround()
