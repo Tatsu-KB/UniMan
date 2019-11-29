@@ -54,8 +54,14 @@ public class Player_Move : MonoBehaviour
                     rb.velocity = new Vector2(rb.velocity.x, jumpPower);
                 }
                 if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
+                {
                     rb.gravityScale = 0.6f;
-                else rb.gravityScale = 1.0f;
+                }
+                else
+                {
+                    rb.gravityScale = 1.0f;
+                }
+
                 if (Active)
                 {
                     if (Input.GetButtonDown("Fire1") && !NowAttack)
@@ -86,7 +92,7 @@ public class Player_Move : MonoBehaviour
             }
             float var = Input.GetAxisRaw("Vertical");
 
-            if (var == -1 && OnGround)
+            if (var == -1 && OnGround && Horizontal == 0)
             {
                 animator.SetBool("Crouch", true);
                 IsCrouch = true;
@@ -128,16 +134,36 @@ public class Player_Move : MonoBehaviour
 
         Speed = rb.velocity.x;
 
-        if(OnGround&&GroundTag == "FreazeGround" && Input.GetAxisRaw("Horizontal") == 0)
+        if (OnGround && GroundTag == "FreazeGround" )
         {
-            Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime * 2);
-            rb.velocity = new Vector2(Speed, rb.velocity.y); //移動
-            
+            if (X == 0)
+            {
+                Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime * 0.8f);
+                rb.velocity = new Vector2(Speed, rb.velocity.y); //移動
+            }
+            if (Speed <= 6.0f)
+            {
+
+                    Speed = Mathf.LerpAngle(Speed, X * MoveSpeed, Time.deltaTime);
+                    Debug.Log("逆滑り" + X);
+                
+            }
+
+            if (Speed >= -6.0f )
+            {
+                if (X >= 0.1f)
+                {
+                    Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime);
+                    Debug.Log("逆滑り" + X);
+                }
+            }
+
         }
         else
         {
             rb.velocity = new Vector2(X * MoveSpeed, rb.velocity.y); //移動
         }
+
         /*
         Vector2 moveVector = Vector2.zero;    // 移動速度の入力
 
@@ -180,7 +206,6 @@ public class Player_Move : MonoBehaviour
         animator.SetTrigger("Attack2");
         maneger.Attack();
     }
-
     void Attack3()
     {
         animator.SetTrigger("Attack3");
@@ -214,7 +239,10 @@ public class Player_Move : MonoBehaviour
 
     public void PlayerDown()
     {
-        if (Active) animator.SetTrigger("Damage");
+        if (Active)
+        {
+            animator.SetTrigger("Damage");
+        }
         Life = 0;
         Active = false;
         rb.velocity = Vector2.zero;                     // やられた後不自然に滑らないように  
