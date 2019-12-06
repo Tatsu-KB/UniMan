@@ -1617,7 +1617,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.016129017, y: 0.016129017, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -2265,7 +2265,7 @@ RectTransform:
   m_GameObject: {fileID: 794776750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000552, y: 1.0000552, z: 1.0000552}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children:
   - {fileID: 568631448}
   - {fileID: 436278621}
@@ -2275,8 +2275,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -360, y: 120}
-  m_SizeDelta: {x: -760.45123, y: -290}
+  m_AnchoredPosition: {x: -382.5, y: 150}
+  m_SizeDelta: {x: -765, y: -300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &794776752
 MonoBehaviour:
@@ -11513,12 +11513,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  vector: {x: 0, y: 0, z: 0}
-  Min: 0
-  Max: 105
+  MinX: 0
+  MaxX: 0
+  MinY: 0
+  MaxY: 105
   VerticalMode: 0
   HorizontalMode: 0
-  Start: 1
+  Start: 0
   speed: 2
 --- !u!4 &1205290270 stripped
 Transform:

@@ -412,9 +412,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  vector: {x: 0, y: 0, z: 0}
-  Min: 0
-  Max: 83
+  MinX: 0
+  MaxX: 83.5
+  MinY: 0
+  MaxY: 0
   VerticalMode: 0
   HorizontalMode: 0
   Start: 1
@@ -18597,7 +18598,7 @@ RectTransform:
   m_GameObject: {fileID: 1802174812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1799431099}
   - {fileID: 16111045}
@@ -18607,8 +18608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -360, y: 120}
-  m_SizeDelta: {x: -760, y: -290}
+  m_AnchoredPosition: {x: -382.5, y: 150}
+  m_SizeDelta: {x: -765, y: -300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802174814
 MonoBehaviour:

@@ -6,8 +6,8 @@ public class CameraMove : MonoBehaviour
 {
     [SerializeField] GameObject Target;
     //[SerializeField] Vector3 vector;
-    [SerializeField] float MinX, MaxX,MinY,MaxY;
-    public bool VerticalMode, HorizontalMode ,Start = true;
+    [SerializeField] float MinX, MaxX, MinY, MaxY;
+    public bool VerticalMode, HorizontalMode, Start = true;
     public int speed;
     // Start is called before the first frame update
 
@@ -22,21 +22,28 @@ public class CameraMove : MonoBehaviour
     {
         if (Target && !VerticalMode && Start)
         {
-            transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), transform.position.y, transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), Mathf.Clamp(Target.transform.position.y, 0, 0), transform.position.z);
         }
         else
         if (Target && VerticalMode && !HorizontalMode)
         {
-            if (MinY < MaxX)
+            if (MinY < MaxY)
             {
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, MinY, MaxY), transform.position.z);
-                MinY +=   Time.deltaTime * speed;
+                MinY += Time.deltaTime * speed;
             }
         }
 
         if (VerticalMode && HorizontalMode)
         {
-             transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), Mathf.Clamp(transform.position.y, MinY, MaxY), transform.position.z);
+            if (Target.transform.position.y  < this.transform.position.y - 1)
+            {
+                transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), Mathf.Clamp(Target.transform.position.y - 1, MinY, MaxY), transform.position.z);
+            }
         }
     }
 
