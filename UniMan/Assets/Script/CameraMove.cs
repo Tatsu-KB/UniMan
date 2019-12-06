@@ -36,7 +36,7 @@ public class CameraMove : MonoBehaviour
 
         if (VerticalMode && HorizontalMode)
         {
-            if (Target.transform.position.y  < this.transform.position.y - 1)
+            if (Target.transform.position.y  < this.transform.position.y)
             {
                 transform.position = new Vector3(Mathf.Clamp(Target.transform.position.x, MinX, MaxX), transform.position.y, transform.position.z);
             }

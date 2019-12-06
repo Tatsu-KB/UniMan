@@ -25,6 +25,6 @@ public class Ground : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        player.NotGround();
+            player.NotGround();
     }
 }

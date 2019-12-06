@@ -334,18 +334,17 @@ public class Player_Move : MonoBehaviour
 
     public void IsGround(string collision)
     {
-        GroundTag = collision;
-        if (rb.velocity.y <= 0)
-        {
-            OnGround = true;
-            Collider();
-        }
-        if(GroundTag != "OneWayGround")
-        {
-            OnGround = true;
-            Collider();
-
-        }
+            GroundTag = collision;
+            if (rb.velocity.y <= 0)
+            {
+                OnGround = true;
+                Collider();
+            }
+            if (GroundTag != "OneWayGround")
+            {
+                OnGround = true;
+                Collider();
+            }
     }
     public void NotGround()
     {
