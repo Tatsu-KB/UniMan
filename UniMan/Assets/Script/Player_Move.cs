@@ -45,7 +45,15 @@ public class Player_Move : MonoBehaviour
         {
             if (!IsCrouch)
             {
+                animator.speed = 1;
                 Horizontal = Input.GetAxisRaw("Horizontal");
+                /*
+                if(Input.GetKey(KeyCode.Q) && OnGround)
+                {
+                    Horizontal *= 1.5f;
+                    animator.speed = 1.5f;
+                }
+                */
                 Vertical = Mathf.Clamp(rb.velocity.y, -1f, 1f);
 
                 var jumpPower = 13.0f;
