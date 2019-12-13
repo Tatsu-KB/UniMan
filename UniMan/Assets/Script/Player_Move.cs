@@ -64,9 +64,9 @@ public class Player_Move : MonoBehaviour
 
                 if (Active)
                 {
-                    if (Input.GetButtonDown("Fire1") && !NowAttack)
+                    if (Input.GetButton/*Down*/("Fire1") && !NowAttack)
                     {
-                        NowAttack = true;
+                       // NowAttack = true;
                         Attack1();
                     }
                     /*
@@ -138,7 +138,7 @@ public class Player_Move : MonoBehaviour
         {
             if (X == 0)
             {
-                Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime * 1.2f);
+                Speed = Mathf.LerpAngle(Speed, 0, Time.deltaTime / 1.5f);
                 rb.velocity = new Vector2(Speed, rb.velocity.y); //移動
             }
 
