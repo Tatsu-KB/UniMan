@@ -153,7 +153,11 @@ public class StageManeger : MonoBehaviour
 
     public void BreakEffect(Transform Pos)
     {
-        Instantiate(DamegeEffect, Pos).transform.parent = null;
+        GameObject Effect;
+        Effect = Instantiate(DamegeEffect, Pos) as GameObject;
+        Effect.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+        Effect.transform.parent = null;
+
     }
 
     void SceneLoading()

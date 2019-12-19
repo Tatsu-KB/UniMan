@@ -72,7 +72,7 @@ public class Player_Move : MonoBehaviour
 
                 if (Active)
                 {
-                    if (Input.GetButton/*Down*/("Fire1") && !NowAttack)
+                    if (Input.GetButtonDown("Fire1") && !NowAttack)
                     {
                        // NowAttack = true;
                         Attack1();
