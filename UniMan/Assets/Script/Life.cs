@@ -40,6 +40,6 @@ public class Life : MonoBehaviour
             }
         }
         else
-        image.color = Color.cyan;
+        image.color = Color.green;
     }
 }
