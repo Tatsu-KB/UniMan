@@ -8,13 +8,13 @@ public class Player_Move : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D col;
     CircleCollider2D circle;
-    public float MoveSpeed , Speed;                                            //移動速度
+    [Header("移動速度")] public float MoveSpeed , Speed; //移動速度
     //public float moveForceMultiplier;    // 移動速度の入力に対する追従度
     float Horizontal, Vertical, preScale, preScale_re;    //横と縦の移動値、反転用の値
-    public bool OnGround, Active = false, NowAttack , IsCrouch;                        //接地、行動可能か、攻撃中かどうか                                
+    public bool OnGround, Active = false, NowAttack , IsCrouch;//接地、行動可能か、攻撃中かどうか                                
     AnimatorStateInfo nowAnim;                                  //アニメーションの情報取得
     Renderer ren;
-    public float Life;                                                         //体力値
+    [Header("体力")] public float Life;                                                         //体力値
     StageManeger maneger;
     [SerializeField] GameObject Bullet;
     Vector2 Resize,Resizeofs ,Size,Sizeofs;
@@ -307,7 +307,7 @@ public class Player_Move : MonoBehaviour
 
     void Find()
     {
-        gameObject.layer = 1;
+        gameObject.layer = 13;
         ren.material.color = new Color(1, 1, 1, 1);
 
     }
@@ -397,7 +397,7 @@ public class Player_Move : MonoBehaviour
 
     public void SlDamage()
     {
-        Life -= Time.deltaTime;
+        Life -= Time.deltaTime * 3f;
 
         if (Life <= 0 && Active)
         {

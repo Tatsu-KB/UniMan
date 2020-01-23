@@ -7,7 +7,7 @@ using TMPro;
 
 public class StageSelect : MonoBehaviour
 {
-    public Image Stage1, Stage2;
+    public Image Stage1, Stage2, Stage3;
     bool AxisReset = false, AxisFlag = true;
     public int ButtonNum , Max;
     [SerializeField] string SceneName;
@@ -64,13 +64,20 @@ public class StageSelect : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         switch (ButtonNum)
         {
+            case 0:
+                Stage1.color = new Color(1, 1, 1, 0.5f);
+                Stage2.color = new Color(1, 1, 1, 1);
+                Stage3.color = new Color(1, 1, 1, 1);
+                break;
             case 1:
                 Stage1.color = new Color(1, 1, 1, 1);
                 Stage2.color = new Color(1, 1, 1, 0.5f);
+                Stage3.color = new Color(1, 1, 1, 1);
                 break;
-            case 0:
+            case 2:
+                Stage1.color = new Color(1, 1, 1, 1);
                 Stage2.color = new Color(1, 1, 1, 1);
-                Stage1.color = new Color(1, 1, 1, 0.5f);
+                Stage3.color = new Color(1, 1, 1, 0.5f);
                 break;
         }
     }
@@ -85,11 +92,18 @@ public class StageSelect : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 break;
             case 1:
+                GameLoad("Stage2");
+                SE(SelectSE);
+                SoundManeger.instance.Stop();
+                yield return new WaitForSeconds(0.5f);
+                break;
+            case 2:
                 GameLoad("StageExtra");
                 SE(SelectSE);
                 SoundManeger.instance.Stop();
                 yield return new WaitForSeconds(0.5f);
                 break;
+
         }
     }
     public void GameLoad(string Name)

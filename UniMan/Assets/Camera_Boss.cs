@@ -22,8 +22,8 @@ public class Camera_Boss : MonoBehaviour
         {
             CameraMove.MinX = 258;
             CameraMove.MaxX = 258;
-            CameraMove.MinY = 2;
-            CameraMove.MaxY = 2;
+            CameraMove.MinY = 1;
+            CameraMove.MaxY = 1;
             CameraMove.Boss = true;
         }
     }

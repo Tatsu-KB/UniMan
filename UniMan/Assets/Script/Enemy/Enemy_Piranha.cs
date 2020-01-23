@@ -25,7 +25,7 @@ public class Enemy_Piranha : MonoBehaviour
         preScale_re = transform.localScale.x * -1;
         scale = transform.localScale;
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
-        Attack = 2;
+        Attack = 3;
         animator = GetComponent<Animator>();
         StateFlag = false;
         Life = 3;

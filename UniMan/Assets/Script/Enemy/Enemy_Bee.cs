@@ -6,7 +6,7 @@ public class Enemy_Bee : MonoBehaviour
 {
     int Life;
     GameObject player;
-    bool EnemyFlag,HitFlag;
+    bool EnemyFlag;
     public float Speed;
     Rigidbody2D rb;
     float preScale, preScale_re;
@@ -23,7 +23,7 @@ public class Enemy_Bee : MonoBehaviour
         preScale_re = transform.localScale.x * -1;
         scale = transform.localScale;
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
-        Attack = 1;
+        Attack = 2;
     }
 
     // Update is called once per frame
@@ -87,26 +87,18 @@ public class Enemy_Bee : MonoBehaviour
         if(collision.tag == "Player")
         {
             maneger.PlayerDamege(Attack);
-            HitFlag = false;
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        HitFlag = true;
-    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             maneger.PlayerDamege(Attack);
-            HitFlag = false;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        HitFlag = true;
-    }
+
 
     public void Destroy()
     {

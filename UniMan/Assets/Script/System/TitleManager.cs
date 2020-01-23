@@ -181,7 +181,7 @@ public class TitleManager : MonoBehaviour
 
     void Music()
     {
-        SoundManeger.instance.Music(BackMusic,0.8f);
+        SoundManeger.instance.Music(BackMusic,1.0f);
         MusicFlag = true;
         return;
     }

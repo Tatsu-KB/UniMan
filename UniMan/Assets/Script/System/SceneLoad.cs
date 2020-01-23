@@ -51,7 +51,7 @@ public class SceneLoad : MonoBehaviour
 
         BackName = SceneName;
         SceneName = Name;
-        StartCoroutine(LoadDeta(Name,1.0f));
+        StartCoroutine(LoadDeta(Name,0.8f));
     }
 
     public void OnGUI()
@@ -87,7 +87,7 @@ public class SceneLoad : MonoBehaviour
         async = SceneManager.LoadSceneAsync(Name);
         async.allowSceneActivation = false;
         while (async.progress < 0.9f) yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         fadeAlpha = 1f;
         async.allowSceneActivation = true;

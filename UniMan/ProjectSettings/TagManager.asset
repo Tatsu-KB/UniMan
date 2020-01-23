@@ -22,6 +22,7 @@ TagManager:
   - OneWayGround
   - FreazeGround
   - Water
+  - Toko
   layers:
   - Default
   - TransparentFX
@@ -41,8 +42,8 @@ TagManager:
   - Bee
   - Particle
   - WaterFloor
-  - 
-  - 
+  - Toko
+  - TokoBody
   - 
   - 
   - 
