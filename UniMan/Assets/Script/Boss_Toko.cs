@@ -13,13 +13,14 @@ public class Boss_Toko : MonoBehaviour
     BoxCollider2D col;
     public float JumpTimer = 3.0f;
     StageManeger maneger;
-
+    bool ActiveFlag;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         maneger = GameObject.FindGameObjectWithTag("StageManeger").GetComponent<StageManeger>();
+        ActiveFlag = false;
 
     }
     private void Update()
@@ -30,15 +31,22 @@ public class Boss_Toko : MonoBehaviour
     {
         PosX = transform.position.x;
         PosY = transform.position.y;
-
         PosX = Mathf.Clamp(PosX, 251.2f, 264.8f);
-        JumpTimer -= Time.deltaTime;
-        if(JumpTimer< 0)
+        if (ActiveFlag)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 18.0f);
-            JumpTimer = 3.0f;
+            JumpTimer -= Time.deltaTime;
+            if (JumpTimer < 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 18.0f);
+                JumpTimer = 3.0f;
+            }
         }
     }
-
+    void OnWillRenderObject()
+    {
+        //画面内に出るまでは動かさない
+        if (Camera.current.name == "Main Camera")
+           ActiveFlag = true;
+    }
 
 }
