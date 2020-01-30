@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class GameClear : MonoBehaviour
 {
     public AudioClip BackMusic;
     bool ExitFlag = true;
+    int DeathCT;
+    public TextMeshProUGUI CT;
+
     // Start is called before the first frame update
     void Start()
     {
         SoundManeger.instance.Music(BackMusic,1.0f);
         GameObject.Find("LoadManeger").GetComponent<SceneLoad>().DeathCount = 0;
+        DeathCT = GameObject.Find("LoadManeger").GetComponent<SceneLoad>().DeathCount;
+        CT.text = DeathCT + " DeathCount";
     }
 
     // Update is called once per frame

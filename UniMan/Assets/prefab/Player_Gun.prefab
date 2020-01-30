@@ -185,7 +185,7 @@ MonoBehaviour:
   Active: 0
   NowAttack: 0
   IsCrouch: 0
-  Life: 30
+  Life: 100
   Bullet: {fileID: 6797927083237987883, guid: 778e3da5ae773294ca5714ad76f305d2, type: 3}
 --- !u!1 &8886695496153460858
 GameObject:

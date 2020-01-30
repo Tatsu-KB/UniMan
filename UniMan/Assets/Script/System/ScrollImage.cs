@@ -11,7 +11,7 @@ public class ScrollImage : MonoBehaviour
         transform.Translate(-0.03f, 0, 0);
         if (transform.position.x < -16.0f)
         {
-            transform.position = new Vector3(19f, 0, 0);
+            transform.position = new Vector3(18.5f, 0, 0);
         }
     }
 }

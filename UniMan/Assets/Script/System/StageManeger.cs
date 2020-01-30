@@ -173,7 +173,7 @@ public class StageManeger : MonoBehaviour
         Player.GetComponent<Animator>().SetTrigger("Start");
     }
 
-    void Music()
+    public void Music()
     {
         SoundManeger.instance.Music(clip,1.0f);
     }

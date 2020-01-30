@@ -5,6 +5,7 @@ using UnityEngine;
 public class Camera_Boss : MonoBehaviour
 {
     public CameraMove CameraMove;
+    public AudioClip AudioClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +21,13 @@ public class Camera_Boss : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            CameraMove.MinX = 258;
-            CameraMove.MaxX = 258;
-            CameraMove.MinY = 1;
-            CameraMove.MaxY = 1;
+            CameraMove.MinX = 313;
+            CameraMove.MaxX = 313;
+            CameraMove.MinY = 0;
+            CameraMove.MaxY = 0;
             CameraMove.Boss = true;
+            GameObject.Find("StageManeger").GetComponent<StageManeger>().clip = AudioClip;
+            GameObject.Find("StageManeger").GetComponent<StageManeger>().Music(); ;
         }
     }
     // X= 258

@@ -15002,7 +15002,7 @@ MonoBehaviour:
   EnemyDamageEffect: {fileID: 1750940742320366, guid: ec1383a81f8b26e41bd5795fba065567,
     type: 3}
   BeeSpeed: 1.5
-  LifeUp: -15
+  LifeUp: -85
   SceneName: 
   clip: {fileID: 8300000, guid: 5842d8401675bf543bfa9cd25c0c9cdc, type: 3}
   PlayerAttackSE: {fileID: 8300000, guid: 153b07bc3aa8e454f990fd040ae6567d, type: 3}
