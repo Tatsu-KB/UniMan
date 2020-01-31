@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be384887a1461dc4b89063304a1d2eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 3639997287239016233, guid: 8793df3c84b4b3d429ee3d6a0afcedb9, type: 3}
+  Bullet: {fileID: 791909613825705083, guid: 8793df3c84b4b3d429ee3d6a0afcedb9, type: 3}
   EnemyFlag: 0
   HitFlag: 0
   StateFlag: 0

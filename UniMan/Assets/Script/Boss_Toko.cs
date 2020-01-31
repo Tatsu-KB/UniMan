@@ -20,7 +20,7 @@ public class Boss_Toko : MonoBehaviour
     float Speed;
     float preScale, preScale_re;
     Vector3 scale;
-
+    public GameObject Bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +73,7 @@ public class Boss_Toko : MonoBehaviour
                 if (JumpTimer < 0)
                 {
                     anim.SetTrigger("Jump");
-                    rb.velocity = new Vector2(rb.velocity.x, 1.0f);
+                    rb.velocity = new Vector2(rb.velocity.x, 16.0f);
                     JumpTimer = Timer;
                 }
             }
@@ -109,19 +109,18 @@ public class Boss_Toko : MonoBehaviour
                     JumpTimer = 3;
                 }
             }
-            if(transform.position.x < 307)
+            if(transform.position.x < 306.5)
             {
                 Speed = speed;
                 scale.x = preScale_re;
             }
-            if (transform.position.x > 319)
+            if (transform.position.x > 319.5)
             {
                 Speed = -speed;
                 scale.x = preScale;
             }
             rb.velocity = new Vector2(Speed, rb.velocity.y);
         }
-        Debug.Log(rb.velocity.y);
         anim.SetFloat("Speed",Mathf.Abs(Speed));
         Debug.Log(beforlife);
     }
@@ -140,7 +139,10 @@ public class Boss_Toko : MonoBehaviour
         ActiveFlag = true;
         anim.SetTrigger("Action");
     }
-
+    void AttackFire()
+    {
+        Instantiate(Bullet, transform.position, transform.rotation).transform.parent = null;
+    }
     void AttackEnd()
     {
         if(transform.localScale.x < 0)

@@ -28,7 +28,7 @@ public class Life : MonoBehaviour
             LifeBefor = PlayerLife.Life;
         }
         LifeBefor = PlayerLife.Life;
-        LifeNow =  Mathf.MoveTowards(LifeNow, LifeBefor, Time.deltaTime * 24f);
+        LifeNow =  Mathf.MoveTowards(LifeNow, LifeBefor, Time.deltaTime * 36f);
 
         slider.value = LifeNow;
         if (slider.value <= slider.maxValue / 2)
