@@ -6,10 +6,11 @@ public class Camera_Boss : MonoBehaviour
 {
     public CameraMove CameraMove;
     public AudioClip AudioClip;
+    public GameObject Life;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Life.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,7 +28,8 @@ public class Camera_Boss : MonoBehaviour
             CameraMove.MaxY = 0;
             CameraMove.Boss = true;
             GameObject.Find("StageManeger").GetComponent<StageManeger>().clip = AudioClip;
-            GameObject.Find("StageManeger").GetComponent<StageManeger>().Music(); ;
+            GameObject.Find("StageManeger").GetComponent<StageManeger>().Music();
+            Life.SetActive(true);
         }
     }
     // X= 258

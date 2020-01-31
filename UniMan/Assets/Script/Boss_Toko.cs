@@ -15,12 +15,12 @@ public class Boss_Toko : MonoBehaviour
     public float JumpTimer;
     float Timer;
     StageManeger maneger;
-    public bool ActiveFlag,OnceTime;
+    public bool ActiveFlag,OnceTime, SecondTime;
     Animator anim;
     float Speed;
     float preScale, preScale_re;
     Vector3 scale;
-    public GameObject Bullet;
+    public GameObject bullet ,bomb;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +79,11 @@ public class Boss_Toko : MonoBehaviour
             }
             if(Life < beforlife / 2)
             {
+                if(!SecondTime)
+                {
+                    anim.SetTrigger("second");
+                    SecondTime = true;
+                }
                 speed = 7;
                 JumpTimer -= Time.deltaTime;
                 if(JumpTimer < 0)
@@ -106,15 +111,16 @@ public class Boss_Toko : MonoBehaviour
                     }
                     anim.SetTrigger("Attack1");
                     Speed = 0;
+                    speed = 0;
                     JumpTimer = 3;
                 }
             }
-            if(transform.position.x < 306.5)
+            if(transform.position.x < 306)
             {
                 Speed = speed;
                 scale.x = preScale_re;
             }
-            if (transform.position.x > 319.5)
+            if (transform.position.x > 320)
             {
                 Speed = -speed;
                 scale.x = preScale;
@@ -141,21 +147,32 @@ public class Boss_Toko : MonoBehaviour
     }
     void AttackFire()
     {
-        Instantiate(Bullet, transform.position, transform.rotation).transform.parent = null;
+        Instantiate (bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.1f), bullet.transform.rotation).GetComponent<TokoBullet>().Inst(1 * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 0);
+        Instantiate(bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y + 0.4f), bullet.transform.rotation).GetComponent<TokoBullet>().Inst(2f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 0.5f);
+        Instantiate(bullet, new Vector3(transform.position.x + transform.localScale.x / 5, transform.position.y - 0.2f), bullet.transform.rotation).GetComponent<TokoBullet>().Inst(1.5f * ((int)transform.localScale.x / Mathf.Abs((int)transform.localScale.x)), 1.25f);
+
+
     }
     void AttackEnd()
     {
         if(transform.localScale.x < 0)
         {
             Speed = -7;
+            speed = 7;
             anim.SetTrigger("Jump");
             rb.velocity = new Vector2(rb.velocity.x, 14.0f);
         }
         else
         {
             Speed = 7;
+            speed = 7;
             anim.SetTrigger("Jump");
             rb.velocity = new Vector2(rb.velocity.x, 14.0f);
         }
+    }
+
+    void Bomb()
+    {
+        Instantiate(bomb, new Vector3(transform.position.x , transform.position.y - 0.1f), bomb.transform.rotation);
     }
 }

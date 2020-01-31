@@ -14,6 +14,7 @@ public class StageManeger : MonoBehaviour
     [SerializeField] GameObject DamegeEffect,Effect,GoalEffect,EnemyEffect,ActiveEffect,EnemyDamageEffect;
     new SpriteRenderer renderer;
     public float BeeSpeed;
+    public int DamageInpact;
     bool Loading = false;
     public int LifeUp;
     public string SceneName;
@@ -85,7 +86,7 @@ public class StageManeger : MonoBehaviour
 
     public void PlayerDamege(int EnemyAtk)
     {
-        Player.GetComponent<Player_Move>().Damage(EnemyAtk);
+        Player.GetComponent<Player_Move>().Damage(EnemyAtk * DamageInpact);
         if(Player.GetComponent<Player_Move>().Life > 0)
         SoundManeger.instance.Sound(DamageSE,1, 1);
         else
@@ -183,7 +184,7 @@ public class StageManeger : MonoBehaviour
     }
     public void Jump()
     {
-        SoundManeger.instance.Sound(JumpSE,1.5f, 2.0f);
+        SoundManeger.instance.Sound(JumpSE,1.5f, 1.2f);
     }
     public void SlipDamage()
     {

@@ -17173,8 +17173,9 @@ MonoBehaviour:
   ActiveEffect: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
   EnemyDamageEffect: {fileID: 1750940742320366, guid: ec1383a81f8b26e41bd5795fba065567,
     type: 3}
-  BeeSpeed: 3
-  LifeUp: 0
+  BeeSpeed: 5
+  DamageInpact: 1
+  LifeUp: -85
   SceneName: 
   clip: {fileID: 8300000, guid: aec76c19983689346842faeb5ef5b386, type: 3}
   PlayerAttackSE: {fileID: 8300000, guid: 153b07bc3aa8e454f990fd040ae6567d, type: 3}
@@ -17182,7 +17183,7 @@ MonoBehaviour:
   BulletSE: {fileID: 8300000, guid: 429b7f4ed5757d64d980e56389992645, type: 3}
   DamageSE: {fileID: 8300000, guid: b02106f3a5451274c9e9faa9fe11d79b, type: 3}
   DownSE: {fileID: 8300000, guid: c342db2a3d98b8046884050ed2bbffdb, type: 3}
-  JumpSE: {fileID: 0}
+  JumpSE: {fileID: 8300000, guid: 81cd5b6a779947f489428e2409b10f00, type: 3}
 --- !u!4 &1808261133
 Transform:
   m_ObjectHideFlags: 0

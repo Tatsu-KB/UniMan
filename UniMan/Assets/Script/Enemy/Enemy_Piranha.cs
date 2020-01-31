@@ -44,7 +44,7 @@ public class Enemy_Piranha : MonoBehaviour
             EnemyAction();
             if (StateFlag == false)
             {
-                StartCoroutine(AttackStart(2.5f));
+                StartCoroutine(AttackStart(1.5f));
                 StateFlag = true;
             }
         }
