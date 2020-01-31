@@ -7,6 +7,7 @@ public class Boss_Toko : MonoBehaviour
     GameObject player;
     [Header("移動速度")] public float speed;
     [Header("体力")] public float Life;
+    public float beforlife;
     float PosX;
     float PosY;
     Rigidbody2D rb;
@@ -33,7 +34,8 @@ public class Boss_Toko : MonoBehaviour
         preScale = transform.localScale.x;
         preScale_re = transform.localScale.x * -1;
         scale = transform.localScale;
-
+        beforlife = Life;
+        Life = 1;
     }
     private void Update()
     {
@@ -41,16 +43,22 @@ public class Boss_Toko : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
-
-        if(Life <= 0)
+        if(Life <= 0 && ActiveFlag)
         {
-            anim.SetBool("Death", true);
+            Debug.Log("やったー！ブッパー！");
+            rb.velocity = new Vector2(0, 0);
+            anim.SetTrigger("Death");
+            ActiveFlag = false;
         }
         Vector2 targetPos = player.transform.position;
 
         float x = targetPos.x;
         float y = targetPos.y;
         transform.localScale = scale;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Life--;
+        }
     }
     void FixedUpdate()
     {
@@ -59,12 +67,47 @@ public class Boss_Toko : MonoBehaviour
         PosX = Mathf.Clamp(PosX, 313, 326);
         if (ActiveFlag)
         {
-            JumpTimer -= Time.deltaTime;
-            if (JumpTimer < 0)
+            if (Life >= beforlife / 2)
             {
-                anim.SetTrigger("Jump");
-                rb.velocity = new Vector2(rb.velocity.x, 16.0f);
-                JumpTimer = Timer;
+                JumpTimer -= Time.deltaTime;
+                if (JumpTimer < 0)
+                {
+                    anim.SetTrigger("Jump");
+                    rb.velocity = new Vector2(rb.velocity.x, 1.0f);
+                    JumpTimer = Timer;
+                }
+            }
+            if(Life < beforlife / 2)
+            {
+                speed = 7;
+                JumpTimer -= Time.deltaTime;
+                if(JumpTimer < 0)
+                {
+                    Vector2 targetPos = player.transform.position;
+
+                    float x = targetPos.x;
+                    float y = targetPos.y;
+                    //プレイヤーとの距離算出
+                    Vector2 direction = new Vector2(x - transform.position.x, y - transform.position.y - 0.1f).normalized;
+                    //プレイヤーに向け前進
+                    rb.velocity = direction * Speed;
+                    //Debug.Log(x - transform.position.x);
+
+                    //反転処理
+                    if ((x - transform.position.x) < 0 && player.activeSelf)
+                    {
+
+                        scale.x = preScale;
+                    }
+
+                    if ((x - transform.position.x) > 0 && player.activeSelf)
+                    {
+                        scale.x = preScale_re;
+                    }
+                    anim.SetTrigger("Attack1");
+                    Speed = 0;
+                    JumpTimer = 3;
+                }
             }
             if(transform.position.x < 307)
             {
@@ -80,6 +123,7 @@ public class Boss_Toko : MonoBehaviour
         }
         Debug.Log(rb.velocity.y);
         anim.SetFloat("Speed",Mathf.Abs(Speed));
+        Debug.Log(beforlife);
     }
     void OnWillRenderObject()
     {
@@ -87,6 +131,7 @@ public class Boss_Toko : MonoBehaviour
         if (Camera.current.name == "Main Camera" && !OnceTime)
         {
             anim.SetTrigger("Start");
+            Life = beforlife;
             OnceTime = true;
         }
     }
@@ -94,5 +139,21 @@ public class Boss_Toko : MonoBehaviour
     {
         ActiveFlag = true;
         anim.SetTrigger("Action");
+    }
+
+    void AttackEnd()
+    {
+        if(transform.localScale.x < 0)
+        {
+            Speed = -7;
+            anim.SetTrigger("Jump");
+            rb.velocity = new Vector2(rb.velocity.x, 14.0f);
+        }
+        else
+        {
+            Speed = 7;
+            anim.SetTrigger("Jump");
+            rb.velocity = new Vector2(rb.velocity.x, 14.0f);
+        }
     }
 }

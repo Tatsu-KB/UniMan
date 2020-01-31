@@ -2561,7 +2561,7 @@ GameObject:
   - component: {fileID: 794776753}
   - component: {fileID: 794776752}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: PlayerLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17182,6 +17182,7 @@ MonoBehaviour:
   BulletSE: {fileID: 8300000, guid: 429b7f4ed5757d64d980e56389992645, type: 3}
   DamageSE: {fileID: 8300000, guid: b02106f3a5451274c9e9faa9fe11d79b, type: 3}
   DownSE: {fileID: 8300000, guid: c342db2a3d98b8046884050ed2bbffdb, type: 3}
+  JumpSE: {fileID: 0}
 --- !u!4 &1808261133
 Transform:
   m_ObjectHideFlags: 0

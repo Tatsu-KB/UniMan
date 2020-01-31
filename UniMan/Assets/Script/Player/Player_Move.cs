@@ -60,6 +60,7 @@ public class Player_Move : MonoBehaviour
                 if (OnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")))
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                    maneger.Jump();
                 }
                 if (OnGround == false && rb.velocity.y > 0.0f && (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump")))
                 {
@@ -74,7 +75,7 @@ public class Player_Move : MonoBehaviour
                 {
                     if (Input.GetButtonDown("Fire1") && !NowAttack)
                     {
-                       // NowAttack = true;
+                        //NowAttack = true;
                         Attack1();
                     }
                     /*

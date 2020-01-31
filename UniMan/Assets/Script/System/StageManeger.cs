@@ -22,7 +22,8 @@ public class StageManeger : MonoBehaviour
                      EnemyAttackSE,
                      BulletSE,
                      DamageSE,
-                     DownSE;
+                     DownSE,
+                    JumpSE;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +75,7 @@ public class StageManeger : MonoBehaviour
         if (Enemy.tag == "Piranha") Enemy.GetComponent<Enemy_Piranha>().Damage(ATK);
 
         Instantiate(EnemyDamageEffect, Pos).transform.parent = null;
-        SoundManeger.instance.Sound(BulletSE);
+        SoundManeger.instance.Sound(BulletSE,1, 1);
 
     }
     public void EnemyDown(Transform Enemy_pos)
@@ -86,15 +87,15 @@ public class StageManeger : MonoBehaviour
     {
         Player.GetComponent<Player_Move>().Damage(EnemyAtk);
         if(Player.GetComponent<Player_Move>().Life > 0)
-        SoundManeger.instance.Sound(DamageSE);
+        SoundManeger.instance.Sound(DamageSE,1, 1);
         else
-        SoundManeger.instance.Sound(DownSE);
+        SoundManeger.instance.Sound(DownSE,1, 1);
     }
 
     public void NeedleDamage()
     {
         Player.GetComponent<Player_Move>().PlayerDown();
-        SoundManeger.instance.Sound(DownSE);
+        SoundManeger.instance.Sound(DownSE,1, 1);
     }
 
     public void StageGoal(Transform transform)
@@ -154,10 +155,9 @@ public class StageManeger : MonoBehaviour
     public void BreakEffect(Transform Pos)
     {
         GameObject Effect;
-        Effect = Instantiate(DamegeEffect, Pos) as GameObject;
+        Effect = Instantiate(DamegeEffect, Pos);
         Effect.transform.localScale = new Vector3(0.3f, 0.3f, 1);
         Effect.transform.parent = null;
-
     }
 
     void SceneLoading()
@@ -179,9 +179,12 @@ public class StageManeger : MonoBehaviour
     }
     public void Attack()
     {
-        SoundManeger.instance.Sound(PlayerAttackSE);
+        SoundManeger.instance.Sound(PlayerAttackSE,1, 1);
     }
-
+    public void Jump()
+    {
+        SoundManeger.instance.Sound(JumpSE,1.5f, 2.0f);
+    }
     public void SlipDamage()
     {
         Player.GetComponent<Player_Move>().SlDamage();

@@ -1179,7 +1179,7 @@ MonoBehaviour:
   SceneName: 
   BackMusic: {fileID: 8300000, guid: 9b61bb351fa928945b0f4ad8356c1189, type: 3}
   CursolSE: {fileID: 8300000, guid: 9ea6583c034703f47b250a9907a63503, type: 3}
-  SelectSE: {fileID: 8300000, guid: 954e4ae283c325b4f9903bbfb4d4b9a6, type: 3}
+  SelectSE: {fileID: 8300000, guid: 35b018451aebb4e4b9515f52ebd10075, type: 3}
 --- !u!4 &1966617598
 Transform:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class Life : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
-        image = GameObject.Find("Canvas/Slider/Fill Area/Fill").GetComponent<Image>();
+        image = GameObject.Find("Canvas/PlayerLife/Fill Area/Fill").GetComponent<Image>();
     }
 
     // Update is called once per frame

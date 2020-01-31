@@ -34,12 +34,12 @@ public class StageSelect : MonoBehaviour
                 if (Input.GetAxis("Horizontal") <= 0.0f && ButtonNum > 0)
                 {
                     ButtonNum--;
-                    SoundManeger.instance.Sound(CursolSE);
+                    SoundManeger.instance.Sound(CursolSE,1, 1);
                 }
                 if (Input.GetAxis("Horizontal") >= 0.0f && ButtonNum < Max)
                 {
                     ButtonNum++;
-                    SoundManeger.instance.Sound(CursolSE);
+                    SoundManeger.instance.Sound(CursolSE,1, 1);
                 }
                 AxisReset = true;
             }
@@ -120,6 +120,6 @@ public class StageSelect : MonoBehaviour
     }
     void SE(AudioClip clip)
     {
-        SoundManeger.instance.Sound(clip);
+        SoundManeger.instance.Sound(clip,1, 1);
     }
 }

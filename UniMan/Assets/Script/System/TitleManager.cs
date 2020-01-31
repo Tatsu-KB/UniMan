@@ -43,7 +43,7 @@ public class TitleManager : MonoBehaviour
                if (Input.GetKeyDown(code) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
                {
                     Title();
-                    SoundManeger.instance.Sound(StartSE);
+                    SoundManeger.instance.Sound(StartSE,1, 1);
                     break;
                }
             }
@@ -57,12 +57,12 @@ public class TitleManager : MonoBehaviour
                 if (Input.GetAxis("Vertical") <= 0.0f && ButtonNum > 0)
                 {
                     ButtonNum--;
-                    SoundManeger.instance.Sound(CursolSE);
+                    SoundManeger.instance.Sound(CursolSE,1, 1);
                 }
                 if (Input.GetAxis("Vertical") >= 0.0f && ButtonNum < Max)
                 {
                     ButtonNum++;
-                    SoundManeger.instance.Sound(CursolSE);
+                    SoundManeger.instance.Sound(CursolSE,1, 1);
                 }
                 AxisReset = true;
                 StartCoroutine(ModeSelect());
@@ -187,6 +187,6 @@ public class TitleManager : MonoBehaviour
     }
     void SE(AudioClip clip)
     {
-        SoundManeger.instance.Sound(clip);
+        SoundManeger.instance.Sound(clip,1,1);
     }
 }

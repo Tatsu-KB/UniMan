@@ -44,8 +44,10 @@ public class SoundManeger : MonoBehaviour
         audioSource[0].Stop();
     }
 
-    public void Sound(AudioClip Sound)
+    public void Sound(AudioClip Sound, float Pitch , float Volume)
     {
+        audioSource[1].pitch = Pitch;
         audioSource[1].PlayOneShot(Sound);
+        audioSource[1].volume = Volume;
     } 
 }

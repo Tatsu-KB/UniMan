@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿/*
+using LitJson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -76,3 +77,4 @@ public class KeyManeger
             tw.Write(jsonText);
     }
 }
+*/
