@@ -40,8 +40,12 @@ public class PlayerBullet : MonoBehaviour
             Destroy(gameObject);
             maneger.GetComponent<StageManeger>().EnemyDamage(collision.gameObject,Attack,transform);
         }
-
-        if(collision.tag != "Player" && collision.tag != "Bee" && collision.tag != "Piranha")
+        if(collision.tag == "Toko")
+        {
+            Destroy(gameObject);
+            maneger.GetComponent<StageManeger>().TokoDamage(collision.gameObject, Attack, transform);
+        }
+        if (collision.tag != "Player" && collision.tag != "Bee" && collision.tag != "Piranha")
         {
             Destroy(gameObject);
             maneger.BreakEffect(transform); 

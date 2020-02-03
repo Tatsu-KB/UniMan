@@ -22,6 +22,7 @@ public class Camera_Boss : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            Life.SetActive(true);
             CameraMove.MinX = 313;
             CameraMove.MaxX = 313;
             CameraMove.MinY = 0;
@@ -29,7 +30,7 @@ public class Camera_Boss : MonoBehaviour
             CameraMove.Boss = true;
             GameObject.Find("StageManeger").GetComponent<StageManeger>().clip = AudioClip;
             GameObject.Find("StageManeger").GetComponent<StageManeger>().Music();
-            Life.SetActive(true);
+            Debug.Log("エ”ェ”イ”!!");
         }
     }
     // X= 258

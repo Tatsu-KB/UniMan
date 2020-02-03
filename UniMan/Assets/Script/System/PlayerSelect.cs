@@ -38,12 +38,12 @@ public class PlayerSelect : MonoBehaviour
                 if (Input.GetAxis("Horizontal") <= 0.0f && ButtonNum > 0)
                 {
                     ButtonNum--;
-                    SoundManeger.instance.Sound(CursolSE,1, 1);
+                    SoundManeger.instance.SoundPlayer(CursolSE,1);
                 }
                 if (Input.GetAxis("Horizontal") >= 0.0f && ButtonNum < Max)
                 {
                     ButtonNum++;
-                    SoundManeger.instance.Sound(CursolSE,1, 1);
+                    SoundManeger.instance.SoundPlayer(CursolSE,1);
                 }
                 AxisReset = true;
             }
@@ -111,6 +111,6 @@ public class PlayerSelect : MonoBehaviour
     }
     void SE(AudioClip clip)
     {
-        SoundManeger.instance.Sound(clip,1, 1);
+        SoundManeger.instance.SoundPlayer(clip,1);
     }
 }

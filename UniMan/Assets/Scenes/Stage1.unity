@@ -167,8 +167,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -494,8 +492,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Ready?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ddbdcffc9c9db44b9375f4383b3bca8, type: 2}
@@ -13022,8 +13018,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 195dc6169a79d9b40a580b28beadfec9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -13096,8 +13090,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -15002,8 +14994,8 @@ MonoBehaviour:
   EnemyDamageEffect: {fileID: 1750940742320366, guid: ec1383a81f8b26e41bd5795fba065567,
     type: 3}
   BeeSpeed: 1.5
-  DamageInpact: 1
-  LifeUp: -85
+  DamageInpact: 10
+  LifeUp: 0
   SceneName: 
   clip: {fileID: 8300000, guid: 5842d8401675bf543bfa9cd25c0c9cdc, type: 3}
   PlayerAttackSE: {fileID: 8300000, guid: 153b07bc3aa8e454f990fd040ae6567d, type: 3}
@@ -18355,8 +18347,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: a0c207a4ed112f043ad721e46b8cdd26, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -18555,8 +18545,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -18677,8 +18665,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1826368376
 GameObject:
   m_ObjectHideFlags: 0
@@ -19825,11 +19811,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1122229379232054117, guid: 16bd4d8a58909b14e83c2f7c2b438cb1,
-        type: 3}
-      propertyPath: m_Name
-      value: GoalPos
-      objectReference: {fileID: 0}
     - target: {fileID: 1122229379232054116, guid: 16bd4d8a58909b14e83c2f7c2b438cb1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19885,6 +19866,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1122229379232054117, guid: 16bd4d8a58909b14e83c2f7c2b438cb1,
+        type: 3}
+      propertyPath: m_Name
+      value: GoalPos
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16bd4d8a58909b14e83c2f7c2b438cb1, type: 3}
 --- !u!1001 &5398452086657876539
@@ -19894,11 +19880,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5398452088245950079, guid: d45c34d65e3358d40849a1d57ddff806,
-        type: 3}
-      propertyPath: m_Name
-      value: StartPos
-      objectReference: {fileID: 0}
     - target: {fileID: 5398452088245950078, guid: d45c34d65e3358d40849a1d57ddff806,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19953,6 +19934,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398452088245950079, guid: d45c34d65e3358d40849a1d57ddff806,
+        type: 3}
+      propertyPath: m_Name
+      value: StartPos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d45c34d65e3358d40849a1d57ddff806, type: 3}

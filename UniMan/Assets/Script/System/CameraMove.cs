@@ -51,7 +51,7 @@ public class CameraMove : MonoBehaviour
         }
         else
         {
-            Debug.Log("ウッキー！今年は申年ィ！！");
+            //Debug.Log("ウッキー！今年は申年ィ！！");
             float X = Mathf.Lerp(transform.position.x,MinX,Time.deltaTime * 2);
             float Y = Mathf.Lerp(transform.position.y, MinY, Time.deltaTime * 2);
             transform.position = new Vector3(X, Y,-10);

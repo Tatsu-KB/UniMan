@@ -32,13 +32,13 @@ public class GameOver : MonoBehaviour
             if (Input.GetAxis("Vertical") <= 0.0f && ButtonNum > 0)
             {
                 ButtonNum--;
-                SoundManeger.instance.Sound(CursolSE,1, 1);
+                SoundManeger.instance.SoundPlayer(CursolSE,1);
 
             }
             if (Input.GetAxis("Vertical") >= 0.0f && ButtonNum < Max)
             {
                 ButtonNum++;
-                SoundManeger.instance.Sound(CursolSE,1, 1);
+                SoundManeger.instance.SoundPlayer(CursolSE,1);
 
             }
             StartCoroutine(ButtonSelect());
@@ -50,7 +50,7 @@ public class GameOver : MonoBehaviour
         }
         if (Input.anyKeyDown && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && InputFlag)
         {
-            SoundManeger.instance.Sound(SelectSE,1, 1);
+            SoundManeger.instance.SoundPlayer(SelectSE,1);
             StartCoroutine(Select());
             InputFlag = false;
         }

@@ -76,9 +76,17 @@ public class StageManeger : MonoBehaviour
         if (Enemy.tag == "Piranha") Enemy.GetComponent<Enemy_Piranha>().Damage(ATK);
 
         Instantiate(EnemyDamageEffect, Pos).transform.parent = null;
-        SoundManeger.instance.Sound(BulletSE,1, 1);
+        SoundManeger.instance.SoundEnemy(BulletSE,1);
 
     }
+    public void TokoDamage(GameObject Enemy, int ATK, Transform Pos)
+    {
+        Enemy.GetComponent<Boss_Toko>().Damage(ATK);
+        Instantiate(EnemyDamageEffect, Pos).transform.parent = null;
+        SoundManeger.instance.SoundEnemy(BulletSE, 1);
+
+    }
+
     public void EnemyDown(Transform Enemy_pos)
     {
         Instantiate(EnemyEffect, Enemy_pos).transform.parent = null;
@@ -88,15 +96,15 @@ public class StageManeger : MonoBehaviour
     {
         Player.GetComponent<Player_Move>().Damage(EnemyAtk * DamageInpact);
         if(Player.GetComponent<Player_Move>().Life > 0)
-        SoundManeger.instance.Sound(DamageSE,1, 1);
+        SoundManeger.instance.SoundPlayer(DamageSE,1);
         else
-        SoundManeger.instance.Sound(DownSE,1, 1);
+        SoundManeger.instance.SoundPlayer(DownSE,1);
     }
 
     public void NeedleDamage()
     {
         Player.GetComponent<Player_Move>().PlayerDown();
-        SoundManeger.instance.Sound(DownSE,1, 1);
+        SoundManeger.instance.SoundPlayer(DownSE,1);
     }
 
     public void StageGoal(Transform transform)
@@ -180,11 +188,15 @@ public class StageManeger : MonoBehaviour
     }
     public void Attack()
     {
-        SoundManeger.instance.Sound(PlayerAttackSE,1, 1);
+        SoundManeger.instance.SoundPlayer(PlayerAttackSE,1);
+    }
+    public void EnemyAttack()
+    {
+        SoundManeger.instance.SoundEnemy(EnemyAttackSE, 1);
     }
     public void Jump()
     {
-        SoundManeger.instance.Sound(JumpSE,1.5f, 1.2f);
+        SoundManeger.instance.SoundPlayer(JumpSE,1.5f);
     }
     public void SlipDamage()
     {

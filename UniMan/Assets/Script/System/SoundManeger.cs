@@ -26,6 +26,7 @@ public class SoundManeger : MonoBehaviour
         audioSource = GetComponents<AudioSource>();
         audioSource[0].volume = 0.8f;
         audioSource[1].volume = 0.5f;
+        audioSource[2].volume = 0.5f;
     }
 
     // Update is called once per frame
@@ -44,10 +45,14 @@ public class SoundManeger : MonoBehaviour
         audioSource[0].Stop();
     }
 
-    public void Sound(AudioClip Sound, float Pitch , float Volume)
+    public void SoundPlayer(AudioClip Sound, float Pitch)
     {
         audioSource[1].pitch = Pitch;
         audioSource[1].PlayOneShot(Sound);
-        audioSource[1].volume = Volume;
-    } 
+    }
+    public void SoundEnemy(AudioClip Sound, float Pitch)
+    {
+        audioSource[2].pitch = Pitch;
+        audioSource[2].PlayOneShot(Sound);
+    }
 }

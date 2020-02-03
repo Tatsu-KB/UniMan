@@ -100,6 +100,7 @@ public class OptionMameger : MonoBehaviour
             case 1:
                 Slider_Sound.value += Input.GetAxisRaw("Horizontal");
                 audios[1].volume = Slider_Sound.value / 100;
+                audios[2].volume = Slider_Sound.value / 100;
                 yield return new WaitForSeconds(0.5f);
                 break;
         }
