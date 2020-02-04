@@ -48,7 +48,7 @@ public class SceneLoad : MonoBehaviour
         {
             DeathCount++;
         }
-
+        
         BackName = SceneName;
         SceneName = Name;
         StartCoroutine(LoadDeta(Name,0.8f));
